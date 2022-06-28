@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import SideNav from '../components/SideNav';
 
 const Home = () => {
@@ -12,7 +13,7 @@ const Home = () => {
                 <div className="top-bar -mx-4 px-4 md:mx-0 md:px-0">
                     <nav aria-label="breadcrumb" className="-intro-x mr-auto hidden sm:flex">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><a href="#">Application</a></li>
+                            <li className="breadcrumb-item"><Link to="">Application</Link></li>
                             <li className="breadcrumb-item active" aria-current="page">Dashboard</li>
                         </ol>
                     </nav>
@@ -21,84 +22,84 @@ const Home = () => {
                             <input type="text" className="search__input form-control border-transparent" placeholder="Search..."></input>
                             <i data-lucide="search" className="search__icon dark:text-slate-500"></i> 
                         </div>
-                        <a className="notification sm:hidden" href=""> <i data-lucide="search" className="notification__icon dark:text-slate-500"></i> </a>
+                        <Link to="" className="notification sm:hidden" href=""> <i data-lucide="search" className="notification__icon dark:text-slate-500"></i> </Link>
                         <div className="search-result">
                             <div className="search-result__content">
                                 <div className="search-result__content__title">Pages</div>
                                 <div className="mb-5">
-                                    <a href="" className="flex items-center">
+                                    <Link to="" className="flex items-center">
                                         <div className="w-8 h-8 bg-success/20 dark:bg-success/10 text-success flex items-center justify-center rounded-full"> <i className="w-4 h-4" data-lucide="inbox"></i> </div>
                                         <div className="ml-3">Mail Settings</div>
-                                    </a>
-                                    <a href="" className="flex items-center mt-2">
+                                    </Link>
+                                    <Link to="" className="flex items-center mt-2">
                                         <div className="w-8 h-8 bg-pending/10 text-pending flex items-center justify-center rounded-full"> <i className="w-4 h-4" data-lucide="users"></i> </div>
                                         <div className="ml-3">Users & Permissions</div>
-                                    </a>
-                                    <a href="" className="flex items-center mt-2">
+                                    </Link>
+                                    <Link to="" className="flex items-center mt-2">
                                         <div className="w-8 h-8 bg-primary/10 dark:bg-primary/20 text-primary/80 flex items-center justify-center rounded-full"> <i className="w-4 h-4" data-lucide="credit-card"></i> </div>
                                         <div className="ml-3">Transactions Report</div>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="search-result__content__title">Users</div>
                                 <div className="mb-5">
-                                    <a href="" className="flex items-center mt-2">
+                                    <Link to="" className="flex items-center mt-2">
                                         <div className="w-8 h-8 image-fit">
                                             <img alt="Midone - HTML Admin Template" className="rounded-full" src={require('../assets/dist/images/profile-15.jpg')}></img>
                                         </div>
                                         <div className="ml-3">Angelina Jolie</div>
                                         <div className="ml-auto w-48 truncate text-slate-500 text-xs text-right">angelinajolie@left4code.com</div>
-                                    </a>
-                                    <a href="" className="flex items-center mt-2">
+                                    </Link>
+                                    <Link to="" className="flex items-center mt-2">
                                         <div className="w-8 h-8 image-fit">
                                             <img alt="Midone - HTML Admin Template" className="rounded-full" src={require('../assets/dist/images/profile-10.jpg')}></img>
                                         </div>
                                         <div className="ml-3">Christian Bale</div>
                                         <div className="ml-auto w-48 truncate text-slate-500 text-xs text-right">christianbale@left4code.com</div>
-                                    </a>
-                                    <a href="" className="flex items-center mt-2">
+                                    </Link>
+                                    <Link to="" className="flex items-center mt-2">
                                         <div className="w-8 h-8 image-fit">
                                             <img alt="Midone - HTML Admin Template" className="rounded-full" src={require('../assets/dist/images/profile-8.jpg')}></img>
                                         </div>
                                         <div className="ml-3">Tom Cruise</div>
                                         <div className="ml-auto w-48 truncate text-slate-500 text-xs text-right">tomcruise@left4code.com</div>
-                                    </a>
-                                    <a href="" className="flex items-center mt-2">
+                                    </Link>
+                                    <Link to="" className="flex items-center mt-2">
                                         <div className="w-8 h-8 image-fit">
                                             <img alt="Midone - HTML Admin Template" className="rounded-full" src={require('../assets/dist/images/profile-11.jpg')}></img>
                                         </div>
                                         <div className="ml-3">Russell Crowe</div>
                                         <div className="ml-auto w-48 truncate text-slate-500 text-xs text-right">russellcrowe@left4code.com</div>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="search-result__content__title">Products</div>
-                                <a href="" className="flex items-center mt-2">
+                                <Link to="" className="flex items-center mt-2">
                                     <div className="w-8 h-8 image-fit">
                                         <img alt="Midone - HTML Admin Template" className="rounded-full" src={require('../assets/dist/images/preview-13.jpg')}></img>
                                     </div>
                                     <div className="ml-3">Oppo Find X2 Pro</div>
                                     <div className="ml-auto w-48 truncate text-slate-500 text-xs text-right">Smartphone &amp; Tablet</div>
-                                </a>
-                                <a href="" className="flex items-center mt-2">
+                                </Link>
+                                <Link to="" className="flex items-center mt-2">
                                     <div className="w-8 h-8 image-fit">
                                         <img alt="Midone - HTML Admin Template" className="rounded-full" src={require('../assets/dist/images/preview-11.jpg')}></img>
                                     </div>
                                     <div className="ml-3">Sony A7 III</div>
                                     <div className="ml-auto w-48 truncate text-slate-500 text-xs text-right">Photography</div>
-                                </a>
-                                <a href="" className="flex items-center mt-2">
+                                </Link>
+                                <Link to="" className="flex items-center mt-2">
                                     <div className="w-8 h-8 image-fit">
                                         <img alt="Midone - HTML Admin Template" className="rounded-full" src={require('../assets/dist/images/preview-3.jpg')}></img>
                                     </div>
                                     <div className="ml-3">Nikon Z6</div>
                                     <div className="ml-auto w-48 truncate text-slate-500 text-xs text-right">Photography</div>
-                                </a>
-                                <a href="" className="flex items-center mt-2">
+                                </Link>
+                                <Link to="" className="flex items-center mt-2">
                                     <div className="w-8 h-8 image-fit">
                                         <img alt="Midone - HTML Admin Template" className="rounded-full" src={require('../assets/dist/images/preview-7.jpg')}></img>
                                     </div>
                                     <div className="ml-3">Nikon Z6</div>
                                     <div className="ml-auto w-48 truncate text-slate-500 text-xs text-right">Photography</div>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -114,7 +115,7 @@ const Home = () => {
                                     </div>
                                     <div className="ml-2 overflow-hidden">
                                         <div className="flex items-center">
-                                            <a href="javascript:;" className="font-medium truncate mr-5">Angelina Jolie</a> 
+                                           <Link to="" className="font-medium truncate mr-5">Angelina Jolie</Link> 
                                             <div className="text-xs text-slate-400 ml-auto whitespace-nowrap">01:10 PM</div>
                                         </div>
                                         <div className="w-full truncate text-slate-500 mt-0.5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500</div>
@@ -127,7 +128,7 @@ const Home = () => {
                                     </div>
                                     <div className="ml-2 overflow-hidden">
                                         <div className="flex items-center">
-                                            <a href="javascript:;" className="font-medium truncate mr-5">Christian Bale</a> 
+                                           <Link to="" className="font-medium truncate mr-5">Christian Bale</Link> 
                                             <div className="text-xs text-slate-400 ml-auto whitespace-nowrap">01:10 PM</div>
                                         </div>
                                         <div className="w-full truncate text-slate-500 mt-0.5">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomi</div>
@@ -140,7 +141,7 @@ const Home = () => {
                                     </div>
                                     <div className="ml-2 overflow-hidden">
                                         <div className="flex items-center">
-                                            <a href="javascript:;" className="font-medium truncate mr-5">Tom Cruise</a> 
+                                           <Link to="" className="font-medium truncate mr-5">Tom Cruise</Link> 
                                             <div className="text-xs text-slate-400 ml-auto whitespace-nowrap">05:09 AM</div>
                                         </div>
                                         <div className="w-full truncate text-slate-500 mt-0.5">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem </div>
@@ -153,7 +154,7 @@ const Home = () => {
                                     </div>
                                     <div className="ml-2 overflow-hidden">
                                         <div className="flex items-center">
-                                            <a href="javascript:;" className="font-medium truncate mr-5">Russell Crowe</a> 
+                                           <Link to="" className="font-medium truncate mr-5">Russell Crowe</Link> 
                                             <div className="text-xs text-slate-400 ml-auto whitespace-nowrap">06:05 AM</div>
                                         </div>
                                         <div className="w-full truncate text-slate-500 mt-0.5">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem </div>
@@ -166,7 +167,7 @@ const Home = () => {
                                     </div>
                                     <div className="ml-2 overflow-hidden">
                                         <div className="flex items-center">
-                                            <a href="javascript:;" className="font-medium truncate mr-5">Kate Winslet</a> 
+                                           <Link to="" className="font-medium truncate mr-5">Kate Winslet</Link> 
                                             <div className="text-xs text-slate-400 ml-auto whitespace-nowrap">03:20 PM</div>
                                         </div>
                                         <div className="w-full truncate text-slate-500 mt-0.5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500</div>
@@ -189,22 +190,22 @@ const Home = () => {
                                     <hr className="dropdown-divider border-white/[0.08]"></hr>
                                 </li>
                                 <li>
-                                    <a href="" className="dropdown-item hover:bg-white/5"> <i data-lucide="user" className="w-4 h-4 mr-2"></i> Profile </a>
+                                    <Link to="" className="dropdown-item hover:bg-white/5"> <i data-lucide="user" className="w-4 h-4 mr-2"></i> Profile </Link>
                                 </li>
                                 <li>
-                                    <a href="" className="dropdown-item hover:bg-white/5"> <i data-lucide="edit" className="w-4 h-4 mr-2"></i> Add Account </a>
+                                    <Link to="" className="dropdown-item hover:bg-white/5"> <i data-lucide="edit" className="w-4 h-4 mr-2"></i> Add Account </Link>
                                 </li>
                                 <li>
-                                    <a href="" className="dropdown-item hover:bg-white/5"> <i data-lucide="lock" className="w-4 h-4 mr-2"></i> Reset Password </a>
+                                    <Link to="" className="dropdown-item hover:bg-white/5"> <i data-lucide="lock" className="w-4 h-4 mr-2"></i> Reset Password </Link>
                                 </li>
                                 <li>
-                                    <a href="" className="dropdown-item hover:bg-white/5"> <i data-lucide="help-circle" className="w-4 h-4 mr-2"></i> Help </a>
+                                    <Link to="" className="dropdown-item hover:bg-white/5"> <i data-lucide="help-circle" className="w-4 h-4 mr-2"></i> Help </Link>
                                 </li>
                                 <li>
                                     <hr className="dropdown-divider border-white/[0.08]"></hr>
                                 </li>
                                 <li>
-                                    <a href="" className="dropdown-item hover:bg-white/5"> <i data-lucide="toggle-right" className="w-4 h-4 mr-2"></i> Logout </a>
+                                    <Link to="" className="dropdown-item hover:bg-white/5"> <i data-lucide="toggle-right" className="w-4 h-4 mr-2"></i> Logout </Link>
                                 </li>
                             </ul>
                         </div>
@@ -218,7 +219,7 @@ const Home = () => {
                                     <h2 className="text-lg font-medium truncate mr-5">
                                         General Report
                                     </h2>
-                                    <a href="" className="ml-auto flex items-center text-primary"> <i data-lucide="refresh-ccw" className="w-4 h-4 mr-3"></i> Reload Data </a>
+                                    <Link to="" className="ml-auto flex items-center text-primary"> <i data-lucide="refresh-ccw" className="w-4 h-4 mr-3"></i> Reload Data </Link>
                                 </div>
                                 <div className="grid grid-cols-12 gap-6 mt-5">
                                     <div className="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
@@ -306,11 +307,11 @@ const Home = () => {
                                             <button className="dropdown-toggle btn btn-outline-secondary font-normal" aria-expanded="false" data-tw-toggle="dropdown"> Filter by Category <i data-lucide="chevron-down" className="w-4 h-4 ml-2"></i> </button>
                                             <div className="dropdown-menu w-40">
                                                 <ul className="dropdown-content overflow-y-auto h-32">
-                                                    <li><a href="" className="dropdown-item">PC & Laptop</a></li>
-                                                    <li><a href="" className="dropdown-item">Smartphone</a></li>
-                                                    <li><a href="" className="dropdown-item">Electronic</a></li>
-                                                    <li><a href="" className="dropdown-item">Photography</a></li>
-                                                    <li><a href="" className="dropdown-item">Sport</a></li>
+                                                    <li><Link to="" className="dropdown-item">PC & Laptop</Link></li>
+                                                    <li><Link to="" className="dropdown-item">Smartphone</Link></li>
+                                                    <li><Link to="" className="dropdown-item">Electronic</Link></li>
+                                                    <li><Link to="" className="dropdown-item">Photography</Link></li>
+                                                    <li><Link to="" className="dropdown-item">Sport</Link></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -327,7 +328,7 @@ const Home = () => {
                                     <h2 className="text-lg font-medium truncate mr-5">
                                         Weekly Top Seller
                                     </h2>
-                                    <a href="" className="ml-auto text-primary truncate">Show More</a> 
+                                    <Link to="" className="ml-auto text-primary truncate">Show More</Link> 
                                 </div>
                                 <div className="intro-y box p-5 mt-5">
                                     <div className="mt-3">
@@ -356,7 +357,7 @@ const Home = () => {
                                     <h2 className="text-lg font-medium truncate mr-5">
                                         Sales Report
                                     </h2>
-                                    <a href="" className="ml-auto text-primary truncate">Show More</a> 
+                                    <Link to="" className="ml-auto text-primary truncate">Show More</Link> 
                                 </div>
                                 <div className="intro-y box p-5 mt-5">
                                     <div className="mt-3">
@@ -450,7 +451,7 @@ const Home = () => {
                                             <div className="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">137 Sales</div>
                                         </div>
                                     </div>
-                                    <a href="" className="intro-y w-full block text-center rounded-md py-4 border border-dotted border-slate-400 dark:border-darkmode-300 text-slate-500">View More</a> 
+                                    <Link to="" className="intro-y w-full block text-center rounded-md py-4 border border-dotted border-slate-400 dark:border-darkmode-300 text-slate-500">View More</Link> 
                                 </div>
                             </div>
                             <div className="col-span-12 grid grid-cols-12 gap-6 mt-8">
@@ -550,7 +551,7 @@ const Home = () => {
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <a href="" className="font-medium whitespace-nowrap">Oppo Find X2 Pro</a> 
+                                                    <Link to="" className="font-medium whitespace-nowrap">Oppo Find X2 Pro</Link> 
                                                     <div className="text-slate-500 text-xs whitespace-nowrap mt-0.5">Smartphone &amp; Tablet</div>
                                                 </td>
                                                 <td className="text-center">146</td>
@@ -559,8 +560,8 @@ const Home = () => {
                                                 </td>
                                                 <td className="table-report__action w-56">
                                                     <div className="flex justify-center items-center">
-                                                        <a className="flex items-center mr-3" href=""> <i data-lucide="check-square" className="w-4 h-4 mr-1"></i> Edit </a>
-                                                        <a className="flex items-center text-danger" href=""> <i data-lucide="trash-2" className="w-4 h-4 mr-1"></i> Delete </a>
+                                                        <Link to="" className="flex items-center mr-3" href=""> <i data-lucide="check-square" className="w-4 h-4 mr-1"></i> Edit </Link>
+                                                        <Link to="" className="flex items-center text-danger" href=""> <i data-lucide="trash-2" className="w-4 h-4 mr-1"></i> Delete </Link>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -579,7 +580,7 @@ const Home = () => {
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <a href="" className="font-medium whitespace-nowrap">Dell XPS 13</a> 
+                                                    <Link to="" className="font-medium whitespace-nowrap">Dell XPS 13</Link> 
                                                     <div className="text-slate-500 text-xs whitespace-nowrap mt-0.5">PC &amp; Laptop</div>
                                                 </td>
                                                 <td className="text-center">103</td>
@@ -588,8 +589,8 @@ const Home = () => {
                                                 </td>
                                                 <td className="table-report__action w-56">
                                                     <div className="flex justify-center items-center">
-                                                        <a className="flex items-center mr-3" href=""> <i data-lucide="check-square" className="w-4 h-4 mr-1"></i> Edit </a>
-                                                        <a className="flex items-center text-danger" href=""> <i data-lucide="trash-2" className="w-4 h-4 mr-1"></i> Delete </a>
+                                                        <Link to="" className="flex items-center mr-3" href=""> <i data-lucide="check-square" className="w-4 h-4 mr-1"></i> Edit </Link>
+                                                        <Link to="" className="flex items-center text-danger" href=""> <i data-lucide="trash-2" className="w-4 h-4 mr-1"></i> Delete </Link>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -608,7 +609,7 @@ const Home = () => {
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <a href="" className="font-medium whitespace-nowrap">Nikon Z6</a> 
+                                                    <Link to="" className="font-medium whitespace-nowrap">Nikon Z6</Link> 
                                                     <div className="text-slate-500 text-xs whitespace-nowrap mt-0.5">Photography</div>
                                                 </td>
                                                 <td className="text-center">50</td>
@@ -617,8 +618,8 @@ const Home = () => {
                                                 </td>
                                                 <td className="table-report__action w-56">
                                                     <div className="flex justify-center items-center">
-                                                        <a className="flex items-center mr-3" href=""> <i data-lucide="check-square" className="w-4 h-4 mr-1"></i> Edit </a>
-                                                        <a className="flex items-center text-danger" href=""> <i data-lucide="trash-2" className="w-4 h-4 mr-1"></i> Delete </a>
+                                                        <Link to="" className="flex items-center mr-3" href=""> <i data-lucide="check-square" className="w-4 h-4 mr-1"></i> Edit </Link>
+                                                        <Link to="" className="flex items-center text-danger" href=""> <i data-lucide="trash-2" className="w-4 h-4 mr-1"></i> Delete </Link>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -637,7 +638,7 @@ const Home = () => {
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <a href="" className="font-medium whitespace-nowrap">Apple MacBook Pro 13</a> 
+                                                    <Link to="" className="font-medium whitespace-nowrap">Apple MacBook Pro 13</Link> 
                                                     <div className="text-slate-500 text-xs whitespace-nowrap mt-0.5">PC &amp; Laptop</div>
                                                 </td>
                                                 <td className="text-center">50</td>
@@ -646,8 +647,8 @@ const Home = () => {
                                                 </td>
                                                 <td className="table-report__action w-56">
                                                     <div className="flex justify-center items-center">
-                                                        <a className="flex items-center mr-3" href=""> <i data-lucide="check-square" className="w-4 h-4 mr-1"></i> Edit </a>
-                                                        <a className="flex items-center text-danger" href=""> <i data-lucide="trash-2" className="w-4 h-4 mr-1"></i> Delete </a>
+                                                        <Link to="" className="flex items-center mr-3" href=""> <i data-lucide="check-square" className="w-4 h-4 mr-1"></i> Edit </Link>
+                                                        <Link to="" className="flex items-center text-danger" href=""> <i data-lucide="trash-2" className="w-4 h-4 mr-1"></i> Delete </Link>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -658,21 +659,21 @@ const Home = () => {
                                     <nav className="w-full sm:w-auto sm:mr-auto">
                                         <ul className="pagination">
                                             <li className="page-item">
-                                                <a className="page-link" href="#"> <i className="w-4 h-4" data-lucide="chevrons-left"></i> </a>
+                                                <Link to="" className="page-link" href="#"> <i className="w-4 h-4" data-lucide="chevrons-left"></i> </Link>
                                             </li>
                                             <li className="page-item">
-                                                <a className="page-link" href="#"> <i className="w-4 h-4" data-lucide="chevron-left"></i> </a>
+                                                <Link to="" className="page-link" href="#"> <i className="w-4 h-4" data-lucide="chevron-left"></i> </Link>
                                             </li>
-                                            <li className="page-item"> <a className="page-link" href="#">...</a> </li>
-                                            <li className="page-item"> <a className="page-link" href="#">1</a> </li>
-                                            <li className="page-item active"> <a className="page-link" href="#">2</a> </li>
-                                            <li className="page-item"> <a className="page-link" href="#">3</a> </li>
-                                            <li className="page-item"> <a className="page-link" href="#">...</a> </li>
+                                            <li className="page-item"> <Link to="" className="page-link" href="#">...</Link> </li>
+                                            <li className="page-item"> <Link to="" className="page-link" href="#">1</Link> </li>
+                                            <li className="page-item active"> <Link to="" className="page-link" href="#">2</Link> </li>
+                                            <li className="page-item"> <Link to="" className="page-link" href="#">3</Link> </li>
+                                            <li className="page-item"> <Link to="" className="page-link" href="#">...</Link> </li>
                                             <li className="page-item">
-                                                <a className="page-link" href="#"> <i className="w-4 h-4" data-lucide="chevron-right"></i> </a>
+                                                <Link to="" className="page-link" href="#"> <i className="w-4 h-4" data-lucide="chevron-right"></i> </Link>
                                             </li>
                                             <li className="page-item">
-                                                <a className="page-link" href="#"> <i className="w-4 h-4" data-lucide="chevrons-right"></i> </a>
+                                                <Link to="" className="page-link" href="#"> <i className="w-4 h-4" data-lucide="chevrons-right"></i> </Link>
                                             </li>
                                         </ul>
                                     </nav>
@@ -756,7 +757,7 @@ const Home = () => {
                                                 <div className="text-danger">-$50</div>
                                             </div>
                                         </div>
-                                        <a href="" className="intro-x w-full block text-center rounded-md py-3 border border-dotted border-slate-400 dark:border-darkmode-300 text-slate-500">View More</a> 
+                                        <Link to="" className="intro-x w-full block text-center rounded-md py-3 border border-dotted border-slate-400 dark:border-darkmode-300 text-slate-500">View More</Link> 
                                     </div>
                                 </div>
                                 <div className="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 mt-3">
@@ -764,7 +765,7 @@ const Home = () => {
                                         <h2 className="text-lg font-medium truncate mr-5">
                                             Recent Activities
                                         </h2>
-                                        <a href="" className="ml-auto text-primary truncate">Show More</a> 
+                                        <Link to="" className="ml-auto text-primary truncate">Show More</Link> 
                                     </div>
                                     <div className="mt-5 relative before:block before:absolute before:w-px before:h-[85%] before:bg-slate-200 before:dark:bg-darkmode-400 before:ml-5 before:mt-5">
                                         <div className="intro-x relative flex items-center mb-3">
@@ -820,7 +821,7 @@ const Home = () => {
                                                     <div className="font-medium">Sylvester Stallone</div>
                                                     <div className="text-xs text-slate-500 ml-auto">07:00 PM</div>
                                                 </div>
-                                                <div className="text-slate-500 mt-1">Has changed <a className="text-primary" href="">Sony Master Series A9G</a> price and description</div>
+                                                <div className="text-slate-500 mt-1">Has changed <Link to="" className="text-primary" href="">Sony Master Series A9G</Link> price and description</div>
                                             </div>
                                         </div>
                                         <div className="intro-x relative flex items-center mb-3">
@@ -834,7 +835,7 @@ const Home = () => {
                                                     <div className="font-medium">Tom Cruise</div>
                                                     <div className="text-xs text-slate-500 ml-auto">07:00 PM</div>
                                                 </div>
-                                                <div className="text-slate-500 mt-1">Has changed <a className="text-primary" href="">Samsung Galaxy S20 Ultra</a> description</div>
+                                                <div className="text-slate-500 mt-1">Has changed <Link to="" className="text-primary" href="">Samsung Galaxy S20 Ultra</Link> description</div>
                                             </div>
                                         </div>
                                     </div>
@@ -886,7 +887,7 @@ const Home = () => {
                                         <h2 className="text-lg font-medium truncate mr-5">
                                             Schedules
                                         </h2>
-                                        <a href="" className="ml-auto text-primary truncate flex items-center"> <i data-lucide="plus" className="w-4 h-4 mr-1"></i> Add New Schedules </a>
+                                        <Link to="" className="ml-auto text-primary truncate flex items-center"> <i data-lucide="plus" className="w-4 h-4 mr-1"></i> Add New Schedules </Link>
                                     </div>
                                     <div className="mt-5">
                                         <div className="intro-x box">
