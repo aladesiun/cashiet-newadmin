@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" height="480" width="640" id="flag-icon-css-au">
-  <g stroke-width="1pt">
+  <g strokeWidth="1pt">
     <path fill="#006" d="M0 0h640v480H0z"/>
     <path d="M0 0v27.95L307.037 250h38.647v-27.95L38.647 0H0zm345.684 0v27.95L38.647 250H0v-27.95L307.037 0h38.647z" fill="#fff"/>
     <path d="M144.035 0v250h57.614V0h-57.615zM0 83.333v83.333h345.684V83.333H0z" fill="#fff"/>

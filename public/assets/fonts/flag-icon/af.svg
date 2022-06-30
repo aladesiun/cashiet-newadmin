@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="480" width="640" id="flag-icon-css-af">
-  <g fill-rule="evenodd" stroke-width="1pt">
+  <g fill-rule="evenodd" strokeWidth="1pt">
     <path d="M0 0h640v480H0z"/>
     <path d="M426.662 0H640v480H426.662z" fill="#090"/>
     <path d="M213.336 0h213.34v480h-213.34z" fill="#bf0000"/>
   </g>
-  <g transform="translate(.961 27.311) scale(1.06346)" fill="#fff" fill-rule="evenodd" stroke="#bd6b00" stroke-width=".5">
+  <g transform="translate(.961 27.311) scale(1.06346)" fill="#fff" fill-rule="evenodd" stroke="#bd6b00" strokeWidth=".5">
     <path d="M319.5 225.84l8.354.001c.031 3.157 1.881 6.549 4.48 8.493h-16.008c2.505-2.271 3.19-4.963 3.174-8.494z"/>
     <path d="M266.71 178.53l4.574 5.04 56.934.093 4.668-5.04-14.56-.186-7.094-4.947-22.868-.093-6.627 5.133H266.71z" stroke="none"/>
     <path d="M290.02 172.74l19.66-.02c2.662-1.408 3.492-5.902 3.479-8.416-.037-7.429-5.233-10.991-10.447-11.18-.781-.04-1.688-.648-1.895-1.36-.514-1.613-.381-2.641-.944-2.584-.5-.007-.353.94-.799 2.453-.245.752-1.09 1.494-1.934 1.537-6.49.324-10.676 5.062-10.513 11.134.11 4.015.577 6.413 3.393 8.437z"/>

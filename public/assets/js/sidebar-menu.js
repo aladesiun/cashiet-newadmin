@@ -1,7 +1,7 @@
 $.sidebarMenu = function (menu) {
   var animationSpeed = 300,
     subMenuSelector = '.sidebar-submenu';
-  $(menu).on('click', 'li a', function (e) {
+  $(menu).on('click', 'li Link', function (e) {
     var $this = $(this);
     var checkElement = $this.next();
     if (checkElement.is(subMenuSelector) && checkElement.is(':visible')) {
@@ -68,11 +68,11 @@ $(window).resize(function () {
 });
 
 // $(".sidebar-menu>li").removeClass("active");
-$(".sidebar-menu").find("a").removeClass("active");
+$(".sidebar-menu").find("Link").removeClass("active");
 $(".sidebar-menu").find("li").removeClass("active");
 
 var current = window.location.pathname
-$(".sidebar-menu>li a").filter(function () {
+$(".sidebar-menu>li Link").filter(function () {
 
   // console.log(window.location.pathname);
   // console.log($(this).attr("href"));

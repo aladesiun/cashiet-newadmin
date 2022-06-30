@@ -9,7 +9,7 @@
   <path d="M291.776 302.613c-5.224 11.277-15.665 13.214-24.798 4.11 0 0 3.671-2.593 7.602-3.309-.737-3.136.774-7.475 2.904-9.822 2.234 1.527 5.351 4.587 6.144 8.142 5.505-.712 8.148.88 8.148.88z" id="b" fill="#f8c300"/>
   <use transform="rotate(9.37 320 551.314)" xlink:href="#b" width="100%" height="100%" fill="#f8c300"/>
   <use transform="rotate(18.74 320 551.314)" xlink:href="#b" width="100%" height="100%" fill="#f8c300"/>
-  <path d="M253.486 327.771a233.143 233.143 0 0 1 133.028 0" fill="none" stroke="#f8c300" stroke-width="10.971"/>
+  <path d="M253.486 327.771a233.143 233.143 0 0 1 133.028 0" fill="none" stroke="#f8c300" strokeWidth="10.971"/>
   <g transform="translate(320 164.571) scale(.68571)" fill="#f8c300">
     <path id="c" transform="scale(.00005)" d="M301930 415571l-790463-574305h977066l-790463 574305L0-513674z"/>
   </g>

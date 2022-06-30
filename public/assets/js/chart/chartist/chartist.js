@@ -4355,7 +4355,7 @@
           'ct:meta': Chartist.serialize(series.meta)
         });
 
-        // If this is a donut, we add the stroke-width as style attribute
+        // If this is a donut, we add the strokeWidth as style attribute
         if (options.donut && !options.donutSolid) {
           pathElement._node.style.strokeWidth = donutWidth.value + 'px';
         }

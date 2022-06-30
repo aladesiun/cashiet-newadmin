@@ -6,18 +6,26 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './views/Home';
 import Signin from './views/auths/signin';
-
- ReactDOM.render(
-    <BrowserRouter>
+import Signup from './views/auths/signup';
+import AdminProvider from './contexts/Admin-context';
+import ProtectRoute from './protect-routes';
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <AdminProvider> 
+   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App/>}>
-      <Route path="/" element={<Home/>}></Route>
+     
+      <Route path='/signin' element={<Signin/>}></Route>
+      <Route path='/signup' element={<Signup/>}></Route>
+      <Route element={<ProtectRoute/>}>
+        <Route path="/" element={<Home/>}></Route>
       </Route>
-      <Route path='/login' element={<Signin/>}></Route>
-
+      </Route>
     </Routes>
-    </BrowserRouter>,
-    document.getElementById('root')
+    </BrowserRouter>
+  </AdminProvider>,
+ 
 );
 
 

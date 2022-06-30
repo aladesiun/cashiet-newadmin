@@ -43,7 +43,7 @@
     <path d="M500 226.408l-31.478 54.535-15.42 26.702H546.9l-14.715-25.484L500 226.41z" fill="#fff"/>
     <g id="e">
       <g id="d">
-        <path d="M500 226.408l-2.356 4.082L500 285.467l2.358-54.977z" opacity=".62" fill="#17c0eb" stroke="#17c0eb" stroke-width=".129"/>
+        <path d="M500 226.408l-2.356 4.082L500 285.467l2.358-54.977z" opacity=".62" fill="#17c0eb" stroke="#17c0eb" strokeWidth=".129"/>
         <path d="M500 277.475l-.133.003.134 3.11.135-3.11c-.045 0-.09-.003-.134-.003z" fill="#fff"/>
       </g>
       <use height="100%" width="100%" xlink:href="#d" transform="rotate(72 500 285.467)"/>

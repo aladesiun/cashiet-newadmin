@@ -10083,7 +10083,7 @@ ul.notification-dropdown.onhover-show-div li+li:hover {
     width: 14px;
     height: 14px;
     margin-right: 14px;
-    stroke-width: 3px;
+    strokeWidth: 3px;
     vertical-align: text-bottom
 }
 

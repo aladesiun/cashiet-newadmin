@@ -66,7 +66,7 @@
 
 @mixin ct-chart-grid($ct-grid-color: $ct-grid-color, $ct-grid-width: $ct-grid-width, $ct-grid-dasharray: $ct-grid-dasharray) {
   stroke: $ct-grid-color;
-  stroke-width: $ct-grid-width;
+  strokeWidth: $ct-grid-width;
 
   @if ($ct-grid-dasharray) {
     stroke-dasharray: $ct-grid-dasharray;
@@ -74,13 +74,13 @@
 }
 
 @mixin ct-chart-point($ct-point-size: $ct-point-size, $ct-point-shape: $ct-point-shape) {
-  stroke-width: $ct-point-size;
-  stroke-linecap: $ct-point-shape;
+  strokeWidth: $ct-point-size;
+  strokeLinecap: $ct-point-shape;
 }
 
 @mixin ct-chart-line($ct-line-width: $ct-line-width, $ct-line-dasharray: $ct-line-dasharray) {
   fill: none;
-  stroke-width: $ct-line-width;
+  strokeWidth: $ct-line-width;
 
   @if ($ct-line-dasharray) {
     stroke-dasharray: $ct-line-dasharray;
@@ -94,12 +94,12 @@
 
 @mixin ct-chart-bar($ct-bar-width: $ct-bar-width) {
   fill: none;
-  stroke-width: $ct-bar-width;
+  strokeWidth: $ct-bar-width;
 }
 
 @mixin ct-chart-donut($ct-donut-width: $ct-donut-width) {
   fill: none;
-  stroke-width: $ct-donut-width;
+  strokeWidth: $ct-donut-width;
 }
 
 @mixin ct-chart-series-color($color) {

@@ -38,7 +38,7 @@ const Home = () => {
                             </form>
                         </li>
                         <li>
-                            <a className="text-dark" to="#!" onclick="javascript:toggleFullScreen()">
+                            <a className="text-dark" to="#!" onClick="javascript:toggleFullScreen()">
                                 <i data-feather="maximize-2"></i>
                             </a>
                         </li>
@@ -1006,8 +1006,24 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <ul class="custom-theme"><li class="demo-li"><a href="../front-end/index.html" target="_blank">Front end</a></li><li class="btn-rtl">RTL</li><li class="btn-dark-setting">Dark</li></ul>
-
+                    <div className="col-xl-6 xl-100">
+                            <div className="card">
+                                <div className="card-header">
+                                    <h5>Market Value</h5>
+                                    <div className="card-header-right">
+                                        <ul className="list-unstyled card-option">
+                                            <li><i className="icofont icofont-simple-left"></i></li>
+                                            <li><i className="view-html fa fa-code"></i></li>
+                                            <li><i className="icofont icofont-maximize full-card"></i></li>
+                                            <li><i className="icofont icofont-minus minimize-card"></i></li>
+                                            <li><i className="icofont icofont-refresh reload-card"></i></li>
+                                            <li><i className="icofont icofont-error close-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
                     <footer className="footer">
                         <div className="container-fluid">
                             <div className="row">

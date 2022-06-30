@@ -4,8 +4,7 @@ import { Outlet } from 'react-router-dom';
 function App() {
   return (
     <div className="App">
-                    <ul class="custom-theme"><li class="demo-li"><a href="../front-end/index.html" target="_blank">Front end</a></li><li class="btn-rtl">RTL</li><li class="btn-dark-setting">Dark</li></ul>
-
+    <ul className="custom-theme"><li className="demo-li"><a href="../front-end/index.html" target="_blank">Front end</a></li><li className="btn-rtl">RTL</li><li className="btn-dark-setting">Dark</li></ul>
      <Outlet></Outlet>
     </div>
   );

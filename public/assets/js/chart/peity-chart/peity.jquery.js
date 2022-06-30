@@ -302,8 +302,8 @@
             fill: 'none',
             points: coords.slice(2, coords.length - 2).join(' '),
             stroke: opts.stroke,
-            'stroke-width': strokeWidth,
-            'stroke-linecap': 'square'
+            'strokeWidth': strokeWidth,
+            'strokeLinecap': 'square'
           })
         )
       }

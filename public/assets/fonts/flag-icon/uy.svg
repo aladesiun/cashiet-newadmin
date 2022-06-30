@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="480" width="640" id="flag-icon-css-uy">
   <path fill="#fff" d="M0 0h640v480H0z"/>
   <path fill="#0038a8" d="M266 53.333h374v53.333H266zM266 160h374v53.333H266zM0 266.667h640V320H0zm0 106.666h640v53.333H0z"/>
-  <g transform="translate(133.333 133.333) scale(2.93333)" stroke-miterlimit="20" fill="#fcd116" stroke="#000" stroke-width=".6">
+  <g transform="translate(133.333 133.333) scale(2.93333)" stroke-miterlimit="20" fill="#fcd116" stroke="#000" strokeWidth=".6">
     <g id="c">
       <g id="b">
         <g id="a">
-          <path d="M1.5 9L6 12c-8 13 1 15-6 21 3-7-3-5-3-17" stroke-linecap="square" transform="rotate(22.5)"/>
+          <path d="M1.5 9L6 12c-8 13 1 15-6 21 3-7-3-5-3-17" strokeLinecap="square" transform="rotate(22.5)"/>
           <path d="M0 11c-2 13 4.5 17 0 22" fill="none" transform="rotate(22.5)"/>
           <path d="M0 0h6L0 33-6 0h6v33"/>
         </g>
