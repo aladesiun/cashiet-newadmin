@@ -5,165 +5,9 @@ const Home = () => {
     return (
         <>
             <div className="page-wrapper">
-
-        <div className="page-main-header">
-            <div className="main-header-right row">
-                <div className="main-header-left d-lg-none w-auto">
-                    <div className="logo-wrapper">
-                        <a to="index.html">
-                            <img className="blur-up lazyloaded d-block d-lg-none"
-                                src="assets/images/dashboard/multikart-logo-black.png" alt=""></img>
-                        </a>
-                    </div>
-                </div>
-                <div className="mobile-sidebar w-auto">
-                    <div className="media-body text-end switch-sm">
-                        <label className="switch">
-                            <a to="javascript:void(0)">
-                                <i id="sidebar-toggle" data-feather="align-left"></i>
-                            </a>
-                        </label>
-                    </div>
-                </div>
-                <div className="nav-right col">
-                    <ul className="nav-menus">
-                        <li>
-                            <form className="form-inline search-form">
-                                <div className="form-group">
-                                    <input className="form-control-plaintext" type="search" placeholder="Search.."></input>
-                                    <span className="d-sm-none mobile-search">
-                                        <i data-feather="search"></i>
-                                    </span>
-                                </div>
-                            </form>
-                        </li>
-                        <li>
-                            <a className="text-dark" to="#!" onClick="javascript:toggleFullScreen()">
-                                <i data-feather="maximize-2"></i>
-                            </a>
-                        </li>
-                        <li className="onhover-dropdown">
-                            <a className="txt-dark" to="javascript:void(0)">
-                                <h6>EN</h6>
-                            </a>
-                            <ul className="language-dropdown onhover-show-div p-20">
-                                <li>
-                                    <a to="javascript:void(0)" data-lng="en">
-                                        <i className="flag-icon flag-icon-is"></i>English</a>
-                                </li>
-                                <li>
-                                    <a to="javascript:void(0)" data-lng="es">
-                                        <i className="flag-icon flag-icon-um"></i>Spanish</a>
-                                </li>
-                                <li>
-                                    <a to="javascript:void(0)" data-lng="pt">
-                                        <i className="flag-icon flag-icon-uy"></i>Portuguese</a>
-                                </li>
-                                <li>
-                                    <a to="javascript:void(0)" data-lng="fr">
-                                        <i className="flag-icon flag-icon-nz"></i>French</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li className="onhover-dropdown">
-                            <i data-feather="bell"></i>
-                            <span className="badge badge-pill badge-primary pull-right notification-badge">3</span>
-                            <span className="dot"></span>
-                            <ul className="notification-dropdown onhover-show-div p-0">
-                                <li>Notification <span className="badge badge-pill badge-primary pull-right">3</span></li>
-                                <li>
-                                    <div className="media">
-                                        <div className="media-body">
-                                            <h6 className="mt-0">
-                                                <span>
-                                                    <i className="shopping-color" data-feather="shopping-bag"></i>
-                                                </span>Your order ready for Ship..!
-                                            </h6>
-                                            <p className="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="media">
-                                        <div className="media-body">
-                                            <h6 className="mt-0 txt-success">
-                                                <span>
-                                                    <i className="download-color font-success" data-feather="download"></i>
-                                                </span>Download Complete
-                                            </h6>
-                                            <p className="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="media">
-                                        <div className="media-body">
-                                            <h6 className="mt-0 txt-danger">
-                                                <span>
-                                                    <i className="alert-color font-danger" data-feather="alert-circle"></i>
-                                                </span>250 MB trash files
-                                            </h6>
-                                            <p className="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li className="txt-dark"><a to="javascript:void(0)">All</a> notification</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a to="javascript:void(0)">
-                                <i className="right_side_toggle" data-feather="message-square"></i>
-                                <span className="dot"></span>
-                            </a>
-                        </li>
-                        <li className="onhover-dropdown">
-                            <div className="media align-items-center">
-                                <img className="align-self-center pull-right img-50 blur-up lazyloaded"
-                                    src="assets/images/dashboard/user3.jpg" alt="header-user"></img>
-                                <div className="dotted-animation">
-                                    <span className="animate-circle"></span>
-                                    <span className="main-circle"></span>
-                                </div>
-                            </div>
-                            <ul className="profile-dropdown onhover-show-div p-20 profile-dropdown-hover">
-                                <li>
-                                    <a to="javascript:void(0)">
-                                        <i data-feather="user"></i>Edit Profile
-                                    </a>
-                                </li>
-                                <li>
-                                    <a to="javascript:void(0)">
-                                        <i data-feather="mail"></i>Inbox
-                                    </a>
-                                </li>
-                                <li>
-                                    <a to="javascript:void(0)">
-                                        <i data-feather="lock"></i>Lock Screen
-                                    </a>
-                                </li>
-                                <li>
-                                    <a to="javascript:void(0)">
-                                        <i data-feather="settings"></i>Settings
-                                    </a>
-                                </li>
-                                <li>
-                                    <a to="javascript:void(0)">
-                                        <i data-feather="log-out"></i>Logout
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div className="d-lg-none mobile-toggle pull-right">
-                        <i data-feather="more-horizontal"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-
                 <div className="page-body-wrapper">
 
-                  <NavHeader/>
+                    <NavHeader />
 
                     <div className="right-sidebar" id="right_side_bar">
                         <div>
@@ -445,7 +289,7 @@ const Home = () => {
                                                 <button className="code-box-copy__btn btn-clipboard"
                                                     data-clipboard-target="#example-head1" title=""
                                                     data-original-title="Copy"><i className="icofont icofont-copy-alt"></i></button>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -708,7 +552,7 @@ const Home = () => {
                                                 <button className="code-box-copy__btn btn-clipboard"
                                                     data-clipboard-target="#example-head4" title=""
                                                     data-original-title="Copy"><i className="icofont icofont-copy-alt"></i></button>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -756,9 +600,9 @@ const Home = () => {
                                                             <td>Designer</td>
                                                             <td>
                                                                 <div className="progress-showcase">
-                                                                    <div className="progress"  style={{height:" 8px",}} >
+                                                                    <div className="progress" style={{ height: " 8px", }} >
                                                                         <div className="progress-bar bg-primary" role="progressbar"
-                                                                            style={{width:" 30%",}} aria-valuenow="50"
+                                                                            style={{ width: " 30%", }} aria-valuenow="50"
                                                                             aria-valuemin="0" aria-valuemax="100"></div>
                                                                     </div>
                                                                 </div>
@@ -781,9 +625,9 @@ const Home = () => {
                                                             <td>Developer</td>
                                                             <td>
                                                                 <div className="progress-showcase">
-                                                                    <div className="progress"  style={{height:" 8px",}}>
+                                                                    <div className="progress" style={{ height: " 8px", }}>
                                                                         <div className="progress-bar bg-secondary"
-                                                                            role="progressbar" style={{width:" 70%",}}
+                                                                            role="progressbar" style={{ width: " 70%", }}
                                                                             aria-valuenow="50" aria-valuemin="0"
                                                                             aria-valuemax="100"></div>
                                                                     </div>
@@ -807,9 +651,9 @@ const Home = () => {
                                                             <td>Tester</td>
                                                             <td>
                                                                 <div className="progress-showcase">
-                                                                    <div className="progress" style={{height:" 8px",}}>
+                                                                    <div className="progress" style={{ height: " 8px", }}>
                                                                         <div className="progress-bar bg-primary" role="progressbar"
-                                                                            style={{width:" 60%",}} aria-valuenow="50"
+                                                                            style={{ width: " 60%", }} aria-valuenow="50"
                                                                             aria-valuemin="0" aria-valuemax="100"></div>
                                                                     </div>
                                                                 </div>
@@ -832,9 +676,9 @@ const Home = () => {
                                                             <td>Designer</td>
                                                             <td>
                                                                 <div className="progress-showcase">
-                                                                    <div className="progress" style={{height:" 8px",}}>
+                                                                    <div className="progress" style={{ height: " 8px", }}>
                                                                         <div className="progress-bar bg-secondary"
-                                                                            role="progressbar" style={{width:" 30%",}}
+                                                                            role="progressbar" style={{ width: " 30%", }}
                                                                             aria-valuenow="50" aria-valuemin="0"
                                                                             aria-valuemax="100"></div>
                                                                     </div>
@@ -858,9 +702,9 @@ const Home = () => {
                                                             <td>Designer</td>
                                                             <td>
                                                                 <div className="progress-showcase">
-                                                                    <div className="progress" style={{height:" 8px",}}>
+                                                                    <div className="progress" style={{ height: " 8px", }}>
                                                                         <div className="progress-bar bg-primary" role="progressbar"
-                                                                            style={{width: '90%',}} aria-valuenow="50"
+                                                                            style={{ width: '90%', }} aria-valuenow="50"
                                                                             aria-valuemin="0" aria-valuemax="100"></div>
                                                                     </div>
                                                                 </div>
@@ -1007,23 +851,23 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="col-xl-6 xl-100">
-                            <div className="card">
-                                <div className="card-header">
-                                    <h5>Market Value</h5>
-                                    <div className="card-header-right">
-                                        <ul className="list-unstyled card-option">
-                                            <li><i className="icofont icofont-simple-left"></i></li>
-                                            <li><i className="view-html fa fa-code"></i></li>
-                                            <li><i className="icofont icofont-maximize full-card"></i></li>
-                                            <li><i className="icofont icofont-minus minimize-card"></i></li>
-                                            <li><i className="icofont icofont-refresh reload-card"></i></li>
-                                            <li><i className="icofont icofont-error close-card"></i></li>
-                                        </ul>
-                                    </div>
+                        <div className="card">
+                            <div className="card-header">
+                                <h5>Market Value</h5>
+                                <div className="card-header-right">
+                                    <ul className="list-unstyled card-option">
+                                        <li><i className="icofont icofont-simple-left"></i></li>
+                                        <li><i className="view-html fa fa-code"></i></li>
+                                        <li><i className="icofont icofont-maximize full-card"></i></li>
+                                        <li><i className="icofont icofont-minus minimize-card"></i></li>
+                                        <li><i className="icofont icofont-refresh reload-card"></i></li>
+                                        <li><i className="icofont icofont-error close-card"></i></li>
+                                    </ul>
                                 </div>
-                               
                             </div>
+
                         </div>
+                    </div>
                     <footer className="footer">
                         <div className="container-fluid">
                             <div className="row">

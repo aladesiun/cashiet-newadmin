@@ -1,19 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+
+  <!DOCTYPE html>
+  <html lang="en">
+
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+      content="Multikart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords"
+      content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="%PUBLIC_URL%/assets/images/dashboard/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/assets/images/dashboard/favicon.png" type="image/x-icon">
+    <link rel="icon" href="assets/images/dashboard/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/images/dashboard/favicon.png" type="image/x-icon">
     <title>Multikart - Premium Admin Template</title>
 
     <!-- Google font-->
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,500;1,600;1,700;1,800;1,900&display=swap">
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,500;1,600;1,700;1,800;1,900&display=swap">
+
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+
+
     <!-- Font Awesome-->
     <link rel="stylesheet" type="text/css" href="assets/css/vendors/font-awesome.css">
 
@@ -24,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/vendors/icofont.css">
 
     <!-- Prism css-->
-    <link rel="stylesheet" type="text/css" href="./assets/css/vendors/prism.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/prism.css">
 
     <!-- Chartist css -->
     <link rel="stylesheet" type="text/css" href="assets/css/vendors/chartist.css">
@@ -34,177 +43,88 @@
 
     <!-- App css-->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-</head>
-  <body className="py-5 md:py-0 bg-black/[0.15] dark:bg-transparent">
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-  </div>
-    <div id="root">
-    </div>
+  </head>
+
+  <body>
+
+    <!-- page-wrapper Start-->
+  
+    <div id="root"></div>
+
     <script src="assets/js/jquery-3.3.1.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-   
+    <!-- Bootstrap js-->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <!-- feather icon js-->
+    <script src="assets/js/icons/feather-icon/feather.min.js"></script>
+    <script src="assets/js/icons/feather-icon/feather-icon.js"></script>
+
+    <!-- Sidebar jquery-->
+    <script src="assets/js/sidebar-menu.js"></script>
+
+    <!--chartist js-->
+    <script src="assets/js/chart/chartist/chartist.js"></script>
+
+    <!--chartjs js-->
+    <script src="assets/js/chart/chartjs/chart.min.js"></script>
+
+    <!-- lazyload js-->
+    <script src="assets/js/lazysizes.min.js"></script>
+
+    <!--copycode js-->
+    <script src="assets/js/prism/prism.min.js"></script>
+    <script src="assets/js/clipboard/clipboard.min.js"></script>
+    <script src="assets/js/custom-card/custom-card.js"></script>
+
+    <!--counter js-->
+    <script src="assets/js/counter/jquery.waypoints.min.js"></script>
+    <script src="assets/js/counter/jquery.counterup.min.js"></script>
+    <script src="assets/js/counter/counter-custom.js"></script>
+
+    <!--peity chart js-->
+    <script src="assets/js/chart/peity-chart/peity.jquery.js"></script>
+
+    <!-- Apex Chart Js -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <!--sparkline chart js-->
+    <script src="assets/js/chart/sparkline/sparkline.js"></script>
+
+    <!--Customizer admin-->
+    <script src="assets/js/admin-customizer.js"></script>
+
+    <!--dashboard custom js-->
+    <script src="assets/js/dashboard/default.js"></script>
+
+    <!--right sidebar js-->
+    <script src="assets/js/chat-menu.js"></script>
+
+    <!--height equal js-->
+    <script src="assets/js/height-equal.js"></script>
+
+    <!--script admin-->
+    <script src="assets/js/admin-script.js"></script>
+
+    <!-- <script src="assets/js/dashboard/default.js"></script>
+
+    <script src="assets/js/chat-menu.js"></script>
+
+    <script src="assets/js/height-equal.js"></script>
+
+    <script src="assets/js/lazysizes.min.js"></script>
+
+    <script src="assets/js/admin-script.js"></script>
+     -->
     <script>
-
-     $(document).ready(function() { 
-
-      feather.replace();
-      $.sidebarMenu = function (menu) {
-  var animationSpeed = 300,
-    subMenuSelector = '.sidebar-submenu';
-  $(menu).on('click', 'li a', function (e) {
-
-    var $this = $(this);
-    var checkElement = $this.next();
-    if (checkElement.is(subMenuSelector) && checkElement.is(':visible')) {
-      checkElement.slideUp(animationSpeed, function () {
-        checkElement.removeClass('menu-open');
-      });
-      checkElement.parent("li").removeClass("active");
-    } else if ((checkElement.is(subMenuSelector)) && (!checkElement.is(':visible'))) {
-      var parent = $this.parents('ul').first();
-      var ul = parent.find('ul:visible').slideUp(animationSpeed);
-      ul.removeClass('menu-open');
-      var parent_li = $this.parent("li");
-      checkElement.slideDown(animationSpeed, function () {
-        checkElement.addClass('menu-open');
-        parent.find('li.active').removeClass('active');
-        parent_li.addClass('active');
-      });
-    }
-    if (checkElement.is(subMenuSelector)) {
-      e.preventDefault();
-    }
-  });
-}
-$.sidebarMenu($('.sidebar-menu'))
-$nav = $('.page-sidebar');
-$header = $('.page-main-header');
-$toggle_nav_top = $('#sidebar-toggle');
-$toggle_nav_top.click(function () {
-  $this = $(this);
-  $nav = $('.page-sidebar');
-  $nav.toggleClass('open');
-  $header.toggleClass('open');
-
-});
-$body_part_side = $('.body-part');
-$body_part_side.click(function () {
-  $nav.addClass('open');
-  $header.addClass('open');
-});
-
-$(".sidebar-back").click(function () {
-  $(".page-sidebar").addClass("open");
-});
-
-//    responsive sidebar
-var $window = $(window);
-var widthwindow = $window.width();
-(function ($) {
-  "use strict";
-  if (widthwindow <= 991) {
-    $toggle_nav_top.addClass("open");
-    $nav.addClass("open");
-  }
-})(jQuery);
-$(window).resize(function () {
-  var widthwindaw = $window.width();
-  if (widthwindaw + 17 <= 991) {
-    $toggle_nav_top.addClass("open");
-    $nav.addClass("open");
-  } else {
-    $toggle_nav_top.removeClass("open");
-    $nav.removeClass("open");
-  }
-});
-
-// $(".sidebar-menu>li").removeClass("active");
-$(".sidebar-menu").find("a").removeClass("active");
-$(".sidebar-menu").find("li").removeClass("active");
-
-var current = window.location.pathname
-$(".sidebar-menu>li a").filter(function () {
-
-  // console.log(window.location.pathname);
-  // console.log($(this).attr("href"));
-
-  var link = $(this).attr("href");
-  if (link) {
-    if (current.indexOf(link) != -1) {
-      $(this).parents('li').addClass('active');
-      $(this).addClass('active');
-      // console.log(link + " found");
-    }
-  }
-});
-
-// add active when dropdown links are active
-$(".sidebar-menu li").each(function (index) {
-  if ($(this).hasClass("active")) {
-    $(this).find(".sidebar-header").addClass("active")
-  }
-});
-
-      });
-
- 
-
-   </script>
-
-     <!-- Bootstrap js-->
-     <script src="assets/js/bootstrap.bundle.min.js"></script>
- 
-     <!-- feather icon js-->
- 
-     <!-- Sidebar jquery-->
-     <script src="assets/js/sidebar-menu.js"></script>
- 
-     <!--chartist js-->
-     <script src="assets/js/chart/chartist/chartist.js"></script>
- 
-     <!--chartjs js-->
-     <script src="assets/js/chart/chartjs/chart.min.js"></script>
- 
-     <!-- lazyload js-->
-     <script src="assets/js/lazysizes.min.js"></script>
- 
-     <!--copycode js-->
-     <script src="assets/js/prism/prism.min.js"></script>
-     <script src="assets/js/clipboard/clipboard.min.js"></script>
-     <script src="assets/js/custom-card/custom-card.js"></script>
- 
-     <!--counter js-->
-     <script src="assets/js/counter/jquery.waypoints.min.js"></script>
-     <script src="assets/js/counter/jquery.counterup.min.js"></script>
-     <script src="assets/js/counter/counter-custom.js"></script>
- 
-     <!--peity chart js-->
-     <script src="assets/js/chart/peity-chart/peity.jquery.js"></script>
- 
-     <!-- Apex Chart Js -->
-     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
- 
-     <!--sparkline chart js-->
-     <script src="assets/js/chart/sparkline/sparkline.js"></script>
- 
-     <!--Customizer admin-->
-     <script src="assets/js/admin-customizer.js"></script>
- 
-     <!--dashboard custom js-->
-     <script src="assets/js/dashboard/default.js"></script>
- 
-     <!--right sidebar js-->
-     <script src="assets/js/chat-menu.js"></script>
- 
-     <!--height equal js-->
-     <script src="assets/js/height-equal.js"></script>
- 
-     <!-- lazyload js-->
-     <script src="assets/js/lazysizes.min.js"></script>
- 
-     <!--script admin-->
-     <script src="assets/js/admin-script.js"></script>
-    
+      setTimeout(()=>{
+         $('<script/>',{type:'text/javascript', src:'assets/js/sidebar-menu.js'}).appendTo('head');
+         $('<script/>',{type:'text/javascript', src:'assets/js/admin-script.js'}).appendTo('head');
+         $('<script/>',{type:'text/javascript', src:'assets/js/dashboard/default.js'}).appendTo('head');
+         $('<script/>',{type:'text/javascript', src:'assets/js/admin-customizer.js'}).appendTo('head');
+         $('<script/>',{type:'text/javascript', src:'assets/js/lazysizes.min.js'}).appendTo('head');
+      }, 2000)
+    </script>
   </body>
-</html> 
+
+  </html>

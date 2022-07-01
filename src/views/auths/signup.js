@@ -1,7 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import { useState } from 'react';
 import axios from 'axios'
 import Notification from "../../components/notification";
+
 const Signup = () => {
     let navigate = useNavigate()
 
@@ -78,6 +79,7 @@ const Signup = () => {
                                 <input required="" name="password" type="password"
                                     className="form-control" placeholder="password" onChange={handleInputChange}></input>
                             </div>
+                            <Link className="text-primary" to="/signin">Login instead</Link>
                             <div className="form-button">
                                 <button className="btn btn-primary" type="submit">
                                     {!Loading && 'Create'}

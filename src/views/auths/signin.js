@@ -88,7 +88,6 @@ const Signin = () => {
     return (
 
         <div className="page-wrapper">
-
             <div className="authentication-box">
                 <div className="container">
                     <div className="p-3 w-40 mx-auto rounded  bg-white">

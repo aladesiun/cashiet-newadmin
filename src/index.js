@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -9,6 +9,7 @@ import Signin from './views/auths/signin';
 import Signup from './views/auths/signup';
 import AdminProvider from './contexts/Admin-context';
 import ProtectRoute from './protect-routes';
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AdminProvider> 
