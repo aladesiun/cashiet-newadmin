@@ -5,31 +5,12 @@ export const AdminContext = React.createContext({admin:{}});
 
 
 export default props =>{
-    const [adminDetails, setAdminDetails]= useState(
-        {
-            username:"",
-            email:"",
-        });
-        const [data, setData]= useState('')
-        const signup =(url, details)=>{
+    let details = localStorage.getItem('_ux');
+    const [adminDetails, setAdminDetails]= useState("admin from context");
+    if (localStorage.getItem('_ux')) {
+        // setAdminDetails('hello');
+    }
 
-        };
-        const fetchUsers = async()=>{
-            try{
-                const response = await axios.post('https://jsonplaceholder.typicode.com/users')
-
-                if(response.status){
-                    setData(response.data);
-                    console.log(response);
-                   
-                }
-            }
-            catch (e) {
-                setTimeout(() => {
-                    
-                },5000);
-            }
-        }
        const signin = async(data)=>{
 
             return  new Promise((resolve, reject) => {
@@ -48,7 +29,7 @@ export default props =>{
        }
 
     return (
-        <AdminContext.Provider value={{ admin:adminDetails, data:data, fetchUsers:fetchUsers, signin:signin}}>
+        <AdminContext.Provider value={{ admin:adminDetails,  signin:signin}}>
             {props.children}
         </AdminContext.Provider>
     )

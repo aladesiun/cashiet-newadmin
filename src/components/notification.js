@@ -7,12 +7,12 @@ const Notification = ({ notifyFailed, notifySuccess }) => {
     return (
         <>
             {notifySuccess.status && 
-            <div class="alert alert-primary" role="alert">
+            <div className="alert alert-primary" role="alert">
                 {notifyFailed.message}
             </div>
             }
             {notifyFailed.status &&
-                 <div class="alert alert-danger" role="alert">
+                 <div className="alert alert-danger" role="alert">
                  {notifyFailed.message}
              </div>
              }

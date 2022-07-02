@@ -1,105 +1,15 @@
 import { Link } from "react-router-dom";
 import NavHeader from "../components/NavHeader";
+import SideNavHeader from "../components/SideNav";
+import { AdminContext } from "../contexts/Admin-context";
+import { useState, useContext, useEffect } from "react";
 
 const Home = () => {
+    const admins = useContext(AdminContext);
     return (
+        
         <>
-            <div className="page-wrapper">
-                <div className="page-body-wrapper">
-
-                    <NavHeader />
-
-                    <div className="right-sidebar" id="right_side_bar">
-                        <div>
-                            <div className="container p-0">
-                                <div className="modal-header p-l-20 p-r-20">
-                                    <div className="col-sm-8 p-0">
-                                        <h6 className="modal-title font-weight-bold">FRIEND LIST</h6>
-                                    </div>
-                                    <div className="col-sm-4 text-end p-0">
-                                        <i className="me-2" data-feather="settings"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="friend-list-search mt-0">
-                                <input type="text" placeholder="search friend"></input>
-                                <i className="fa fa-search"></i>
-                            </div>
-                            <div className="p-l-30 p-r-30 friend-list-name">
-                                <div className="chat-box">
-                                    <div className="people-list friend-list">
-                                        <ul className="list">
-                                            <li className="clearfix">
-                                                <img className="rounded-circle user-image blur-up lazyloaded"
-                                                    src="assets/images/dashboard/user.jpg" alt=""></img>
-                                                <div className="status-circle online"></div>
-                                                <div className="about">
-                                                    <div className="name">Vincent Porter</div>
-                                                    <div className="status">Online</div>
-                                                </div>
-                                            </li>
-                                            <li className="clearfix">
-                                                <img className="rounded-circle user-image blur-up lazyloaded"
-                                                    src="assets/images/dashboard/user1.jpg" alt=""></img>
-                                                <div className="status-circle away"></div>
-                                                <div className="about">
-                                                    <div className="name">Ain Chavez</div>
-                                                    <div className="status">28 minutes ago</div>
-                                                </div>
-                                            </li>
-                                            <li className="clearfix">
-                                                <img className="rounded-circle user-image blur-up lazyloaded"
-                                                    src="assets/images/dashboard/user2.jpg" alt=""></img>
-                                                <div className="status-circle online"></div>
-                                                <div className="about">
-                                                    <div className="name">Kori Thomas</div>
-                                                    <div className="status">Online</div>
-                                                </div>
-                                            </li>
-                                            <li className="clearfix">
-                                                <img className="rounded-circle user-image blur-up lazyloaded"
-                                                    src="assets/images/dashboard/user3.jpg" alt=""></img>
-                                                <div className="status-circle online"></div>
-                                                <div className="about">
-                                                    <div className="name">Erica Hughes</div>
-                                                    <div className="status">Online</div>
-                                                </div>
-                                            </li>
-                                            <li className="clearfix">
-                                                <img className="rounded-circle user-image blur-up lazyloaded"
-                                                    src="assets/images/dashboard/user3.jpg" alt=""></img>
-                                                <div className="status-circle offline"></div>
-                                                <div className="about">
-                                                    <div className="name">Ginger Johnston</div>
-                                                    <div className="status">2 minutes ago</div>
-                                                </div>
-                                            </li>
-                                            <li className="clearfix">
-                                                <img className="rounded-circle user-image blur-up lazyloaded"
-                                                    src="assets/images/dashboard/user5.jpg" alt=""></img>
-                                                <div className="status-circle away"></div>
-                                                <div className="about">
-                                                    <div className="name">Prasanth Anand</div>
-                                                    <div className="status">2 hour ago</div>
-                                                </div>
-                                            </li>
-                                            <li className="clearfix">
-                                                <img className="rounded-circle user-image blur-up lazyloaded"
-                                                    src="assets/images/dashboard/designer.jpg" alt=""></img>
-                                                <div className="status-circle online"></div>
-                                                <div className="about">
-                                                    <div className="name">Hileri Jecno</div>
-                                                    <div className="status">Online</div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="page-body">
+            <div className="page-body">
                         <div className="container-fluid">
                             <div className="page-header">
                                 <div className="row">
@@ -107,6 +17,7 @@ const Home = () => {
                                         <div className="page-header-left">
                                             <h3>Dashboard
                                                 <small>Multikart Admin panel</small>
+                                                {admins && admins.admin}
                                             </h3>
                                         </div>
                                     </div>
@@ -114,7 +25,7 @@ const Home = () => {
                                         <ol className="breadcrumb pull-right">
                                             <li className="breadcrumb-item">
                                                 <Link to="/index">
-                                                    <i data-feather="home"></i>
+                                                    <i data-feather="Layout"></i>
                                                 </Link>
                                             </li>
                                             <li className="breadcrumb-item active">Dashboard</li>
@@ -850,38 +761,6 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-xl-6 xl-100">
-                        <div className="card">
-                            <div className="card-header">
-                                <h5>Market Value</h5>
-                                <div className="card-header-right">
-                                    <ul className="list-unstyled card-option">
-                                        <li><i className="icofont icofont-simple-left"></i></li>
-                                        <li><i className="view-html fa fa-code"></i></li>
-                                        <li><i className="icofont icofont-maximize full-card"></i></li>
-                                        <li><i className="icofont icofont-minus minimize-card"></i></li>
-                                        <li><i className="icofont icofont-refresh reload-card"></i></li>
-                                        <li><i className="icofont icofont-error close-card"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <footer className="footer">
-                        <div className="container-fluid">
-                            <div className="row">
-                                <div className="col-md-6 footer-copyright text-start">
-                                    <p className="mb-0">Copyright 2019 © Multikart All rights reserved.</p>
-                                </div>
-                                <div className="col-md-6 pull-right text-end">
-                                    <p className=" mb-0">Hand crafted & made with<i className="fa fa-heart"></i></p>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
-                </div>
-            </div>
         </>
     );
 }

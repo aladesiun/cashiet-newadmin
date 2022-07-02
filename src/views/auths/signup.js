@@ -1,15 +1,13 @@
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState } from 'react';
 import axios from 'axios'
-import Notification from "../../components/notification";
+import toast from "react-hot-toast";
 
 const Signup = () => {
     let navigate = useNavigate()
 
     const [admin, setAdmin] = useState({ email: "", password: "", username: '' });
     const [Loading, setLoading] = useState(false);
-    const [NotifySuccess, setNotifySuccess] = useState({ status: false, message: "" })
-    const [NotifyFailed, setNotifyFailed] = useState({ status: false, message: "" })
     let endpoint = process.env.REACT_APP_ENDPOINT;
     let token = process.env.REACT_APP_ADMIN_TOKEN;
     const handleInputChange = (e) => {
@@ -20,77 +18,64 @@ const Signup = () => {
         }))
 
     }
-    console.log(admin);
     const createAdmin = async () => {
         setLoading(true)
         try {
             const response = await axios.post(endpoint + '/users/admin/signup', admin, {
                 headers: { Authorization: 'Bearer ' + token }
-                })
+            })
             if (response.status) {
+                toast.error(response.message);
                 setLoading(false)
-                setNotifySuccess({
-                    ...NotifySuccess,
-                    status: true,
-                    message: 'welcome'
-                })
-                navigate('signin')
+                navigate('/signin')
+
 
             }
+            else {
+               
+            }
         }
-        catch (e) {
+        catch (error) {
             setLoading(false)
-            setNotifyFailed(
-                {
-                    ...NotifyFailed,
-                    status: true,
-                    message: e.message
-                })
-
-            setTimeout(() => {
-                setNotifyFailed(
-                    {
-                        ...NotifyFailed,
-                        status: false,
-                    })
-            }, 3000);
+            var error_message = error.response.data.message;
+            toast.error(error_message);
         }
     }
     return (
-        <div className="page-wrapper">
+        <form className="form-horizontal auth-form" onSubmit={(e) => { e.preventDefault(); createAdmin() }}>
 
-            <div className="authentication-box">
-                <div className="container">
-                    <div className="p-3 w-40 mx-auto rounded  bg-white">
-                        <p className="text-primary">Create Admin</p>
-                        {/* Notification component passed notification messages as props */}
-
-                        <form className="form-horizontal auth-form" onSubmit={(e) => { e.preventDefault(); createAdmin() }}>
-                            <Notification notifyFailed={NotifyFailed} notifySuccess={NotifySuccess} />
-                            <div className="form-group">
-                                <input required="" name="email" type="email"
-                                    className="form-control" placeholder="email" id="email1" onChange={handleInputChange}></input>
-                            </div>
-                            <div className="form-group">
-                                <input required="" name="username" type="text"
-                                    className="form-control" placeholder="Username" id="username" onChange={handleInputChange}></input>
-                            </div>
-                            <div className="form-group">
-                                <input required="" name="password" type="password"
-                                    className="form-control" placeholder="password" onChange={handleInputChange}></input>
-                            </div>
-                            <Link className="text-primary" to="/signin">Login instead</Link>
-                            <div className="form-button">
-                                <button className="btn btn-primary" type="submit">
-                                    {!Loading && 'Create'}
-                                    {Loading && 'Creating...'}
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        <div className="form-group">
+            <input required name="email" type="email"
+                className="form-control" placeholder="email" id="email1" onChange={handleInputChange}></input>
+        </div>
+        <div className="form-group">
+            <input required name="username" type="username"
+                className="form-control" placeholder="username" id="username1" onChange={handleInputChange}></input>
+        </div>
+        <div className="form-group">
+            <input required name="password" type="password"
+                className="form-control" placeholder="password" onChange={handleInputChange}></input>
+        </div>
+        <div className="form-terms">
+            <div className="form-check mesm-2">
+                <input required type="checkbox" className="form-check-input" id="customControlAutosizingx" />
+                <label className="form-check-label ps-2" for="customControlAutosizing">
+                    Remember me
+                </label>
+                <a href="javascript:void(0)" className="btn btn-default forgot-pass">
+                    Forgot Password!
+                </a>
             </div>
         </div>
+
+        <div className="form-button">
+            <button className="btn btn-primary" type="submit">
+                {!Loading && 'Login'}
+                {Loading && 'Loading...'}
+            </button>
+        </div>
+       
+    </form>
     );
 }
 
