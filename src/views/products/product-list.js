@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminContext } from '../../contexts/Admin-context';
 import toast from 'react-hot-toast';
-import httpServices from "../../services/http-services";
+import httpServices from "../../hooks/http-services";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -10,8 +10,6 @@ import "react-loading-skeleton/dist/skeleton.css";
 const Products = () => {
     let navigate = useNavigate()
     const [Loading, setLoading] = useState(false);
-    const [NotifySuccess, setNotifySuccess] = useState({ status: false, message: "" })
-    const [NotifyFailed, setNotifyFailed] = useState({ status: false, message: "" })
     const [Products, setProducts] = useState([]);
     const getProducts = async () => {
         setLoading(true);
@@ -25,19 +23,8 @@ const Products = () => {
                 toast.success(response.data.message)
             }
             else {
-                setNotifyFailed(
-                    {
-                        ...NotifyFailed,
-                        status: true,
-                        message: response.message
-                    })
-                setTimeout(() => {
-                    setNotifyFailed(
-                        {
-                            ...NotifyFailed,
-                            status: false,
-                        })
-                }, 3000);
+                toast.success(response.data.message)
+              
             }
         }
         catch (e) {
@@ -65,7 +52,6 @@ const Products = () => {
         catch (e) {
             setLoading(false)
             toast.error(e.message)
-            window.location.reload();
 
         }
     }

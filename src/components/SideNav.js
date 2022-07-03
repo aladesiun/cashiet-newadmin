@@ -4,13 +4,13 @@ const SideNavHeader = () => {
         <div className="page-sidebar">
         <div className="main-header-left d-none d-lg-block">
             <div className="logo-wrapper">
-                <Link  to="index">
+                <Link  to="/">
                     <img className="d-none d-lg-block blur-up lazyloaded" src="assets/images/dashboard/multikart-logo.png" alt=""></img>
                 </Link>
             </div>
         </div>
         <div className="sidebar custom-scrollbar">
-            <Link  to=" " className="sidebar-back d-lg-none d-block"><i className="fa fa-times" aria-hidden="true"></i></Link>
+            <div  className="sidebar-back d-lg-none d-block"><i className="fa fa-times" aria-hidden="true"></i></div>
             <div className="sidebar-user">
                 <img className="img-60" src="assets/images/dashboard/user3.jpg" alt="#"></img>
                 <div>

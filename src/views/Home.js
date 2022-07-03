@@ -16,8 +16,8 @@ const Home = () => {
                                     <div className="col-lg-6">
                                         <div className="page-header-left">
                                             <h3>Dashboard
-                                                <small>Multikart Admin panel</small>
-                                                {admins && admins.admin}
+                                                <small>Current Admin:</small>
+                                                {admins && admins.admin.email}
                                             </h3>
                                         </div>
                                     </div>

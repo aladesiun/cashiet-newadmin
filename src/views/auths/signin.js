@@ -6,7 +6,7 @@ const Signin = () => {
     let navigate = useNavigate()
     const admins = useContext(AdminContext);
     console.log(admins.admin);
-    const [Admin, setAdmin] = useState({ email: "", password: "" });
+    const [Admin, setAdmin] = useState({ email: "aladesiuntope@gmail.com", password: "Admin@1234" });
     const [Loading, setLoading] = useState(false);
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -25,17 +25,11 @@ const Signin = () => {
         }).then((data) => {
             if (data.status) {
                 setLoading(false);
+                navigate('/')
                 toast.success('success');
 
-
-                var admin_token = data.data.token;
-                admins.setAdminDetails(admin_token)
-                localStorage.setItem('_ux', admin_token);
-
-                toast.success('success');
-                // navigate('/')
             }
-            else{
+            else {
                 toast.error('An error occured please try again');
                 setLoading(false);
                 window.location.reload();
@@ -54,21 +48,17 @@ const Signin = () => {
         <>
             <form className="form-horizontal auth-form" onSubmit={(e) => { e.preventDefault(); signin() }}>
                 <div className="form-group">
-                {admins.admin}
 
-                    <input required name="email" type="email"
+                    <input required name="email" type="email" value={Admin.email}
                         className="form-control" placeholder="email" id="email1" onChange={handleInputChange}></input>
                 </div>
                 <div className="form-group">
-                    <input required name="password" type="password"
+                    <input required name="password" type="password" value={Admin.password}
                         className="form-control" placeholder="password" onChange={handleInputChange}></input>
                 </div>
                 <div className="form-terms">
                     <div className="form-check mesm-2">
-                        <input required type="checkbox" className="form-check-input" id="customControlAutosizing" />
-                        <label className="form-check-label ps-2" for="customControlAutosizing">
-                            Remember me
-                        </label>
+
                         <a href="javascript:void(0)" className="btn btn-default forgot-pass">
                             Forgot Password!
                         </a>
@@ -81,7 +71,7 @@ const Signin = () => {
                         {Loading && 'Loading...'}
                     </button>
                 </div>
-               
+
             </form>
         </>
 
