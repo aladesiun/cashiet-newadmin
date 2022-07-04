@@ -6,7 +6,7 @@ const Signin = () => {
     let navigate = useNavigate()
     const admins = useContext(AdminContext);
     console.log(admins.admin);
-    const [Admin, setAdmin] = useState({ email: "aladesiuntope@gmail.com", password: "Admin@1234" });
+    const [Admin, setAdmin] = useState({ email: "", password: "" });
     const [Loading, setLoading] = useState(false);
     const handleInputChange = (e) => {
         const { name, value } = e.target;
