@@ -65,7 +65,7 @@ const Products = () => {
                     <div className="card height-equal">
                         
                         <div className="card-header">
-                            <h5>Products test</h5>
+                            <h5>Products</h5>
                             <div className="card-header-right">
                                 <ul className="list-unstyled card-option">
                                     <li><i className="icofont icofont-simple-left"></i></li>
