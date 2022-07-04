@@ -27,8 +27,7 @@ const Signup = () => {
             if (response.status) {
                 toast.error(response.message);
                 setLoading(false)
-                navigate('/signin')
-
+                window.location.href="/signin"
 
             }
             else {
@@ -56,21 +55,11 @@ const Signup = () => {
             <input required name="password" type="password"
                 className="form-control" placeholder="password" onChange={handleInputChange}></input>
         </div>
-        <div className="form-terms">
-            <div className="form-check mesm-2">
-                <input required type="checkbox" className="form-check-input" id="customControlAutosizingx" />
-                <label className="form-check-label ps-2" for="customControlAutosizing">
-                    Remember me
-                </label>
-                <a href="javascript:void(0)" className="btn btn-default forgot-pass">
-                    Forgot Password!
-                </a>
-            </div>
-        </div>
+        
 
         <div className="form-button">
             <button className="btn btn-primary" type="submit">
-                {!Loading && 'Login'}
+                {!Loading && 'Sign Up'}
                 {Loading && 'Loading...'}
             </button>
         </div>

@@ -25,7 +25,7 @@ const Signin = () => {
         }).then((data) => {
             if (data.status) {
                 setLoading(false);
-                navigate('/')
+                window.location.href="/"
                 toast.success('success');
 
             }
