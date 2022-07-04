@@ -21,7 +21,7 @@ const SideNavHeader = () => {
         <div className="sidebar custom-scrollbar">
             <div  className="sidebar-back d-lg-none d-block"><i className="fa fa-times" aria-hidden="true"></i></div>
             <div className="sidebar-user">
-                <img className="img-60" src={require('../assets/images/dashboard/user3.jpg')} alt="#"></img>
+                <img className="img-60" src={require('../assets/images/cashiet.png')} alt="#"></img>
                 <div>
                     <h6 className="f-14">{admins && admins.admin.username}</h6>
                     <p>Admin</p>
