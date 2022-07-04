@@ -9,7 +9,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import useGet from "../../hooks/get";
 const Product = () => {
     let { _id } = useParams();
-    const { data, Loading, Error} = useGet('products/' + _id);
+    const { data, Loading, Error} = useGet('/products/' + _id);
     const Products =data ? data.product : " ";
     console.log(Products);
 
@@ -71,7 +71,7 @@ const Product = () => {
                         }
                         {Products && 
                             <div className="row product-page-main card-body">
-                                <div className="col-xl-4">
+                                <div className="col-xl-2">
                                 <div className="img-td" style={{width:'200px', maxHeight:'200px'}}><img src={Products.image ? Products.image.url : ''} alt={"Products"+Products._id} className="img-fluid"></img></div>
 
                                 </div>
@@ -160,7 +160,7 @@ const Product = () => {
                                 </div>
                             </div>
                         }
-                        {Error && <div>error o boss</div>}
+                        {Error && <div className="text-center"><h1 className="font-bold fs-3">Unable to fetch data at this monent</h1></div>}
 
                     </div>
                 </div>

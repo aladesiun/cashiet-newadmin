@@ -20,8 +20,8 @@ const useGet = (url) =>{
     .then((data)=>{
         if (data.status) {
             setLoading(false);
-            console.log(data.data.products.results);
-            setData(data.data.products.results)
+            console.log(data.data);
+            setData(data.data)
             toast.success('success')
         }
         
