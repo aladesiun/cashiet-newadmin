@@ -8,8 +8,9 @@
   width: 100%;
 }
 .img-td{
-  width: 30px;
-  min-width: 100px!important;
+  width: 100px!important;
+  min-width: 50px!important;
+  background-color: red;
   border-radius: 30px;
 
 }

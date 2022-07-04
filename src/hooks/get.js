@@ -7,25 +7,35 @@ const useGet = (url) =>{
     let token = process.env.REACT_APP_ADMIN_TOKEN;
     const [data, setData] = useState({});
     const [Loading, setLoading] = useState(false);
+    const [Error, setError] = useState(false);
 
-   
+   const getData=async()=>{
+    setLoading(true)
+
+    await  axios.get(endpoint + url, {
+        headers: {
+            Authorization: 'Bearer ' + token,
+        },
+    })
+    .then((data)=>{
+        if (data.status) {
+            setLoading(false);
+            console.log(data.data.products.results);
+            setData(data.data.products.results)
+            toast.success('success')
+        }
+        
+    }) 
+    .catch((error)=> {
+        setLoading(false)
+        setError(true)
+        toast.error(error.message)
+    })
+   }
      useEffect(()=>{
-        setLoading(true)
-
-            axios.get(endpoint+"/"+url)
-            .then((data)=>{
-                setLoading(false);
-                console.log(data);
-                setData(data.data.product)
-                toast.success('success')
-            }) 
-            .catch((error)=> {
-                setLoading(false)
-
-                toast.error(error.message)
-            })
+       getData()
         
      },[url])
-     return {data,Loading}
+     return {data,Loading, Error}
 }
 export default useGet;

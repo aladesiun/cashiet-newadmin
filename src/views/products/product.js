@@ -9,8 +9,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 import useGet from "../../hooks/get";
 const Product = () => {
     let { _id } = useParams();
-    const { data:Products, Loading:Loading } = useGet('products/' + _id);
-    console.log(Products.name);
+    const { data, Loading, Error} = useGet('products/' + _id);
+    const Products =data ? data.product : " ";
+    console.log(Products);
 
     useEffect(() => {
     }, [])
@@ -68,10 +69,10 @@ const Product = () => {
                             </div>
 
                         }
-                        {!Loading &&
+                        {Products && 
                             <div className="row product-page-main card-body">
                                 <div className="col-xl-4">
-                                <div className="img-td" style={{width:'200px', maxHeight:'200px'}}><img src={Products.image.url} alt={"Products"+Products._id} className="img-fluid"></img></div>
+                                <div className="img-td" style={{width:'200px', maxHeight:'200px'}}><img src={Products.image ? Products.image.url : ''} alt={"Products"+Products._id} className="img-fluid"></img></div>
 
                                 </div>
                                 <div className="col-xl-8">
@@ -106,7 +107,7 @@ const Product = () => {
                                         </ul>
                                         <hr />
                                         <h6 className="product-title size-text">
-                                            select size <span className="pull-right"><a href data-bs-toggle="modal" data-bs-target="#sizemodal">size chart</a></span>
+                                            Dimensions <span className="pull-right"><a href data-bs-toggle="modal" data-bs-target="#sizemodal">size chart</a></span>
                                         </h6>
                                         <div className="modal fade" id="sizemodal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div className="modal-dialog modal-dialog-centered" role="document">
@@ -115,7 +116,7 @@ const Product = () => {
                                                         <h5 className="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
                                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                                                     </div>
-                                                    <div className="modal-body"><img src={require('../../assets/images/size-chart.jpg')} alt className="img-fluid blur-up lazyloaded" /></div>
+                                                    <div className="modal-body"><img src={require('../../assets/images/size-chart.jpg')} alt className="img-fluid blur-up " /></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -152,14 +153,14 @@ const Product = () => {
                                             </p>
                                         </div>
                                         <div className="m-t-15">
-                                            <button className="btn btn-primary m-r-10" type="button">Add To Cart</button>
-                                            <button className="btn btn-secondary" type="button">Buy Now</button>
+                                            <button className="btn btn-primary m-r-10" type="button">Delete</button>
+                                            <Link className="btn btn-secondary" to="l">Edit</Link>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         }
+                        {Error && <div>error o boss</div>}
 
                     </div>
                 </div>
