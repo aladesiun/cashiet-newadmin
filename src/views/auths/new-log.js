@@ -39,9 +39,7 @@ const NewLog = () => {
                             </div>
                         </div>
                     </div>
-                    <Link to="/" className="btn btn-primary back-btn">
-                        <i data-feather="arrow-left"></i>back
-                    </Link>
+                   
                 </div>
             </div>
         </div>
