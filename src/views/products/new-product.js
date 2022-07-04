@@ -4,8 +4,11 @@ import { AdminContext } from '../../contexts/Admin-context';
 import toast from 'react-hot-toast';
 import httpServices from "../../hooks/http-services";
 import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 const AddProduct = () => {
     const [product, setProduct]= useState({name:"", price:"", keyword:"", image:"",category:"", description:"", });
+    const [Loading, setLoading] = useState(false);
+    console.log(product);
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setProduct((prevState) => ({
@@ -13,6 +16,31 @@ const AddProduct = () => {
             [name]: value.replace(/\s/g, '')
         }))
     }
+    const signin = () => {
+        setLoading(true);
+
+        axios.post({
+            endpoint: "/products",
+            details: product,
+        }).then((data) => {
+            if (data.status) {
+                setLoading(false);
+                toast.success('success');
+
+                window.location.href="/products"
+
+            }
+            else {
+                toast.error('An error occured please try again');
+                setLoading(false);
+                window.location.reload();
+            }
+        }).catch((error) => {
+            setLoading(false);
+            var error_message = error.response.data.message;
+            toast.error(error_message);
+        });
+    };
     return (
         <div className="page-body">
             <div className="card product-cont">

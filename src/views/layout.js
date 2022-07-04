@@ -6,7 +6,6 @@ const Layout = () => {
     return (
         <>
             <div className="page-wrapper">
-               <NavHeader/>
                 <div className="page-body-wrapper">
 
                     <SideNavHeader/>                    
