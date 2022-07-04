@@ -14,14 +14,13 @@ const SideNavHeader = () => {
         <div className="main-header-left d-none d-lg-block">
             <div className="logo-wrapper">
                 <Link  to="/">
-                    <img className="d-none d-lg-block blur-up lazyloaded" src="assets/images/dashboard/multikart-logo.png" alt=""></img>
+                    <img className="d-none d-lg-block blur-up lazyloaded" src={require('../assets/images/index.png')} alt=""></img>
                 </Link>
             </div>
         </div>
         <div className="sidebar custom-scrollbar">
             <div  className="sidebar-back d-lg-none d-block"><i className="fa fa-times" aria-hidden="true"></i></div>
-            <div className="sidebar-user">
-                <img className="img-60" src={require('../assets/images/cashiet.png')} alt="#"></img>
+            <div className="sidebar-user block ml-0">
                 <div>
                     <h6 className="f-14">{admins && admins.admin.username}</h6>
                     <p>Admin</p>

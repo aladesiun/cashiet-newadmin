@@ -20,7 +20,7 @@ const ForgetPassword = () => {
                 headers: { Authorization: 'Bearer ' + token }
             })
             if (response.status) {
-                toast.success(response.message);
+                toast.success("A verification code has been sent to your email");
                 setLoading(false)
                 // window.location.href="/signin"
 

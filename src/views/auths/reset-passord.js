@@ -1,16 +1,19 @@
 import { useState } from "react";
 import axios from 'axios'
 import toast from "react-hot-toast";
+import { useSearchParams } from "react-router-dom";
 const ResetPassword = () => {
-    // http://cashiet.com/password-reset?user=62bf323ec3757a3c61972264&token=82e8065e41630e9f1c3ef7cf61e219b37ecd2f7049cece3a78c3142ed7abe1fc
+    const [searchParams, setSearchParams]= useSearchParams();
+    const resetToken = searchParams.get('token');
+    const userId= searchParams.get('user');
     let endpoint = process.env.REACT_APP_ENDPOINT;
     let token = process.env.REACT_APP_ADMIN_TOKEN;
-    const [password, setEmail] = useState({Password:""});
-    const [PasswordConfirm, setPasswordConfirm] = useState({email:""});
+    const [password, setPassword] = useState({password:"", token:resetToken, userId:userId});
+    console.log(password);
     const [Loading, setLoading] = useState(false);
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setEmail((prevState) => ({
+        setPassword((prevState) => ({
             ...prevState,
             [name]: value.replace(/\s/g, '')
         }))
@@ -18,13 +21,13 @@ const ResetPassword = () => {
     const resetPassword= async ()=>{
         setLoading(true)
         try {
-            const response = await axios.post(endpoint + '/password', password, {
+            const response = await axios.post(endpoint + '/password/reset', password, {
                 headers: { Authorization: 'Bearer ' + token }
             })
             if (response.status) {
                 toast.success(response.message);
                 setLoading(false)
-                // window.location.href="/signin"
+                window.location.href="/signin"
 
             }
             else {
@@ -45,13 +48,14 @@ const ResetPassword = () => {
                     <div className="tab-content" id="top-tabContent">
                         <div className="tab-pane fade show active" id="top-profile" role="tabpanel">
                             <form className="form-horizontal reset-pass auth-form" onSubmit={(e)=>{e.preventDefault(); resetPassword()}}>
-                                <h3 className="forgot-title">Forgot Password</h3>
+                                <h3 className="forgot-title">Set New Password</h3>
                                 <div className="form-group reset-input">
-                                    <label>Enter your email address and we will send you a link to reset your password.</label>
-                                    <input required name="email" onChange={handleInputChange} type="email" className="form-control" placeholder="Username / Phone Number" id="exampleInputEmail1" />
+                                    <label>New Password</label>
+                                    <input required name="password" onChange={handleInputChange} type="text" className="form-control" placeholder="Username / Phone Number" id="exampleInputEmail1" />
                                 </div>
+                                
                                 <div className="form-button mt-3">
-                                    <button className="btn btn-primary" type="submit">Reset Password</button>
+                                    <button className="btn btn-primary" type="submit">{Loading ? 'Reseting' : 'Reset Password'}</button>
                                 </div>
                             </form>
                         </div>

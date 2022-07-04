@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AdminContext } from '../../contexts/Admin-context';
 import toast from "react-hot-toast";
 const Signin = () => {
@@ -25,7 +25,7 @@ const Signin = () => {
         }).then((data) => {
             if (data.status) {
                 setLoading(false);
-                window.location.href="/"
+                window.location.href="/products/filter"
                 toast.success('success');
 
             }
@@ -59,9 +59,9 @@ const Signin = () => {
                 <div className="form-terms">
                     <div className="form-check mesm-2">
 
-                        <a href="javascript:void(0)" className="btn btn-default forgot-pass">
+                        <Link to="/forgot-password" className="btn btn-default forgot-pass">
                             Forgot Password!
-                        </a>
+                        </Link>
                     </div>
                 </div>
 
