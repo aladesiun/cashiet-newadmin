@@ -15,7 +15,7 @@ const AddProduct = () => {
         const { name, value } = e.target;
         setProduct((prevState) => ({
             ...prevState,
-            [name]: value.replace(/\s/g, '')
+            [name]: value
         }))
     }
     const addProduct = (e) => {

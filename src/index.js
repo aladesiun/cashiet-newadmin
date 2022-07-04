@@ -16,6 +16,7 @@ import Product from './views/products/product';
 import AddProduct from './views/products/new-product';
 import ForgetPassword from './views/auths/forget-password';
 import ResetPassword from './views/auths/reset-passord';
+import EditProduct from './views/products/edit-product';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -33,6 +34,7 @@ root.render(
           <Route path="/products/filter" element={<Products/>}></Route>
           <Route path="/product/:_id" element={<Product/>}></Route>
           <Route path="/products/new" element={<AddProduct/>}></Route>
+          <Route path="/product/edit/_id" element={<EditProduct/>}></Route>
         </Route>
       </Route>
       </Route>
