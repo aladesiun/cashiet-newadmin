@@ -14,6 +14,8 @@ import Layout from './views/layout';
 import Products from './views/products/product-list';
 import Product from './views/products/product';
 import AddProduct from './views/products/new-product';
+import ForgetPassword from './views/auths/forget-password';
+import ResetPassword from './views/auths/reset-passord';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -23,10 +25,12 @@ root.render(
       <Route path="/" element={<App/>}>
      
       <Route path='/signin' element={<NewLog/>}></Route>
+      <Route path='/forget-password' element={<ForgetPassword/>}></Route>
+      <Route path='/reset/?token/?userId' element={<ResetPassword/>}></Route>
       <Route element={<ProtectRoute/>}>
       <Route path="/" element={<Layout/>}>
           <Route path="/" element={<Home/>}></Route>
-          <Route path="/products" element={<Products/>}></Route>
+          <Route path="/products/filter" element={<Products/>}></Route>
           <Route path="/product/:_id" element={<Product/>}></Route>
           <Route path="/products/new" element={<AddProduct/>}></Route>
         </Route>

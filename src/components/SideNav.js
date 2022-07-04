@@ -7,7 +7,7 @@ const SideNavHeader = () => {
     const logout=()=>{
         localStorage.removeItem('adx')
         localStorage.removeItem('_ux')
-        navigate('/signin');
+        window.location.href="/signin"
     }
     return (
         <div className="page-sidebar">
@@ -44,7 +44,7 @@ const SideNavHeader = () => {
 
                     <ul className="sidebar-submenu">
                         <li>
-                            <Link  to="/products">
+                            <Link  to="/products/filter">
                                 <i className="fa fa-circle"></i>
                                 <span>Products</span>
                             </Link>

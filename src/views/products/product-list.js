@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { AdminContext } from '../../contexts/Admin-context';
 import toast from 'react-hot-toast';
 import httpServices from "../../hooks/http-services";
@@ -11,14 +11,25 @@ const Products = () => {
     let navigate = useNavigate()
     const [Loading, setLoading] = useState(false);
     const [Products, setProducts] = useState([]);
+    const [searchParams, setSearchParams]= useSearchParams();
+    const [query, setQuery] = useState(searchParams.get('name'))
+    const url = query ? `/products/filter/${query}` : "/products/filter";
+    const handleInputChange = (e) => {
+        const newQuery = e.target.value;
+        setQuery(newQuery);
+        setSearchParams({
+            name:newQuery 
+        })
+
+    }
     const getProducts = async () => {
         setLoading(true);
         try {
-            const response = await httpServices.get('/products')
+            const response = await httpServices.get(url)
             if (response.status) {
                 setLoading(false)
-                let result = response.data.products.results;
-                console.log(response.data.products.results);
+                let result = response.data.products;
+                console.log(response.data.products);
                 setProducts(result)
                 toast.success(response.data.message)
             }
@@ -58,6 +69,7 @@ const Products = () => {
     useEffect(() => {
         getProducts()
     }, []);
+   
     return (
         <div className="page-body ">
             <div className="product-cont">
@@ -77,10 +89,12 @@ const Products = () => {
                                 </ul>
                             </div>
                         </div>
-                        <div className="d-flex justify-content-between bg-white p-3">
-                            <form className="form-inline search-form search-box">
-                                <div className="form-group">
-                                    <input className="form-control-plaintext" type="search" placeholder="Search.." />
+                        <div className="d-flex justify-content-between align-items-center bg-white p-3">
+                            <form className="form-inline search-form search-box" onSubmit={(e)=>{e.preventDefault(); getProducts()}}>
+                                <div className="form-group flex">
+                                    <input className="form-control" type="text" placeholder="Search.." value={query} onChange={handleInputChange}/>
+                                    <button className="btn-primary border-0 p-1 rounded" type="submit">search</button>
+
                                 </div>
                             </form>
                             <Link to="page-create.html" className="btn btn-primary mt-md-0 mt-2">Add New Page</Link>
