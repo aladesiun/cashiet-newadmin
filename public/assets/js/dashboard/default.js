@@ -110,8 +110,8 @@ var pieOptions = {
 
 var doughnutData = [{
         value: 300,
-        color: "#ff4c3b",
-        highlight: "#ff4c3b",
+        color: "#04A134",
+        highlight: "#04A134",
         label: "Saint Lucia"
     },
     {
@@ -142,7 +142,7 @@ var doughnutCtx = document.getElementById("myDoughnutGraph").getContext("2d");
 var myDoughnutChart = new Chart(doughnutCtx).Doughnut(doughnutData, doughnutOptions);
 
 $(".pie-colours-1").peity("pie", {
-    fill: ["#ff4c3b", "#02cccd", "#ffbc58", "#a5a5a5"],
+    fill: ["#04A134", "#02cccd", "#ffbc58", "#a5a5a5"],
     width: '250',
     height: '180'
 })
@@ -222,8 +222,8 @@ var lineGraphData = {
     }, {
         label: "My third dataset",
         fillColor: "transparent",
-        strokeColor: "#ff4c3b",
-        pointColor: "#ff4c3b",
+        strokeColor: "#04A134",
+        pointColor: "#04A134",
         pointStrokeColor: "#fff",
         pointHighlightFill: "#000",
         pointHighlightStroke: "rgba(30, 166, 236, 1)",
@@ -312,14 +312,14 @@ var sparkline_chart = {
                 width: '100%',
                 height: '100%',
                 tooltipClassname: 'chart-sparkline',
-                lineColor: '#ff4c3b',
+                lineColor: '#04A134',
                 fillColor: 'transparent',
-                highlightLineColor: "#ff4c3b",
+                highlightLineColor: "#04A134",
                 highlightSpotColor: false,
-                targetColor: "#ff4c3b",
-                performanceColor: "#ff4c3b",
-                boxFillColor: "#ff4c3b",
-                medianColor: "#ff4c3b",
+                targetColor: "#04A134",
+                performanceColor: "#04A134",
+                boxFillColor: "#04A134",
+                medianColor: "#04A134",
                 minSpotColor: false,
                 maxSpotColor: false,
                 spotColor: false

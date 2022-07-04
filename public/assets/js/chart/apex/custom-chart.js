@@ -86,7 +86,7 @@ var options = {
       format: 'dd MMM yyyy'
     }
   },
-  colors: ['#ff4c3b'],
+  colors: ['#04A134'],
   fill: {
     type: 'gradient',
     gradient: {

@@ -45,7 +45,7 @@ const Home = () => {
                                             </div>
                                         </div>
                                         <div className="media-body media-doller">
-                                            <span className="m-0">Earnings</span>
+                                            <span className="m-0">Sold</span>
                                             <h3 className="mb-0">$ <span className="counter">6659</span><small> This
                                                 Month</small>
                                             </h3>
@@ -81,7 +81,7 @@ const Home = () => {
                                             <div className="align-self-center text-center"><i data-feather="message-square"
                                                 className="font-primary"></i></div>
                                         </div>
-                                        <div className="media-body media-doller"><span className="m-0">Messages</span>
+                                        <div className="media-body media-doller"><span className="m-0">In stock</span>
                                             <h3 className="mb-0">$ <span className="counter">893</span><small> This
                                                 Month</small></h3>
                                         </div>
@@ -97,7 +97,7 @@ const Home = () => {
                                             <div className="align-self-center text-center"><i data-feather="users"
                                                 className="font-danger"></i></div>
                                         </div>
-                                        <div className="media-body media-doller"><span className="m-0">New Vendors</span>
+                                        <div className="media-body media-doller"><span className="m-0">Vendors</span>
                                             <h3 className="mb-0">$ <span className="counter">5631</span><small> This
                                                 Month</small></h3>
                                         </div>

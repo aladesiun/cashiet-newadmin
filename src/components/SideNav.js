@@ -1,5 +1,14 @@
-import {Link} from 'react-router-dom'
+import {Link, Navigate, useNavigate} from 'react-router-dom'
+import { AdminContext } from "../contexts/Admin-context";
+import { useState, useContext, useEffect } from "react";
 const SideNavHeader = () => {
+    const admins = useContext(AdminContext);
+    let navigate = useNavigate();
+    const logout=()=>{
+        localStorage.removeItem('adx')
+        localStorage.removeItem('_ux')
+        navigate('/signin');
+    }
     return (
         <div className="page-sidebar">
         <div className="main-header-left d-none d-lg-block">
@@ -12,10 +21,10 @@ const SideNavHeader = () => {
         <div className="sidebar custom-scrollbar">
             <div  className="sidebar-back d-lg-none d-block"><i className="fa fa-times" aria-hidden="true"></i></div>
             <div className="sidebar-user">
-                <img className="img-60" src="assets/images/dashboard/user3.jpg" alt="#"></img>
+                <img className="img-60" src={require('../assets/images/dashboard/user3.jpg')} alt="#"></img>
                 <div>
-                    <h6 className="f-14">JOHN</h6>
-                    <p>general manager.</p>
+                    <h6 className="f-14">{admins && admins.admin.username}</h6>
+                    <p>Admin</p>
                 </div>
             </div>
             <ul className="sidebar-menu">
@@ -35,17 +44,17 @@ const SideNavHeader = () => {
 
                     <ul className="sidebar-submenu">
                         <li>
-                            <Link  to="/product">
+                            <Link  to="/products">
                                 <i className="fa fa-circle"></i>
-                                <span></span>
-                                <i className="fa fa-angle-right pull-right"></i>
+                                <span>Products</span>
                             </Link>
-                            <Link  to="/new ">
+                           
+                        </li>
+                        <li>
+                            <Link  to="/products/new">
                                 <i className="fa fa-circle"></i>
-                                <span></span>
-                                <i className="fa fa-angle-right pull-right"></i>
+                                <span>Add Product</span>
                             </Link>
-
                            
                         </li>
 
@@ -53,28 +62,7 @@ const SideNavHeader = () => {
                 </li>
 
                 <li>
-                    <Link className="sidebar-header" to=" "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg><span>Settings</span><i className="fa fa-angle-right pull-right"></i></Link>
-                    <ul className="sidebar-submenu">
-                        <li>
-                            <Link  to="profile"><i className="fa fa-circle"></i>Profile
-                            </Link>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    <Link className="sidebar-header" to="invoice"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg><span>Invoice</span></Link>
-                </li>
-
-                <li>
-                    <Link className="sidebar-header" to="forgot-password">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-key"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg>
-                        <span>Forgot Password</span>
-                    </Link>
-                </li>
-
-                <li>
-                    <Link className="sidebar-header" to="/signin">
+                    <Link to="#" className="sidebar-header bg-none" onClick={()=>logout()}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
                         <span>Login</span>
                     </Link>

@@ -107,51 +107,14 @@ const Product = () => {
                                         </ul>
                                         <hr />
                                         <h6 className="product-title size-text">
-                                            Dimensions <span className="pull-right"><a href data-bs-toggle="modal" data-bs-target="#sizemodal">size chart</a></span>
+                                            Dimensions:
                                         </h6>
-                                        <div className="modal fade" id="sizemodal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div className="modal-dialog modal-dialog-centered" role="document">
-                                                <div className="modal-content">
-                                                    <div className="modal-header">
-                                                        <h5 className="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
-                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                                    </div>
-                                                    <div className="modal-body"><img src={require('../../assets/images/size-chart.jpg')} alt className="img-fluid blur-up " /></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="size-box">
-                                            <ul>
-                                                <li className="active"><a href="javascript:void(0)">s</a></li>
-                                                <li><a href="javascript:void(0)">m</a></li>
-                                                <li><a href="javascript:void(0)">l</a></li>
-                                                <li><a href="javascript:void(0)">xl</a></li>
-                                            </ul>
-                                        </div>
-                                        <div className="add-product-form">
-                                            <h6 className="product-title">quantity</h6>
-                                            <fieldset className="qty-box mt-2 ms-0">
-                                                <div className="input-group bootstrap-touchspin">
-                                                    <div className="input-group-prepend">
-                                                        <button className="btn btn-primary btn-square bootstrap-touchspin-down" type="button"><i className="fa fa-minus" /></button>
-                                                    </div>
-                                                    <div className="input-group-prepend"><span className="input-group-text bootstrap-touchspin-prefix" style={{ "display": "none" }} /></div>
-                                                    <input className="touchspin form-control" type="text" defaultValue={1} style={{ "display": "block" }} />
-                                                    <div className="input-group-append"><span className="input-group-text bootstrap-touchspin-postfix" style={{ "display": "none" }} /></div>
-                                                    <div className="input-group-append ml-0">
-                                                        <button className="btn btn-primary btn-square bootstrap-touchspin-up" type="button"><i className="fa fa-plus" /></button>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
+                                        <div>
+                                            width:{Products.dimension.width}
                                         </div>
                                         <hr />
-                                        <h6 className="product-title">Sales Ends In</h6>
-                                        <div className="timer">
-                                            <p id="demo">
-                                                <span>25 <span className="padding-l">:</span> <span className="timer-cal">Days</span> </span><span>22 <span className="padding-l">:</span> <span className="timer-cal">Hrs</span> </span>
-                                                <span>13 <span className="padding-l">:</span> <span className="timer-cal">Min</span> </span><span>57 <span className="timer-cal">Sec</span></span>
-                                            </p>
-                                        </div>
+                                        <h6 className="product-title">Description</h6>
+                                        <p>{Products.description}</p>
                                         <div className="m-t-15">
                                             <button className="btn btn-primary m-r-10" type="button">Delete</button>
                                             <Link className="btn btn-secondary" to="l">Edit</Link>

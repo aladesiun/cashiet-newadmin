@@ -62,8 +62,8 @@ var lineGraphData = {
     }, {
         label: "My third dataset",
         fillColor: "transparent",
-        strokeColor: "#ff4c3b",
-        pointColor: "#ff4c3b",
+        strokeColor: "#04A134",
+        pointColor: "#04A134",
         pointStrokeColor: "#fff",
         pointHighlightFill: "#000",
         pointHighlightStroke: "rgba(30, 166, 236, 1)",
@@ -163,8 +163,8 @@ var myLineChart = {
     labels: ["", "10", "20", "30", "40", "50", "60", "70", "80"],
     datasets: [{
         fillColor: "transparent",
-        strokeColor: "#ff4c3b",
-        pointColor: "#ff4c3b",
+        strokeColor: "#04A134",
+        pointColor: "#04A134",
         data: [20, 40, 20, 50, 20, 60, 10, 40, 20]
     }, {
         fillColor: "transparent",
@@ -216,7 +216,7 @@ function drawBasic() {
                 minValue: 0
             },
             width: '100%',
-            colors: ["#ff4c3b", "#a5a5a5"]
+            colors: ["#04A134", "#a5a5a5"]
         };
         var chart = new google.visualization.AreaChart(document.getElementById('area-chart1'));
         chart.draw(data, options);
