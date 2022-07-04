@@ -1,65 +1,84 @@
+import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { AdminContext } from '../../contexts/Admin-context';
+import toast from 'react-hot-toast';
+import httpServices from "../../hooks/http-services";
+import { Link, useParams } from "react-router-dom";
 const AddProduct = () => {
+    const [product, setProduct]= useState({name:"", price:"", keyword:"", image:"",category:"", description:"", });
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setProduct((prevState) => ({
+            ...prevState,
+            [name]: value.replace(/\s/g, '')
+        }))
+    }
     return (
         <div className="page-body">
             <div className="card product-cont">
                 <div className="card-body">
                     <div className="row product-adding">
-                        <div className="col-xl-5">
-                            <div className="add-product">
-                                <div className="row">
-                                    <div className="col-xl-9 xl-50 col-sm-6 col-9">
-                                        <img src="assets/images/pro3/1.jpg" alt="" className="img-fluid image_zoom_1 blur-up lazyloaded" />
-                                    </div>
-                                    <div className="col-xl-3 xl-50 col-sm-6 col-3">
-                                        <ul className="file-upload-product">
-                                            <li>
-                                                <div className="box-input-file"><input className="upload" type="file" /><i className="fa fa-plus" /></div>
-                                            </li>
-                                            <li>
-                                                <div className="box-input-file"><input className="upload" type="file" /><i className="fa fa-plus" /></div>
-                                            </li>
-                                            <li>
-                                                <div className="box-input-file"><input className="upload" type="file" /><i className="fa fa-plus" /></div>
-                                            </li>
-                                            <li>
-                                                <div className="box-input-file"><input className="upload" type="file" /><i className="fa fa-plus" /></div>
-                                            </li>
-                                            <li>
-                                                <div className="box-input-file"><input className="upload" type="file" /><i className="fa fa-plus" /></div>
-                                            </li>
-                                            <li>
-                                                <div className="box-input-file"><input className="upload" type="file" /><i className="fa fa-plus" /></div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       
                         <div className="col-xl-7">
                             <form className="needs-validation add-product-form" novalidate>
                                 <div className="form">
                                     <div className="form-group mb-3 row">
-                                        <label htmlFor="validationCustom01" className="col-xl-3 col-sm-4 mb-0">Title :</label>
+                                        <label htmlFor="validationCustom01" className="col-xl-3 col-sm-4 mb-0">Name :</label>
                                         <div className="col-xl-8 col-sm-7">
-                                            <input className="form-control" id="validationCustom01" type="text" required />
+                                            <input className="form-control" id="validationCustom01" type="text" required onChange={handleInputChange}  name="name"/>
                                         </div>
                                         <div className="valid-feedback">Looks good!</div>
                                     </div>
                                     <div className="form-group mb-3 row">
-                                        <label htmlFor="validationCustom02" className="col-xl-3 col-sm-4 mb-0">Price :</label>
+                                        <label htmlFor="validationCustom01" className="col-xl-3 col-sm-4 mb-0">Price :</label>
                                         <div className="col-xl-8 col-sm-7">
-                                            <input className="form-control" id="validationCustom02" type="text" required />
+                                            <input className="form-control" id="validationCustom01" type="text" required onChange={handleInputChange}  name="price"/>
                                         </div>
                                         <div className="valid-feedback">Looks good!</div>
                                     </div>
                                     <div className="form-group mb-3 row">
-                                        <label htmlFor="validationCustomUsername" className="col-xl-3 col-sm-4 mb-0">Product Code :</label>
+                                        <label htmlFor="validationCustom01" className="col-xl-3 col-sm-4 mb-0">Keyword :</label>
                                         <div className="col-xl-8 col-sm-7">
-                                            <input className="form-control" id="validationCustomUsername" type="text" required />
+                                            <input className="form-control" id="validationCustom01" type="text" required onChange={handleInputChange}  name="keyword"/>
                                         </div>
-                                        <div className="invalid-feedback offset-sm-4 offset-xl-3">Please choose Valid Code.</div>
+                                        <div className="valid-feedback">Looks good!</div>
+                                    </div>
+                                    <div className="form-group mb-3 row">
+                                        <label htmlFor="validationCustom01" className="col-xl-3 col-sm-4 mb-0">Keyword :</label>
+                                        <div className="col-xl-8 col-sm-7">
+                                            <input className="form-control" id="validationCustom01" type="text" required onChange={handleInputChange}  name="keyword"/>
+                                        </div>
+                                        <div className="valid-feedback">Looks good!</div>
+                                    </div>
+                                    <div className="form-group mb-3 row">
+                                        <label htmlFor="validationCustom01" className="col-xl-3 col-sm-4 mb-0">Keyword :</label>
+                                        <div className="col-xl-8 col-sm-7">
+                                            <input className="form-control" id="validationCustom01" type="text" required onChange={handleInputChange}  name="keyword"/>
+                                        </div>
+                                        <div className="valid-feedback">Looks good!</div>
+                                    </div>
+                                    <div className="form-group mb-3 row">
+                                        <label htmlFor="validationCustom01" className="col-xl-3 col-sm-4 mb-0">Image :</label>
+                                        <div className="col-xl-8 col-sm-7">
+                                            <input className="form-control" id="validationCustom01" type="file" required onChange={handleInputChange}  name="image"/>
+                                        </div>
+                                        <div className="valid-feedback">Looks good!</div>
                                     </div>
                                 </div>
+                                <div className="form-group mb-3 row">
+                                        <label htmlFor="validationCustom01" className="col-xl-3 col-sm-4 mb-0">Category:</label>
+                                        <div className="col-xl-8 col-sm-7">
+                                            <input className="form-control" id="validationCustom01" type="text" required onChange={handleInputChange}  name="category"/>
+                                        </div>
+                                        <div className="valid-feedback">Looks good!</div>
+                                    </div>
+                                    <div className="form-group mb-3 row">
+                                        <label htmlFor="validationCustom01" className="col-xl-3 col-sm-4 mb-0">Category:</label>
+                                        <div className="col-xl-8 col-sm-7">
+                                            <input className="form-control" id="validationCustom01" type="text" required onChange={handleInputChange}  name="category"/>
+                                        </div>
+                                        <div className="valid-feedback">Looks good!</div>
+                                    </div>
                                 <div className="form">
                                     <div className="form-group row">
                                         <label htmlFor="exampleFormControlSelect1" className="col-xl-3 col-sm-4 mb-0">Select Size :</label>
