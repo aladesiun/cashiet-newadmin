@@ -76,35 +76,9 @@ const Products = () => {
             <div className="product-cont">
                 <div className="col-xl-12 xl-100">
                     <div className="card height-equal">
-
-                        <div className="card-header">
-                            <h5>Products</h5>
-                            <div className="card-header-right">
-                                <ul className="list-unstyled card-option">
-                                    <li><i className="icofont icofont-simple-left"></i></li>
-                                    <li><i className="view-html fa fa-code"></i></li>
-                                    <li><i className="icofont icofont-maximize full-card"></i></li>
-                                    <li><i className="icofont icofont-minus minimize-card"></i></li>
-                                    <li><i className="icofont icofont-refresh reload-card"></i></li>
-                                    <li><i className="icofont icofont-error close-card"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-
                         <div className="card-body">
                             <div className="user-status table-responsive products-table">
                                 <table className="table table-bordernone mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Slug</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Keywords</th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
                                     <tbody>
                                         {Loading &&
                                             <tr>

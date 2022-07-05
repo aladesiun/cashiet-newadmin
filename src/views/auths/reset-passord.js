@@ -53,7 +53,6 @@ const ResetPassword = () => {
                                     <label>New Password</label>
                                     <input required name="password" onChange={handleInputChange} type="text" className="form-control" placeholder="Username / Phone Number" id="exampleInputEmail1" />
                                 </div>
-                                
                                 <div className="form-button mt-3">
                                     <button className="btn btn-primary" type="submit">{Loading ? 'Reseting' : 'Reset Password'}</button>
                                 </div>
