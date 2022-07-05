@@ -17,3 +17,6 @@
   height: 1000px;
   margin:50px auto;
 }
+.bg-product{
+  background-image: url('assets/images/pro3/34.jpg');
+}
