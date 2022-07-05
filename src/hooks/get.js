@@ -22,7 +22,7 @@ const useGet = (url) =>{
             setLoading(false);
             console.log(data.data);
             setData(data.data)
-            toast.success('success')
+            // toast.success('success')
         }
         
     }) 
