@@ -96,7 +96,7 @@ const Products = () => {
 
                                 </div>
                             </form>
-                            <Link to="page-create.html" className="btn btn-primary mt-md-0 mt-2">Add New Page</Link>
+                            <a href="/products/new" className="btn btn-primary mt-md-0 mt-2">Add Products</a>
                         </div>
                         <div className="card-body">
                             <div className="user-status table-responsive products-table">
