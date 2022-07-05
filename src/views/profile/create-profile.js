@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 
 import axios from 'axios'
 const CreateProfile = () => {
-    const [profile, setProfile]= useState({firstName:"", middleName:"", lastName:"", gender:"", nationality:"", dob:"", phoneNumber:"", profilePicture:""});
+    const [profile, setProfile]= useState({firstName:"", middleName:"", lastName:"", gender:"", nationality:"", dob:"", phoneNumber:""});
     console.log(profile);
     const [Loading, setLoading] = useState(false);
     let endpoint = process.env.REACT_APP_ENDPOINT;
@@ -94,12 +94,12 @@ const CreateProfile = () => {
                                 <input className="form-control" id="validationCustom01" type="number" required onChange={handleInputChange} name="phoneNumber" />
                             </div>
                         </div>
-                        <div className="form-group mb-3 row">
+                        {/* <div className="form-group mb-3 row">
                             <label htmlFor="validationCustom01" className="col-xl-3 col-sm-4 mb-0">Profle picture :</label>
                             <div className="col-xl-8 col-sm-7">
                                 <input className="form-control" id="validationCustom01" type="file" required onChange={handleInputChange} name="phoneNumber" />
                             </div>
-                        </div>
+                        </div> */}
                         <div className="form">
                             <div className="form-group row">
 
