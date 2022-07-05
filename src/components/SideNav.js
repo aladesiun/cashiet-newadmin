@@ -49,17 +49,12 @@ const SideNavHeader = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="order-tracking.html">
+                                <a href="#">
                                     <i className="fa fa-circle" />
                                     <span>Users Profile</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="order-detail.html">
-                                    <i className="fa fa-circle" />
-                                    <span>Order Details</span>
-                                </a>
-                            </li>
+                            
                         </ul>
                     </li>
 
