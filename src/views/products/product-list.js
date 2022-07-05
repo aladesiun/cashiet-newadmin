@@ -93,7 +93,6 @@ const Products = () => {
                             <form className="form-inline search-form search-box" onSubmit={(e)=>{e.preventDefault(); getProducts()}}>
                                 <div className="form-group flex">
                                     <input className="form-control" type="text" placeholder="Search.." value={query} onChange={handleInputChange}/>
-                                    <button className="btn-primary border-0 p-1 rounded" type="submit">search</button>
 
                                 </div>
                             </form>

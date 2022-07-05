@@ -4,7 +4,7 @@ import axios from "axios";
 
 const useGet = (url) =>{
     let endpoint = process.env.REACT_APP_ENDPOINT;
-    let token = process.env.REACT_APP_ADMIN_TOKEN;
+    let token = localStorage.getItem('_ux');
     const [data, setData] = useState({});
     const [Loading, setLoading] = useState(false);
     const [Error, setError] = useState(false);
@@ -29,7 +29,7 @@ const useGet = (url) =>{
     .catch((error)=> {
         setLoading(false)
         setError(true)
-        toast.error(error.message)
+        toast.error(error.response.data.message)
     })
    }
      useEffect(()=>{

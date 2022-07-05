@@ -25,7 +25,7 @@ const Signin = () => {
         }).then((data) => {
             if (data.status) {
                 setLoading(false);
-                window.location.href="/products/filter"
+                window.location.href = "/products/filter"
                 toast.success('success');
 
             }
@@ -46,33 +46,69 @@ const Signin = () => {
     }, []);
     return (
         <>
-            <form className="form-horizontal auth-form" onSubmit={(e) => { e.preventDefault(); signin() }}>
-                <div className="form-group">
+            <div className="page-wrapper">
+                <div className="authentication-box">
+                    <div className="container">
+                        <div className="w-3">
+                            <div className="p-0t">
+                                <div className="logo-wrapper">
+                                    <img className="d-none d-lg-block blur-up lazyloaded" src={require('../../assets/images/index.png')} alt=""></img>
+                                </div>
+                                <div className="card tab2-card card-login">
+                                    <div className="card-body">
+                                        <ul className="nav nav-tabs nav-material" id="top-tab" role="tablist">
+                                            <li className="nav-item">
+                                                <a className="nav-link active" id="top-profile-tab" data-bs-toggle="tab" href="#top-profile" role="tab" aria-controls="top-profile" aria-selected="true">
+                                                    <span className="icon-user me-2"></span>Admin Login
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div className="tab-content" id="top-tabContent">
 
-                    <input required name="email" type="email" value={Admin.email}
-                        className="form-control" placeholder="email" id="email1" onChange={handleInputChange}></input>
-                </div>
-                <div className="form-group">
-                    <input required name="password" type="password" value={Admin.password}
-                        className="form-control" placeholder="password" onChange={handleInputChange}></input>
-                </div>
-                <div className="form-terms">
-                    <div className="form-check mesm-2">
+                                            <div className="tab-pane fade show active" id="top-profile" role="tabpanel" aria-labelledby="top-profile-tab">
+                                                <form className="form-horizontal auth-form" onSubmit={(e) => { e.preventDefault(); signin() }}>
+                                                    <div className="form-group">
 
-                        <Link to="/forgot-password" className="btn btn-default forgot-pass">
-                            Forgot Password!
-                        </Link>
+                                                        <input required name="email" type="email" value={Admin.email}
+                                                            className="form-control" placeholder="email" id="email1" onChange={handleInputChange}></input>
+                                                    </div>
+                                                    <div className="form-group">
+                                                        <input required name="password" type="password" value={Admin.password}
+                                                            className="form-control" placeholder="password" onChange={handleInputChange}></input>
+                                                    </div>
+
+                                                    <div className="form-terms">
+                                                        <div className="">
+
+                                                            <Link to="/forgot-password" className="btn-default forgot-pass mr-2">
+                                                                Forgot Password!
+                                                            </Link>
+                                                            <Link to="/signup" className=" btn-default forgot-pass mx-5">
+                                                                Don't have an account?
+                                                            </Link>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="form-button">
+                                                        <button className="btn btn-primary" type="submit">
+                                                            {!Loading && 'Login'}
+                                                            {Loading && 'Loading...'}
+                                                        </button>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-
-                <div className="form-button">
-                    <button className="btn btn-primary" type="submit">
-                        {!Loading && 'Login'}
-                        {Loading && 'Loading...'}
-                    </button>
-                </div>
-
-            </form>
+            </div>
         </>
 
     );

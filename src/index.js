@@ -9,7 +9,6 @@ import Signin from './views/auths/signin';
 import Signup from './views/auths/signup';
 import AdminProvider from './contexts/Admin-context';
 import ProtectRoute from './protect-routes';
-import NewLog from './views/auths/new-log';
 import Layout from './views/layout';
 import Products from './views/products/product-list';
 import Product from './views/products/product';
@@ -17,6 +16,7 @@ import AddProduct from './views/products/new-product';
 import ForgetPassword from './views/auths/forget-password';
 import ResetPassword from './views/auths/reset-passord';
 import EditProduct from './views/products/edit-product';
+import Profile from './views/profile/profile';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -25,7 +25,8 @@ root.render(
     <Routes>
       <Route path="/" element={<App/>}>
      
-      <Route path='/signin' element={<NewLog/>}></Route>
+      <Route path='/signup' element={<Signup/>}></Route>
+      <Route path='/signin' element={<Signin/>}></Route>
       <Route path='/forgot-password' element={<ForgetPassword/>}></Route>
       <Route path='/password-reset' element={<ResetPassword/>}></Route>
       <Route element={<ProtectRoute/>}>
@@ -35,6 +36,8 @@ root.render(
           <Route path="/product/:_id" element={<Product/>}></Route>
           <Route path="/products/new" element={<AddProduct/>}></Route>
           <Route path="/product/edit/_id" element={<EditProduct/>}></Route>
+          <Route path="/profile" element={<Profile/>}></Route>
+
         </Route>
       </Route>
       </Route>
