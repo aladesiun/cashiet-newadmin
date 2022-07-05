@@ -118,7 +118,7 @@ const Products = () => {
                                                 <div className="page-header-left">
                                                     <h3>
                                                         Product List
-                                                        <small>Multikart Admin panel</small>
+                                                        <small>Cashiet Admin panel</small>
                                                     </h3>
                                                 </div>
                                             </div>

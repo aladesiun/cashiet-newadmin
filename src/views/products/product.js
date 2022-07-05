@@ -22,7 +22,7 @@ const Product = () => {
                                 <div className="page-header-left">
                                     <h3>
                                         Product Detail
-                                        <small>Multikart Admin panel</small>
+                                        <small>Cashiet Admin panel</small>
                                     </h3>
                                 </div>
                             </div>

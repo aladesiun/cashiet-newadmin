@@ -6,7 +6,7 @@ const NavHeader = () => {
     <div className="main-header-left d-lg-none w-auto">
       <div className="logo-wrapper">
         <a href="index.html">
-          <img className="blur-up lazyloaded d-block d-lg-none" src="assets/images/dashboard/multikart-logo-black.png" alt />
+          <img className="blur-up lazyloaded d-block d-lg-none" src="assets/images/dashboard/Cashiet-logo-black.png" alt />
         </a>
       </div>
     </div>

@@ -4,7 +4,7 @@ const EditProfile = ({t}) => {
     return (
         <>
             <table className="table table-borderless">
-                {/* <tbody>
+                <tbody>
                     <tr>
                         <td>First Name:</td>
                         <td>{profile.firstName}</td>
@@ -39,7 +39,7 @@ const EditProfile = ({t}) => {
                         <td>{profile.nationality}</td>
 
                     </tr>
-                </tbody> */}
+                </tbody>
             </table>
             <div className="account-setting deactivate-account">
                 <h5 className="f-w-600">Deactivate Account</h5>
