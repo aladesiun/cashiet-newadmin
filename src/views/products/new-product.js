@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import axios from "axios";
 const AddProduct = () => {
     const [product, setProduct] = useState({ name: "", price: "", keywords: [], image: "", category: "", description: "", });
-    
+
     const [Loading, setLoading] = useState(false);
     let endpoint = process.env.REACT_APP_ENDPOINT;
     let token = process.env.REACT_APP_ADMIN_TOKEN;
@@ -90,11 +90,12 @@ const AddProduct = () => {
                                 <div className="form-group mb-3 row">
                                     <label htmlFor="validationCustom01" className="col-xl-3 col-sm-4 mb-0">Description:</label>
                                     <div className="col-xl-8 col-sm-7">
-                                    <textarea id="editor1" name="editor1" cols={10} rows={4} style={{ "display": "block", "width":"" }}   />
+                                            <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ "height": "100px" }} defaultValue={""} name="description" onChange={handleInputChange}/>
+                                            <label htmlFor="floatingTextarea2">Comments</label>
                                     </div>
                                 </div>
                                 <div className="form-group row">
-                                    
+
                                     <div className="offset-xl-3 offset-sm-4 mt-4">
                                         <button type="submit" className="btn btn-primary">Add</button>
                                         <button type="button" className="btn btn-light">Discard</button>
