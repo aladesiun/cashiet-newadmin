@@ -3,19 +3,42 @@ import "react-loading-skeleton/dist/skeleton.css";
 import useGet from "../../hooks/get";
 import EditProduct from "../products/edit-product";
 import { useState, useContext, useEffect } from "react";
+import toast from 'react-hot-toast';
 
+import axios from 'axios'
 import CreateProfile from "./create-profile";
 const Profile = () => {
     const { data, Loading, Error } = useGet('/profile/user');
     const profile = data ? data.userProfile : null;
-    const [editprofile, setEditProfile]= useState({firstName:"", middleName:"", lastName:"", gender:"", nationality:"", dob:"", phoneNumber:"", profilePicture:""});
-
+    const [editprofile, setEditProfile] = useState({ firstName: "", middleName: "", lastName: "", gender: "", nationality: "", dob: "", phoneNumber: "", profilePicture: "" });
+    let endpoint = process.env.REACT_APP_ENDPOINT;
+    let token = localStorage.getItem("_ux");
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setEditProfile((prevState) => ({
             ...prevState,
-            [name]: value 
+            [name]: value
         }))
+    }
+    const editProfile = async () => {
+        try {
+
+            const response = await axios.put(endpoint + '/profile', editprofile, {
+                headers: { Authorization: 'Bearer ' + token }
+            })
+            if (response.status) {
+                toast.success('successfully added your profile');
+                window.location.href="/profile"
+
+            }
+            else {
+
+            }
+        }
+        catch (error) {
+            var error_message = error.response.data.message;
+            toast.error(error_message);
+        }
     }
     return (
         <>
@@ -28,7 +51,7 @@ const Profile = () => {
                                 <div className="page-header-left">
                                     <h3>
                                         My Profile
-                                        <small>Cashiet Admin panel</small>
+                                        <small>Multikart Admin panel</small>
                                     </h3>
                                 </div>
                             </div>
@@ -160,96 +183,96 @@ const Profile = () => {
                                                 </div>
                                             </div>
                                             <div className="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
-                                               <form>
-                                               <table className="table table-borderless">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>First Name:</td>
-                                                            <td>
-                                                                Current:
-                                                                <div className="form">
-                                                                    <div className="form-group mb-3 row">
-                                                                        <div className="col-xl-8 col-sm-7">
-                                                                            <input value={profile.firstName} className="form-control" id="validationCustom01" type="text" required onChange={handleInputChange} name="firstName" />
+                                                <form onSubmit={(e) => { e.preventDefault(); editProfile() }}>
+                                                    <table className="table table-borderless">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>First Name:</td>
+                                                                <td>
+                                                                    Current: {profile.firstName}
+                                                                    <div className="form">
+                                                                        <div className="form-group mb-3 row">
+                                                                            <div className="col-xl-8 col-sm-7">
+                                                                                <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="firstName" />
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Last Name:</td>
-                                                            <td>Current: 
-                                                            <div className="form-group mb-3 row">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Last Name:</td>
+                                                                <td>Current: {profile.lastName}
+                                                                    <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
-                                                                            <input value={profile.lastName} className="form-control" id="validationCustom01" type="text" required onChange={handleInputChange} name="lastName" />
+                                                                            <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="lastName" />
                                                                         </div>
                                                                     </div></td>
 
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Email:</td>
-                                                            <td>Current: 
-                                                            <div className="form-group mb-3 row">
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Email:</td>
+                                                                <td>Current: {profile.user.email}
+                                                                    <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
-                                                                            <input value={profile.user.email} className="form-control" id="validationCustom01" type="text" required onChange={handleInputChange} name="middleName" />
+                                                                            <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="middleName" />
                                                                         </div>
                                                                     </div></td>
 
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Gender:</td>
-                                                            <td>Current: 
-                                                            <div className="form-group mb-3 row">
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gender:</td>
+                                                                <td>Current: {profile.gender}
+                                                                    <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
 
-                                                                            <select className="form-control" value={ profile.gender} id="validationCustom01" required onChange={handleInputChange} name="gender" >
+                                                                            <select className="form-control" id="validationCustom01" onChange={handleInputChange} name="gender" >
                                                                                 <option value="male">male</option>
                                                                                 <option value="female">female</option>
                                                                             </select>
                                                                         </div>
                                                                     </div></td>
 
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Mobile Number:</td>
-                                                            <td>Current: 
-                                                            <div className="form-group mb-3 row">
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Mobile Number:</td>
+                                                                <td>Current: {profile.phoneNumber}
+                                                                    <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
-                                                                            <input value={profile.phoneNumber}className="form-control" id="validationCustom01" type="text" required onChange={handleInputChange} name="nationality" />
+                                                                            <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="nationality" />
                                                                         </div>
                                                                     </div></td>
 
-                                                        </tr>
-                                                        <tr>
-                                                            <td>DOB:</td>
-                                                            <td>Current:{profile.dob}
-                                                            <div className="form-group mb-3 row">
+                                                            </tr>
+                                                            <tr>
+                                                                <td>DOB:</td>
+                                                                <td>Current: {profile.dob}
+                                                                    <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
-                                                                            <input  className="form-control" id="validationCustom01" type="date" required onChange={handleInputChange} name="nationality" />
+                                                                            <input className="form-control" id="validationCustom01" type="date" onChange={handleInputChange} name="nationality" />
                                                                         </div>
                                                                     </div></td>
 
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Nationality :</td>
-                                                            <td>Current: 
-                                                            <div className="form-group mb-3 row">
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Nationality :</td>
+                                                                <td>Current: {profile.nationality}
+                                                                    <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
-                                                                            <input value={profile.nationality}className="form-control" id="validationCustom01" type="text" required onChange={handleInputChange} name="nationality" />
+                                                                            <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="nationality" />
                                                                         </div>
                                                                     </div></td>
 
-                                                        </tr>
-                                                    </tbody>
-                                                    <button type="submit" className="btn btn-primary">Edit</button>
-                                                </table>
-                                               
-                                                <div className="account-setting deactivate-account">
-                                                    <h5 className="f-w-600">Delete Account</h5>
-                                                
-                                                    <button type="button" className="btn btn-primary">Delete Account</button>
-                                                </div>
-                                               </form>
+                                                            </tr>
+                                                        </tbody>
+                                                        <button type="submit" className="btn btn-primary">Edit</button>
+                                                    </table>
+
+                                                    <div className="account-setting deactivate-account">
+                                                        <h5 className="f-w-600">Delete Account</h5>
+
+                                                        <button type="button" className="btn btn-primary">Delete Account</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
