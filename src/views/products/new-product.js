@@ -17,7 +17,7 @@ const AddProduct = () => {
         console.log(keywordsArr);
 
     }
-    const [product, setProduct] = useState({ name: "", price: "", image: '', category: "", description: "", keywords: [] });
+    const [product, setProduct] = useState({ name: "", price: "", image: '', category: "", description: ""});
     console.log(product);
     const [Loading, setLoading] = useState(false);
     let endpoint = process.env.REACT_APP_ENDPOINT;
@@ -47,6 +47,7 @@ const AddProduct = () => {
         e.preventDefault();
 
         let formData = new FormData();
+        
         for(var field in product){
             formData.append(field, product[field]);
         }
@@ -61,12 +62,12 @@ const AddProduct = () => {
             const response = await axios.post(endpoint + '/products', formData, {
                 headers: {
                     Authorization: 'Bearer ' + token,
-
                 }
             })
             if (response.status) {
                 toast.success('successfully added your profile');
                 setLoading(false)
+                console.log(formData);
                 window.location.href="/products/filter"
 
             }
@@ -145,7 +146,7 @@ const AddProduct = () => {
                                             <label htmlFor="validationCustom01" className="col-form-label pt-0"><span className="mx-1">Added Keywords:</span>{keywordsArr.toString()}</label>
 
                                             <input value={keywords} onChange={e => setKeywords(e.target.value)} className="form-control" id="validationCustom01" type="text" />
-                                            <button type="button" className="btn btn-primary" onClick={() => handleKeyword()}>Add</button>
+                                            <button type="button" className="btn btn-primary my-2" onClick={() => handleKeyword()}>Add</button>
                                         </div>
                                         <div className="form-group">
                                             <label className="col-form-label">Description</label>
