@@ -23,3 +23,23 @@
 .w-full{
   width: 100%;
 }
+.edit-modal{
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  background-color: rgba(22, 22, 22, 0.211)!important;  
+}
+.edit-modal .content{
+  background-color: white;
+  height: 400px;
+  min-width:300px ;
+
+
+}
+.active {
+  background-color: none!important;
+}

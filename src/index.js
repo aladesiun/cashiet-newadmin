@@ -17,6 +17,9 @@ import ForgetPassword from './views/auths/forget-password';
 import ResetPassword from './views/auths/reset-passord';
 import EditProduct from './views/products/edit-product';
 import Profile from './views/profile/profile';
+import Categories from './views/categories/categories';
+import EditCategory from './views/categories/edit-category';
+import AddCategories from './views/categories/add-categories';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -32,11 +35,20 @@ root.render(
       <Route element={<ProtectRoute/>}>
       <Route path="/" element={<Layout/>}>
           <Route path="/" element={<Home/>}></Route>
+
           <Route path="/products/filter" element={<Products/>}></Route>
           <Route path="/product/:_id" element={<Product/>}></Route>
           <Route path="/products/new" element={<AddProduct/>}></Route>
           <Route path="/product/edit/:_id" element={<EditProduct/>}></Route>
+
           <Route path="/profile" element={<Profile/>}></Route>
+
+
+          <Route path="/categories" element={<Categories/>}></Route>
+          <Route path="/category/edit/:_id" element={<EditCategory/>}></Route>
+          <Route path="/Categories/new" element={<AddCategories/>}></Route>
+
+
 
         </Route>
       </Route>

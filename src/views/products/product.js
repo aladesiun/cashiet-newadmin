@@ -94,10 +94,10 @@ const Product = () => {
                                         slideNumberStyle={slideNumberStyle}
                                         captionPosition="bottom"
                                         dots={true}
-                                        automatic={false}
+                                        automatic={true}
                                         pauseIconColor="white"
                                         pauseIconSize="40px"
-                                        slideBackgroundColor="white"
+                                        slideBackgroundColor="black"
                                         slideImageFit="cover"
                                         thumbnails={true}
                                         thumbnailWidth="100px"

@@ -12,7 +12,7 @@ const useGet = (url) =>{
    const getData=async()=>{
     setLoading(true)
 
-    await  axios.get(endpoint + url, {
+    await axios.get(endpoint + url, {
         headers: {
             Authorization: 'Bearer ' + token,
         },
