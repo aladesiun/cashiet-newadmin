@@ -155,19 +155,6 @@ const AddProduct = () => {
 
                                     </div>
                                     <div className="form-group">
-                                        <label className="col-form-label"><span>*</span> Status</label>
-                                        <div className="m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
-                                            <label className="d-block" htmlFor="edo-ani">
-                                                <input className="radio_animated" id="edo-ani" type="radio" name="rdo-ani" />
-                                                Enable
-                                            </label>
-                                            <label className="d-block" htmlFor="edo-ani1">
-                                                <input className="radio_animated" id="edo-ani1" type="radio" name="rdo-ani" />
-                                                Disable
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
                                         <label htmlFor="validationCustom01" className="col-form-label pt-0"><span>*</span>Image file</label>
                                         <input onChange={e => ImageFile(e)} accept="avatar/*" multiple className="form-control" id="validationCustom01" type="file" required />
                                     </div>

@@ -1,6 +1,5 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { AdminContext } from '../../contexts/Admin-context';
 import toast from 'react-hot-toast';
 import httpServices from "../../hooks/http-services";
 import { Link } from "react-router-dom";
