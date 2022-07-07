@@ -111,7 +111,10 @@ const EditProduct = () => {
                                                 <div className="col-xl-8 col-sm-7">
                                                     <div className="form-floating">
                                                         <textarea onChange={handleInputChange}  className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ "height": "100px" }} defaultValue={""} />
-                                                        <label htmlFor="floatingTextarea2">Current Description:{Products && Products.description.length > 2 ? Products.description.substring(0,20)+"...":  Products.description}</label>
+                                                        <label htmlFor="floatingTextarea2">Current Description:
+                                                        </label>
+
+                                                        {/* {Products && Products.description.length > 2 ? Products.description.substring(0,20)+"...":  Products.description} */}
                                                     </div>
                                                 </div>
                                             </div>
