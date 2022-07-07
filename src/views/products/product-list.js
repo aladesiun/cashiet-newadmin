@@ -50,11 +50,7 @@ const Products = () => {
             const response = await httpServices.delete('/products/' + _id)
             if (response.status) {
                 setLoading(false)
-                let result = response.data.products.results;
-                console.log(response.data.products.results);
-                toast.success(response.data.message)
-                window.location.reload();
-
+                window.location.href='/products/filter';
 
 
             }

@@ -1,21 +1,21 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { AdminContext } from '../../contexts/Admin-context';
+import { AdminContext } from '../../../contexts/Admin-context';
 import toast from 'react-hot-toast';
-import httpServices from "../../hooks/http-services";
+import httpServices from "../../../hooks/http-services";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import useGet from "../../hooks/get";
+import useGet from "../../../hooks/get";
 
-const Categories = () => {
-    const { data, Loading } = useGet("/categories");
-    const Categories = data ? data.categories : '';
+const SubCategories = () => {
+    const { data, Loading } = useGet("/subcategory");
+    const SubCategories = data ? data.subcategories : '';
     const deleteCategory = async (_id) => {
         try {
-            const response = await httpServices.delete('/categories/' + _id)
+            const response = await httpServices.delete('/Subcategories/' + _id)
             if (response.data.status) {
-                window.location.href = '/categories';
+                window.location.href = '/Subcategories';
             }
             else {
                 toast.success(response.data.message)
@@ -25,11 +25,11 @@ const Categories = () => {
             toast.error(e.message)
         }
     }
-    const deleteAllCategories = async (_id) => {
+    const deleteAllSubCategories = async (_id) => {
         try {
-            const response = await httpServices.delete('/categories/delete/all')
+            const response = await httpServices.delete('/Subcategories/delete/all')
             if (response.data.status) {
-                window.location.href = '/categories';
+                window.location.href = '/Subcategories';
             }
             else {
                 toast.success(response.data.message)
@@ -46,7 +46,7 @@ const Categories = () => {
                     <div className="card height-equal">
 
                         <div className="card-header">
-                            <h5>Categories</h5>
+                            <h5>SubCategories</h5>
                             <div className="card-header-right">
                                 <ul className="list-unstyled card-option">
                                     <li><i className="icofont icofont-simple-left"></i></li>
@@ -60,11 +60,11 @@ const Categories = () => {
                         </div>
                         <div className="d-flex justify-content-between align-items-center bg-white p-3">
 
-                            <a href="/category/new" className="btn btn-primary mt-md-0 mt-2">Add Categories</a>
-                            <a href="#" className="btn btn-warning mt-md-0 mt-2"  onClick={() => { deleteAllCategories() }}>Delete all</a>
+                            <a href="/Sub-category/new" className="btn btn-primary mt-md-0 mt-2">Add SubCategory</a>
+                            <a href="#" className="btn btn-warning mt-md-0 mt-2"  onClick={() => { deleteAllSubCategories() }}>Delete all</a>
                         </div>
                         <div className="card-body">
-                            <div className="user-status table-responsive Categories-table">
+                            <div className="user-status table-responsive SubCategories-table">
                                 <table className="table table-bordernone mb-0">
                                     <thead>
                                         <tr>
@@ -97,7 +97,7 @@ const Categories = () => {
 
                                             </tr>
                                         }
-                                        {Categories && Categories.map((category) => (
+                                        {SubCategories && SubCategories.map((category) => (
                                             <tr key={category._id} >
 
                                                 <td>{category.name}</td>
@@ -120,9 +120,9 @@ const Categories = () => {
                                     </tbody>
                                 </table>
                             </div>
-                            {!Categories && <>
+                            {!SubCategories && <>
 
-                                {!Loading && <div className="text-center w-full my-3 text-dangers"><h3>No Categories At This Moment</h3></div>}
+                                {!Loading && <div className="text-center w-full my-3 text-dangers"><h3>No SubCategories At This Moment</h3></div>}
 
                             </>}
                             <div className="code-box-copy">
@@ -139,4 +139,4 @@ const Categories = () => {
     );
 }
 
-export default Categories;
+export default SubCategories;

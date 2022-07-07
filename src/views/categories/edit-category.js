@@ -10,7 +10,7 @@ const EditCategory = () => {
     let url = "/categories/" + _id;
     const { data, Loading } = useGet(url);
     const Category = data ? data.category : 'dd';
-    const [categoryDetails, setCategoryDetails] = useState({ name: '', slug: '' })
+    const [categoryDetails, setCategoryDetails] = useState({ name: ''})
     console.log(categoryDetails);
     console.log(Category);
     const handleInputChange = (e) => {
@@ -59,18 +59,6 @@ const EditCategory = () => {
                                             <div className="form-group mb-3 row">
                                                 <div className="col-xl-8 col-sm-7">
                                                     <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="name" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Current slug:{Category && Category.slug}
-                                        <div className="form">
-                                            <div className="form-group mb-3 row">
-                                                <div className="col-xl-8 col-sm-7">
-                                                    <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="slug" />
                                                 </div>
                                             </div>
                                         </div>

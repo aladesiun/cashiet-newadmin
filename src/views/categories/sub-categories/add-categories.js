@@ -1,30 +1,30 @@
 import { useState } from "react";
 import toast from 'react-hot-toast';
 import axios from 'axios'
-const AddCategories = () => {
-    const [category, setcategory]= useState({name:""});
-    console.log(category);
+const AddSubCategories = () => {
+    const [SubCategory, setSubCategory]= useState({name:""});
+    console.log(SubCategory);
     const [Loading, setLoading] = useState(false);
     let endpoint = process.env.REACT_APP_ENDPOINT;
     let token = localStorage.getItem("_ux");
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setcategory((prevState) => ({
+        setSubCategory((prevState) => ({
             ...prevState,
             [name]: value 
         }))
     }
-    const CreateCategory= async ()=>{
+    const CreateSubCategory= async ()=>{
             setLoading(true)
             try {
 
-                const response = await axios.post(endpoint + '/categories', category, {
+                const response = await axios.post(endpoint + '/subcategory', SubCategory, {
                     headers: { Authorization: 'Bearer ' + token }
                 })
                 if (response.status) {
                     toast.success('successfully added your profile');
                     setLoading(false)
-                    window.location.href="/categories"
+                    // window.location.href="/sub-categories"
     
                 }
                 else {
@@ -47,7 +47,7 @@ const AddCategories = () => {
             <div className="row product-adding">
 
                 <div className="col-xl-7">
-                    <form className="needs-validation add-product-form" novalidate enctype='multipart/form-data' onSubmit={(e) =>{e.preventDefault(); CreateCategory()}}>
+                    <form className="needs-validation add-product-form" novalidate enctype='multipart/form-data' onSubmit={(e) =>{e.preventDefault(); CreateSubCategory()}}>
                         <div className="form">
                             <div className="form-group mb-3 row">
                                 <label htmlFor="validationCustom01" className="col-xl-3 col-sm-4 mb-0">Name :</label>
@@ -75,4 +75,4 @@ const AddCategories = () => {
     </> );
 }
  
-export default AddCategories;
+export default AddSubCategories;

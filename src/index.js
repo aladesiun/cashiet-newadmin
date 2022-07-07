@@ -20,6 +20,8 @@ import Profile from './views/profile/profile';
 import Categories from './views/categories/categories';
 import EditCategory from './views/categories/edit-category';
 import AddCategories from './views/categories/add-categories';
+import SubCategories from './views/categories/sub-categories/sub-categories';
+import AddSubCategories from './views/categories/sub-categories/add-categories';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -46,7 +48,12 @@ root.render(
 
           <Route path="/categories" element={<Categories/>}></Route>
           <Route path="/category/edit/:_id" element={<EditCategory/>}></Route>
-          <Route path="/Categories/new" element={<AddCategories/>}></Route>
+          <Route path="/category/new" element={<AddCategories/>}></Route>
+
+          <Route path="/sub-categories" element={<SubCategories/>}></Route>
+          <Route path="/sub-category/new" element={<AddSubCategories/>}></Route>
+
+
 
 
 

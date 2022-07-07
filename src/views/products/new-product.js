@@ -5,31 +5,34 @@ import useGet from "../../hooks/get";
 
 const AddProduct = () => {
     const { data } = useGet("/categories");
-    const [selectedImage, setSelectedImage] = useState();
-    const [selectedImage_name, setSelectedImage_name] = useState()
 
-    const [product, setProduct] = useState({ name: "", price: "", image: selectedImage_name, category: "", description: "", keywords: ['goods', 'cashiet'] });
-    const [keywords, setKeywords] = useState([]);
+    const [keywords, setKeywords] = useState('');
+    const [keywordsArr, setKeywordsArr] = useState([]);
 
+
+    const handleKeyword = () => {
+        console.log('clicked');
+        setKeywordsArr(data => [...data, keywords]);
+        setKeywords('')
+        console.log(keywordsArr);
+
+    }
+    const [product, setProduct] = useState({ name: "", price: "", image: '', category: "", description: "", keywords: [] });
+    console.log(product);
     const [Loading, setLoading] = useState(false);
     let endpoint = process.env.REACT_APP_ENDPOINT;
     let token = localStorage.getItem('_ux');
 
     const ImageFile = (e) => {
         let file = e.target.files[0];
-        setSelectedImage(file)
-        setSelectedImage_name(file.name)
-        let formdata = new FormData();
-        formdata.append('image', selectedImage);
-        formdata.append('name', "image");
-        setProduct((prevState) => ({
-            ...prevState,
-            image: formdata
-        }))
-    }
-    console.log(selectedImage);
-    console.log(product);
 
+        if(file){
+            setProduct((prevState) => ({
+                ...prevState,
+                image: file
+            }))
+        }
+    }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -40,19 +43,31 @@ const AddProduct = () => {
     }
 
     const addProduct = async (e) => {
+        
         e.preventDefault();
+
+        let formData = new FormData();
+        for(var field in product){
+            formData.append(field, product[field]);
+        }
+
+        
+        formData.append("keywords", keywordsArr);
+
         setLoading(true)
+        
         try {
 
-            const response = await axios.post(endpoint + '/products', product, {
-                headers: { 
-                    Authorization: 'Bearer ' + token, 
+            const response = await axios.post(endpoint + '/products', formData, {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+
                 }
             })
             if (response.status) {
                 toast.success('successfully added your profile');
                 setLoading(false)
-                // window.location.href="/sign/"
+                window.location.href="/products/filter"
 
             }
             else {
@@ -127,13 +142,10 @@ const AddProduct = () => {
                                             </select>
                                         </div>
                                         <div className="form-group">
-                                            <label htmlFor="validationCustom01" className="col-form-label pt-0"><span className="mx-1">Added Keywords:</span>{product.keywords.toString()}</label>
-                                            <form onSubmit={(e) => { e.preventDefault(); }}>
-                                                <input value={keywords} className="form-control" id="validationCustom01" type="text" required />
-                                                <button type="button" className="btn btn-primary">Add</button>
+                                            <label htmlFor="validationCustom01" className="col-form-label pt-0"><span className="mx-1">Added Keywords:</span>{keywordsArr.toString()}</label>
 
-
-                                            </form>
+                                            <input value={keywords} onChange={e => setKeywords(e.target.value)} className="form-control" id="validationCustom01" type="text" />
+                                            <button type="button" className="btn btn-primary" onClick={() => handleKeyword()}>Add</button>
                                         </div>
                                         <div className="form-group">
                                             <label className="col-form-label">Description</label>

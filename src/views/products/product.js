@@ -134,7 +134,7 @@ const Product = () => {
                                         <p>{Products.description}</p>
                                         <div className="m-t-15">
                                             <button className="btn btn-primary m-r-10" type="button">Delete</button>
-                                            <Link className="btn btn-secondary" to="#">Edit</Link>
+                                            <a className="btn btn-secondary" href={"/product/edit/" + Products._id}>Edit</a>
                                         </div>
                                     </div>
                                 </div>

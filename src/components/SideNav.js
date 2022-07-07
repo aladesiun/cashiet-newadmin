@@ -100,9 +100,23 @@ const SideNavHeader = () => {
 
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="/category/new">
+                                    <i className="fa fa-circle"></i>
+                                    <span>Add Category</span>
+                                </a>
+
+                            </li>
+                            <li>
+                                <a href="/sub-categories">
                                     <i className="fa fa-circle"></i>
                                     <span>Sub categories</span>
+                                </a>
+
+                            </li>
+                            <li>
+                                <a href="/sub-category/new">
+                                    <i className="fa fa-circle"></i>
+                                    <span>Add Sub-Category</span>
                                 </a>
 
                             </li>
