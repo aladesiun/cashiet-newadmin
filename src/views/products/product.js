@@ -1,13 +1,28 @@
-import {  useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import useGet from "../../hooks/get";
+import { Carousel } from 'react-carousel-minimal';
+
 const Product = () => {
     let { _id } = useParams();
-    const { data, Loading, Error} = useGet('/products/' + _id);
-    const Products =data ? data.product : " ";
+    const { data, Loading, Error } = useGet('/products/' + _id);
+    const Products = data ? data.product : '';
+    const ProductsGallery = data.gallery ? data.gallery.images : [];
+    const dataCarousel = ProductsGallery ? ProductsGallery.map((image) => image.url) : '';
+    const CarouselData = [{ image: dataCarousel, caption: "Scotland" }, { image: Products ? Products.image.url : '' }]
     console.log(Products);
+    console.log(CarouselData);
+    console.log(dataCarousel);
+    const captionStyle = {
+        fontSize: '2em',
+        fontWeight: 'bold',
+    }
+    const slideNumberStyle = {
+        fontSize: '20px',
+        fontWeight: 'bold',
+    }
 
     useEffect(() => {
     }, [])
@@ -65,42 +80,48 @@ const Product = () => {
                             </div>
 
                         }
-                        {Products && 
+                        {Products &&
                             <div className="row product-page-main card-body">
-                                <div className="col-xl-2">
-                                <div className="img-td" style={{width:'200px', maxHeight:'200px'}}><img src={Products.image ? Products.image.url : ''} alt={"Products"+Products._id} className="img-fluid"></img></div>
-
+                                <div className="col-xl-4">
+                                    {/* <div className="img-td" style={{ width: '200px', maxHeight: '200px' }}><img src={ : ''} alt={"Products" + Products._id} className="img-fluid"></img></div> */}
+                                    <Carousel
+                                        data={CarouselData}
+                                        time={3000}
+                                        width="850px"
+                                        height="500px"
+                                        radius="10px"
+                                        slideNumber={true}
+                                        slideNumberStyle={slideNumberStyle}
+                                        captionPosition="bottom"
+                                        dots={true}
+                                        automatic={false}
+                                        pauseIconColor="white"
+                                        pauseIconSize="40px"
+                                        slideBackgroundColor="white"
+                                        slideImageFit="cover"
+                                        thumbnails={true}
+                                        thumbnailWidth="100px"
+                                        style={{
+                                            textAlign: "center",
+                                            maxWidth: "850px",
+                                            maxHeight: "500px",
+                                            margin: "40px auto",
+                                        }}
+                                    />
                                 </div>
-                                <div className="col-xl-8">
+                                <div className="col-xl-6">
                                     <div className="product-page-details product-right mb-0">
                                         <h2>{Products.name}</h2>
-                                        <div className="br-wrapper br-theme-fontawesome-stars-o">
-                                            <select id="u-rating-fontawesome-o" name="rating" data-current-rating={5} autoComplete="off" style={{ "display": "none" }}>
-                                                <option value={1}>1</option>
-                                                <option value={2}>2</option>
-                                                <option value={3}>3</option>
-                                                <option value={4}>4</option>
-                                                <option value={5}>5</option>
-                                            </select>
-                                            <div className="br-widget">
-                                                <a href="#" data-rating-value={1} data-rating-text={1} className="br-selected" /><a href="#" data-rating-value={2} data-rating-text={2} className="br-selected" />
-                                                <a href="#" data-rating-value={3} data-rating-text={3} className="br-selected" /><a href="#" data-rating-value={4} data-rating-text={4} className="br-selected" />
-                                                <a href="#" data-rating-value={5} data-rating-text={5} className="br-selected br-current" />
-                                            </div>
-                                        </div>
+                                        <div className="d-flex"> keywords: <p className="mx-2">{Products.keywords.toString()}</p></div>
                                         <hr />
                                         <h6 className="product-title">product details</h6>
                                         <p>
                                             {Products.description}
                                         </p>
                                         <div className="product-price digits mt-2">
-                                            <h3> NGN{Products.price}<del>0000</del></h3>
+                                            <h4> NGN{Products.price}<del className="mx-1">#0000</del></h4>
                                         </div>
-                                        <ul className="color-variant">
-                                            <li className="bg-light0" />
-                                            <li className="bg-light1" />
-                                            <li className="bg-light2" />
-                                        </ul>
+
                                         <hr />
                                         <h6 className="product-title size-text">
                                             Dimensions:

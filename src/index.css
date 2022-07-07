@@ -20,3 +20,6 @@
 .bg-product{
   background-image: url('assets/images/pro3/34.jpg');
 }
+.w-full{
+  width: 100%;
+}

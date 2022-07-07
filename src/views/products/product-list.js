@@ -11,14 +11,15 @@ const Products = () => {
     let navigate = useNavigate()
     const [Loading, setLoading] = useState(false);
     const [Products, setProducts] = useState([]);
-    const [searchParams, setSearchParams]= useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [query, setQuery] = useState(searchParams.get('name'))
-    const url = query ? `/products/filter/${query}` : "/products/filter";
+    const url = query ? `/products/filter/?name=${query}` : "/products/filter";
+    
     const handleInputChange = (e) => {
         const newQuery = e.target.value;
         setQuery(newQuery);
         setSearchParams({
-            name:newQuery 
+            name: newQuery
         })
 
     }
@@ -26,7 +27,7 @@ const Products = () => {
         setLoading(true);
         try {
             const response = await httpServices.get(url)
-            if (response.status) {
+            if (response.status == 200) {
                 setLoading(false)
                 let result = response.data.products;
                 console.log(response.data.products);
@@ -34,6 +35,7 @@ const Products = () => {
                 toast.success(response.data.message)
             }
             else {
+                setProducts(null)
                 toast.success(response.data.message)
 
             }
@@ -69,13 +71,13 @@ const Products = () => {
     useEffect(() => {
         getProducts()
     }, []);
-   
+
     return (
         <div className="page-body ">
             <div className="product-cont">
                 <div className="col-xl-12 xl-100">
                     <div className="card height-equal">
-                        
+
                         <div className="card-header">
                             <h5>Products</h5>
                             <div className="card-header-right">
@@ -90,9 +92,9 @@ const Products = () => {
                             </div>
                         </div>
                         <div className="d-flex justify-content-between align-items-center bg-white p-3">
-                            <form className="form-inline search-form search-box" onSubmit={(e)=>{e.preventDefault(); getProducts()}}>
+                            <form className="form-inline search-form search-box" onSubmit={(e) => { e.preventDefault(); getProducts() }}>
                                 <div className="form-group flex">
-                                    <input className="form-control" type="text" placeholder="Search.." value={query} onChange={handleInputChange}/>
+                                    <input className="form-control" type="text" placeholder="Search.." value={query} onChange={handleInputChange} />
 
                                 </div>
                             </form>
@@ -138,12 +140,12 @@ const Products = () => {
                                         }
 
                                         {Products && Products.map((product) => (<tr key={product._id} >
-                                            <td className="img-td" ><img src={product.image.url} alt={product._id + "product"} className="" style={{ width: '118px', height:"77px", borderRadius:'10px' }}></img></td>
+                                            <td className="img-td" ><img src={product.image.url} alt={product._id + "product"} className="" style={{ width: '118px', height: "77px", borderRadius: '10px' }}></img></td>
 
                                             <td>{product.name}</td>
                                             <td>{product.slug}</td>
                                             <td>{product.price}</td>
-                                            <td>{product.keywords}</td>
+                                            <td>{product.keywords.toString()}</td>
                                             <td>{product._id}</td>
                                             <td>
                                                 <div className="form-button">
@@ -165,6 +167,11 @@ const Products = () => {
                                     </tbody>
                                 </table>
                             </div>
+                            {Products.length < 1 && <>
+
+                                {!Loading && <div className="text-center w-full my-3 text-dangers"><h3>Product not found</h3></div>}
+
+                            </>}
                             <div className="code-box-copy">
                                 <button className="code-box-copy__btn btn-clipboard"
                                     data-clipboard-target="#example-head4" title=""

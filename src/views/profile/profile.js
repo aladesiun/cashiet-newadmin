@@ -12,7 +12,10 @@ const Profile = () => {
     const profile = data ? data.userProfile : null;
     const [editprofile, setEditProfile] = useState({ firstName: "", middleName: "", lastName: "", gender: "", nationality: "", dob: "", phoneNumber: "", profilePicture: "" });
     let endpoint = process.env.REACT_APP_ENDPOINT;
+    console.log(editprofile);
     let token = localStorage.getItem("_ux");
+   
+      console.log(editprofile);
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setEditProfile((prevState) => ({
@@ -20,15 +23,19 @@ const Profile = () => {
             [name]: value
         }))
     }
+    Object.keys(editprofile).forEach(key => {
+        if (editprofile[key] === '') {
+          delete editprofile[key];
+        }
+      });
     const editProfile = async () => {
-        try {
-
-            const response = await axios.put(endpoint + '/profile', editprofile, {
+        try { 
+            const response = await axios.put(endpoint + '/profile', editProfile, {
                 headers: { Authorization: 'Bearer ' + token }
             })
             if (response.status) {
                 toast.success('successfully added your profile');
-                window.location.href="/profile"
+                // window.location.href="/profile"
 
             }
             else {
@@ -100,7 +107,7 @@ const Profile = () => {
                                     <div className="card-body">
                                         <div className="profile-details text-center">
                                             <img src={require('../../assets/images/dashboard/designer.jpg')} alt className="img-fluid img-90 rounded-circle blur-up lazyloaded" />
-                                            <h5 className="f-w-600 mb-0">{profile.firstName}</h5>
+                                            <h5 className="f-w-600 mb-0">{profile.username}</h5>
                                             <span>{profile.user.email}</span>
                                             <div className="social">
                                                 <div className="form-group btn-showcase">

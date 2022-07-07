@@ -17,7 +17,7 @@ const EditProduct = () => {
     }, [])
     return (
         <>
-        hello
+        {data && data.name}
         </>
     )
 }

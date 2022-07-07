@@ -35,7 +35,7 @@ root.render(
           <Route path="/products/filter" element={<Products/>}></Route>
           <Route path="/product/:_id" element={<Product/>}></Route>
           <Route path="/products/new" element={<AddProduct/>}></Route>
-          <Route path="/product/edit/_id" element={<EditProduct/>}></Route>
+          <Route path="/product/edit/:_id" element={<EditProduct/>}></Route>
           <Route path="/profile" element={<Profile/>}></Route>
 
         </Route>

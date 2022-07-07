@@ -1,6 +1,4 @@
-const EditProfile = ({t}) => {
-    console.log('edit');
-    console.log(t);
+const EditProfile = () => {
     return (
         <>
             <table className="table table-borderless">
