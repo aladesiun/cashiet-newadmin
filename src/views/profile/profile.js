@@ -10,12 +10,11 @@ import CreateProfile from "./create-profile";
 const Profile = () => {
     const { data, Loading, Error } = useGet('/profile/user');
     const profile = data ? data.userProfile : null;
-    const [editprofile, setEditProfile] = useState({ firstName: "", middleName: "", lastName: "", gender: "", nationality: "", dob: "", phoneNumber: "", profilePicture: "" });
+    const [editprofile, setEditProfile] =  useState({})
     let endpoint = process.env.REACT_APP_ENDPOINT;
     console.log(editprofile);
     let token = localStorage.getItem("_ux");
    
-      console.log(editprofile);
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setEditProfile((prevState) => ({
@@ -23,14 +22,9 @@ const Profile = () => {
             [name]: value
         }))
     }
-    Object.keys(editprofile).forEach(key => {
-        if (editprofile[key] === '') {
-          delete editprofile[key];
-        }
-      });
     const editProfile = async () => {
         try { 
-            const response = await axios.put(endpoint + '/profile', editProfile, {
+            const response = await axios.put(endpoint + '/profile', editprofile, {
                 headers: { Authorization: 'Bearer ' + token }
             })
             if (response.status) {
@@ -107,8 +101,8 @@ const Profile = () => {
                                     <div className="card-body">
                                         <div className="profile-details text-center">
                                             <img src={require('../../assets/images/dashboard/designer.jpg')} alt className="img-fluid img-90 rounded-circle blur-up lazyloaded" />
-                                            <h5 className="f-w-600 mb-0">{profile.username}</h5>
-                                            <span>{profile.user.email}</span>
+                                            <h5 className="f-w-600 mb-0">{profile.username ?? "Not set"}</h5>
+                                            <span>{profile.user.email ?? "Not set"}</span>
                                             <div className="social">
                                                 <div className="form-group btn-showcase">
                                                     <button className="btn social-btn btn-fb d-inline-block"><i className="fa fa-facebook" /></button>
@@ -153,36 +147,36 @@ const Profile = () => {
                                                         <tbody>
                                                             <tr>
                                                                 <td>First Name:</td>
-                                                                <td>{profile.firstName}</td>
+                                                                <td>{profile.firstName ?? "Not set"}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Last Name:</td>
-                                                                <td>{profile.lastName}</td>
+                                                                <td>{profile.lastName ?? "Not set"}</td>
 
                                                             </tr>
                                                             <tr>
                                                                 <td>Email:</td>
-                                                                <td>{profile.user.email}</td>
+                                                                <td>{profile.user.email ?? "Not set"}</td>
 
                                                             </tr>
                                                             <tr>
                                                                 <td>Gender:</td>
-                                                                <td>{profile.gender}</td>
+                                                                <td>{profile.gender ?? "Not set"}</td>
 
                                                             </tr>
                                                             <tr>
                                                                 <td>Mobile Number:</td>
-                                                                <td>{profile.phoneNumber}</td>
+                                                                <td>{profile.phoneNumber ?? "Not set"}</td>
 
                                                             </tr>
                                                             <tr>
                                                                 <td>DOB:</td>
-                                                                <td>{profile.dob}</td>
+                                                                <td>{profile.dob ?? "Not set"}</td>
 
                                                             </tr>
                                                             <tr>
                                                                 <td>Nationality :</td>
-                                                                <td>{profile.nationality}</td>
+                                                                <td>{profile.nationality ?? "Not set"}</td>
 
                                                             </tr>
                                                         </tbody>
@@ -221,7 +215,7 @@ const Profile = () => {
                                                                 <td>Current: {profile.user.email}
                                                                     <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
-                                                                            <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="middleName" />
+                                                                            <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="email" />
                                                                         </div>
                                                                     </div></td>
 
@@ -232,7 +226,7 @@ const Profile = () => {
                                                                     <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
 
-                                                                            <select className="form-control" id="validationCustom01" onChange={handleInputChange} name="gender" >
+                                                                            <select className="form-control" id="validationCustom01" onChange={handleInputChange} name="dob" >
                                                                                 <option value="male">male</option>
                                                                                 <option value="female">female</option>
                                                                             </select>
@@ -245,7 +239,7 @@ const Profile = () => {
                                                                 <td>Current: {profile.phoneNumber}
                                                                     <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
-                                                                            <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="nationality" />
+                                                                            <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="phoneNumber" />
                                                                         </div>
                                                                     </div></td>
 
@@ -255,7 +249,7 @@ const Profile = () => {
                                                                 <td>Current: {profile.dob}
                                                                     <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
-                                                                            <input className="form-control" id="validationCustom01" type="date" onChange={handleInputChange} name="nationality" />
+                                                                            <input className="form-control" id="validationCustom01" type="date" onChange={handleInputChange} name="dob" />
                                                                         </div>
                                                                     </div></td>
 

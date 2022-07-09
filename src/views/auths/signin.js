@@ -80,12 +80,12 @@ const Signin = () => {
                                                     <div className="form-terms">
                                                         <div className="">
 
-                                                            <Link to="/forgot-password" className="btn-default forgot-pass mr-2">
+                                                            <a href="/forgot-password" className="btn-default forgot-pass mr-2">
                                                                 Forgot Password!
-                                                            </Link>
-                                                            <Link to="/signup" className=" btn-default forgot-pass mx-5">
+                                                            </a>
+                                                            <a href="/signup" className=" btn-default forgot-pass mx-5">
                                                                 Don't have an account?
-                                                            </Link>
+                                                            </a>
                                                         </div>
                                                     </div>
 

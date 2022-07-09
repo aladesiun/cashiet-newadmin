@@ -6,7 +6,7 @@ import axios from "axios";
 
 const EditProduct = () => {
     let { _id } = useParams();
-    const [editProduct, setEditProfile] = useState({});
+    const [editProduct, setEditProduct] = useState({});
     console.log(editProduct);
     const { data, Loading, Error } = useGet('/products/' + _id);
     const Products = data ? data.product : " ";
@@ -16,12 +16,12 @@ const EditProduct = () => {
     let token = localStorage.getItem('_ux');
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setEditProfile((prevState) => ({
+        setEditProduct((prevState) => ({
             ...prevState,
             [name]: value
         }))
     }
-    const editProfile = async () => {
+    const editProducts = async () => {
         try {
             const response = await axios.put(endpoint + url, editProduct, {
                 headers: { Authorization: 'Bearer ' + token }
@@ -50,7 +50,7 @@ const EditProduct = () => {
                     <div className="page-header">
                         <h3 className="text-dark">Edit Category</h3>
                     </div>
-                    <form onSubmit={(e) => { e.preventDefault(); editProduct() }}>
+                    <form onSubmit={(e) => { e.preventDefault(); editProducts() }}>
                         <table className="table table-borderless">
                             <tbody>
                                 <tr>
@@ -111,11 +111,33 @@ const EditProduct = () => {
                                                 <div className="col-xl-8 col-sm-7">
                                                     <div className="form-floating">
                                                         <textarea onChange={handleInputChange}  className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ "height": "100px" }} defaultValue={""} />
-                                                        <label htmlFor="floatingTextarea2">Current Description:
+                                                        <label htmlFor="floatingTextarea2 my-1">Current Description:{Products && Products.description}
                                                         </label>
 
                                                         {/* {Products && Products.description.length > 2 ? Products.description.substring(0,20)+"...":  Products.description} */}
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Current keywords:  {Products && Products.keywords.toString()}
+                                        <div className="form">
+                                            <div className="form-group mb-3 row">
+                                                <div className="col-xl-8 col-sm-7">
+                                                    <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="price" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Current length:  {Products && Products.dimension.length}
+                                        <div className="form">
+                                            <div className="form-group mb-3 row">
+                                                <div className="col-xl-8 col-sm-7">
+                                                    <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="height" />
                                                 </div>
                                             </div>
                                         </div>

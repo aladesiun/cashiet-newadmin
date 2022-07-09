@@ -79,9 +79,9 @@ const Signup = () => {
 
                                                 <div className="form-terms">
                                                         <div className="">
-                                                            <Link to="/signin" className=" btn-default forgot-pass">
+                                                            <a href="/signin" className=" btn-default forgot-pass">
                                                                 Already have an account?
-                                                            </Link>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 <div className="form-button">

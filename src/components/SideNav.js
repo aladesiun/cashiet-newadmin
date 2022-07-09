@@ -83,6 +83,31 @@ const SideNavHeader = () => {
 
                         </ul>
                     </li>
+                    <li>
+                        <a className="sidebar-header" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                            <span>Users</span>
+                            <i className="fa fa-angle-right pull-right"></i>
+                        </a>
+
+                        <ul className="sidebar-submenu">
+                            <li>
+                                <a href="/users">
+                                    <i className="fa fa-circle"></i>
+                                    <span>View users</span>
+                                </a>
+
+                            </li>
+                            <li>
+                                <a href="/user/new">
+                                    <i className="fa fa-circle"></i>
+                                    <span>Add Users</span>
+                                </a>
+
+                            </li>
+
+                        </ul>
+                    </li>
 
                     <li>
                         <a className="sidebar-header" href="#">
@@ -120,6 +145,34 @@ const SideNavHeader = () => {
                                 </a>
 
                             </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a className="sidebar-header" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                            <span>Admins</span>
+                            <i className="fa fa-angle-right pull-right"></i>
+                        </a>
+
+                        <ul className="sidebar-submenu">
+                           
+                            <li>
+                                <a href="/admins">
+                                    <i className="fa fa-circle"></i>
+                                    <span>Admins</span>
+                                </a>
+
+                            </li>
+                            <li>
+                                <a href="/admin/new">
+                                    <i className="fa fa-circle"></i>
+                                    <span>Create Admin</span>
+                                </a>
+
+                            </li>
+                           
+                            
 
                         </ul>
                     </li>

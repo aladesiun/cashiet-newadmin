@@ -1,69 +1,45 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { AdminContext } from '../../contexts/Admin-context';
 import toast from 'react-hot-toast';
 import httpServices from "../../hooks/http-services";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import useGet from "../../hooks/get";
 
-const Products = () => {
-    let navigate = useNavigate()
-    const [Loading, setLoading] = useState(false);
-    const [Products, setProducts] = useState([]);
-    const [query, setQuery] = useState('')
-    const url = query ? `/products/filter/?name=${query}` : "/products/filter";
-    
-    const handleInputChange = (e) => {
-        const newQuery = e.target.value;
-        setQuery(newQuery);
-       
-
-    }
-    const getProducts = async () => {
-        setLoading(true);
+const Users = () => {
+    const { data, Loading } = useGet("/Users/");
+    const Users = data ? data.users : '';
+    console.log(Users);
+    const deleteUser = async (_id) => {
         try {
-            const response = await httpServices.get(url)
-            if (response.status == 200) {
-                setLoading(false)
-                let result = response.data.products;
-                console.log(response.data.products);
-                setProducts(result)
-                toast.success(response.data.message)
-            }
-            else {
-                setProducts(null)
-                toast.success(response.data.message)
-
-            }
-        }
-        catch (e) {
-            setLoading(false)
-            toast.error(e.message)
-        }
-    }
-    const deleteProduct = async (_id) => {
-        try {
-            const response = await httpServices.delete('/products/' + _id)
-            if (response.status) {
-                setLoading(false)
-                window.location.href='/products/filter';
-
-
+            const response = await httpServices.delete('/Users/' + _id)
+            if (response.data.status) {
+                window.location.href = '/Users';
             }
             else {
                 toast.success(response.data.message)
             }
         }
         catch (e) {
-            setLoading(false)
             toast.error(e.message)
-
         }
     }
-    useEffect(() => {
-        getProducts()
-    }, []);
-
+    const deleteAllUsers = async (_id) => {
+        try {
+            const response = await httpServices.delete('/Users/delete/all')
+            if (response.data.status) {
+                window.location.href = '/Users';
+            }
+            else {
+                toast.success(response.data.message)
+            }
+        }
+        catch (e) {
+            toast.error(e.message)
+        }
+    }
     return (
         <div className="page-body ">
             <div className="product-cont">
@@ -71,7 +47,7 @@ const Products = () => {
                     <div className="card height-equal">
 
                         <div className="card-header">
-                            <h5>Products</h5>
+                            <h5>Users</h5>
                             <div className="card-header-right">
                                 <ul className="list-unstyled card-option">
                                     <li><i className="icofont icofont-simple-left"></i></li>
@@ -84,25 +60,19 @@ const Products = () => {
                             </div>
                         </div>
                         <div className="d-flex justify-content-between align-items-center bg-white p-3">
-                            <form className="form-inline search-form search-box" onSubmit={(e) => { e.preventDefault(); getProducts() }}>
-                                <div className="form-group flex">
-                                    <input className="form-control" type="text" placeholder="Search.." value={query} onChange={handleInputChange} />
 
-                                </div>
-                            </form>
-                            <a href="/products/new" className="btn btn-primary mt-md-0 mt-2">Add Products</a>
+                            <a href="/users/new" className="btn btn-primary mt-md-0 mt-2">Add Users</a>
+                            <a href="#" className="btn btn-warning mt-md-0 mt-2" onClick={() => { deleteAllUsers() }}>Delete all</a>
                         </div>
                         <div className="card-body">
-                            <div className="user-status table-responsive products-table">
+                            <div className="user-status table-responsive Users-table">
                                 <table className="table table-bordernone mb-0">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Slug</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Keywords</th>
-                                            <th scope="col"></th>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">email</th>
+                                            <th scope="col">role</th>
+                                            <th scope="col">Edit</th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
@@ -130,38 +100,37 @@ const Products = () => {
 
                                             </tr>
                                         }
-
-                                        {Products && Products.map((product) => (<tr key={product._id} >
-                                            <td className="img-td" ><img src={product.image && product.image.url} alt={product._id + "product"} className="" style={{ width: '118px', height: "77px", borderRadius: '10px' }}></img></td>
-
-                                            <td>{product.name}</td>
-                                            <td>{product.slug}</td>
-                                            <td>{product.price}</td>
-                                            <td>{product.keywords.toString()}</td>
-                                            <td>{product._id}</td>
-                                            <td>
-                                                <div className="form-button">
-                                                    <Link className="btn btn-primary" to={"/product/" + product._id}>View</Link>
+                                        {Users && Users.results.map((user) => (
+                                            <tr key={user._id} >
+                                                <td>{user.username}</td>
+                                                <td>{user.email}</td>
+                                                <td>{user.role}</td>
+                                                <td>
                                                     <div className="form-button m-4 flex" >
-                                                        <Link className="" to={"/product/edit/" + product._id}>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></Link>
-                                                        <Link to="#" className="m-2" onClick={() => { deleteProduct(product._id) }}>
+                                                        <Link to={"/user/edit/" + user._id} className="m-2" >
+
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                                                        </Link>
+                                                        <Link to="#" className="m-2" onClick={() => { deleteUser(user._id) }}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                                                         </Link>
                                                     </div>
-                                                </div>
+                                                </td>
+                                                <td>
+                                                    <Link to={"/user/" + user._id} className="m-2" >
+                                                        View
+                                                    </Link>
+                                                </td>
 
-                                            </td>
 
-                                        </tr>
+                                            </tr>
                                         ))}
-
                                     </tbody>
                                 </table>
                             </div>
-                            {Products.length < 1 && <>
+                            {!Users && <>
 
-                                {!Loading && <div className="text-center w-full my-3 text-dangers"><h3>Product not found</h3></div>}
+                                {!Loading && <div className="text-center w-full my-3 text-dangers"><h3>No Users At This Moment</h3></div>}
 
                             </>}
                             <div className="code-box-copy">
@@ -178,4 +147,4 @@ const Products = () => {
     );
 }
 
-export default Products;
+export default Users;

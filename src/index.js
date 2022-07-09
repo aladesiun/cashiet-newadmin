@@ -22,6 +22,12 @@ import EditCategory from './views/categories/edit-category';
 import AddCategories from './views/categories/add-categories';
 import SubCategories from './views/categories/sub-categories/sub-categories';
 import AddSubCategories from './views/categories/sub-categories/add-categories';
+import Users from './views/users/users';
+import CreateAdmin from './views/admin/create-admin';
+import EditUser from './views/users/edit-user';
+import User from './views/users/user';
+import CreateUser from './views/users/create-user';
+import Admins from './views/admin/admins';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -52,6 +58,16 @@ root.render(
 
           <Route path="/sub-categories" element={<SubCategories/>}></Route>
           <Route path="/sub-category/new" element={<AddSubCategories/>}></Route>
+
+          <Route path="/users" element={<Users/>}></Route>
+          <Route path="/user/new" element={<CreateUser/>}></Route>
+          <Route path="/user/:_id" element={<User/>}></Route>
+          <Route path="/user/edit/:_id" element={<EditUser/>}></Route>
+
+
+          <Route path="/admin/new" element={<CreateAdmin/>}></Route>
+          <Route path="/admins" element={<Admins/>}></Route>
+
 
 
 

@@ -22,9 +22,9 @@ const Home = () => {
                             <div className="col-lg-6">
                                 <ol className="breadcrumb pull-right">
                                     <li className="breadcrumb-item">
-                                        <Link to="/index">
+                                        <a href="/index">
                                             <i data-feather="Layout"></i>
-                                        </Link>
+                                        </a>
                                     </li>
                                     <li className="breadcrumb-item active">Dashboard</li>
                                 </ol>
@@ -192,7 +192,7 @@ const Home = () => {
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <Link to="/order" className="btn btn-primary mt-4">View All Orders</Link>
+                                        <a href="/order" className="btn btn-primary mt-4">View All Orders</a>
                                     </div>
                                     <div className="code-box-copy">
                                         <button className="code-box-copy__btn btn-clipboard"

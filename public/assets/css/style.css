@@ -8724,7 +8724,7 @@ a:hover {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .nav-link>.nav-link,
+.nav-pills .nav-a>.nav-link,
 .nav-pills .show.active,
 .nav-pills .show>.nav-link {
     background-color: #04A134
