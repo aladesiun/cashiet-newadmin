@@ -17,7 +17,7 @@ const AddProduct = () => {
         console.log(keywordsArr);
 
     }
-    const [product, setProduct] = useState({ name: "", price: "", image: '', category: "", description: ""});
+    const [product, setProduct] = useState({ name: "", price: "", image: '', category: "", description: "",});
     console.log(product);
     const [Loading, setLoading] = useState(false);
     let endpoint = process.env.REACT_APP_ENDPOINT;
@@ -41,24 +41,29 @@ const AddProduct = () => {
             [name]: value
         }))
     }
-
     const addProduct = async (e) => {
         
         e.preventDefault();
-
+        setProduct((prevState) => ({
+            ...prevState,
+            keywords: keywordsArr
+        }))
         let formData = new FormData();
         
         for(var field in product){
-            formData.append(field, product[field]);
+            if (field != 'keywords') {
+                formData.append(field, product[field]);
+            }
         }
-
-        
-        formData.append("keywords", keywordsArr);
+        for (var i = 0; i < keywordsArr.length; i++) {
+            formData.append('keywords', keywordsArr[i]);
+          }
+        console.log(formData);
 
         setLoading(true)
         
         try {
-
+            console.log(formData);
             const response = await axios.post(endpoint + '/products', formData, {
                 headers: {
                     Authorization: 'Bearer ' + token,
@@ -68,7 +73,7 @@ const AddProduct = () => {
                 toast.success('successfully added your profile');
                 setLoading(false)
                 console.log(formData);
-                window.location.href="/products/filter"
+                window.location.href="/products"
 
             }
             else {

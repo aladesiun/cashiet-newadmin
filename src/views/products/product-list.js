@@ -10,16 +10,13 @@ const Products = () => {
     let navigate = useNavigate()
     const [Loading, setLoading] = useState(false);
     const [Products, setProducts] = useState([]);
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [query, setQuery] = useState(searchParams.get('name'))
+    const [query, setQuery] = useState('')
     const url = query ? `/products/filter/?name=${query}` : "/products/filter";
     
     const handleInputChange = (e) => {
         const newQuery = e.target.value;
         setQuery(newQuery);
-        setSearchParams({
-            name: newQuery
-        })
+       
 
     }
     const getProducts = async () => {

@@ -67,7 +67,7 @@ const SideNavHeader = () => {
 
                         <ul className="sidebar-submenu">
                             <li>
-                                <a href="/products/filter">
+                                <a href="/products">
                                     <i className="fa fa-circle"></i>
                                     <span>Products</span>
                                 </a>
