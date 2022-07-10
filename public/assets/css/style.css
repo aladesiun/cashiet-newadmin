@@ -1291,8 +1291,8 @@
 .btn-primary:focus,
 .btn-primary:active,
 .btn-primary.active {
-    background-color: #ff1d08 !important;
-    border-color: #ff1d08 !important
+    background-color: #38d768 !important;
+    border-color: #38d768 !important
 }
 
 .btn-primary:focus {
@@ -1508,8 +1508,8 @@
 .btn-outline-primary-2x:active,
 .btn-outline-primary-2x.active {
     color: #fff;
-    background-color: #ff1d08 !important;
-    border-color: #ff1d08 !important;
+    background-color: #38d768 !important;
+    border-color: #38d768 !important;
     -webkit-box-shadow: none;
     box-shadow: none
 }
@@ -1655,8 +1655,8 @@
 .btn-outline-primary:active,
 .btn-outline-primary.active {
     color: #fff;
-    background-color: #ff1d08 !important;
-    border-color: #ff1d08 !important
+    background-color: #38d768 !important;
+    border-color: #38d768 !important
 }
 
 .btn-outline-secondary {
@@ -1794,8 +1794,8 @@
 }
 
 .btn-primary:not([disabled]):not(.disabled).active {
-    background-color: #ff1d08;
-    border-color: #ff1d08;
+    background-color: #38d768;
+    border-color: #38d768;
     -webkit-box-shadow: none !important;
     box-shadow: none !important
 }
@@ -1805,8 +1805,8 @@
 .btn-primary:not([disabled]):not(.disabled).active:active,
 .btn-primary:not([disabled]):not(.disabled).active.active {
     color: #fff;
-    background-color: #ff1d08;
-    border-color: #ff1d08
+    background-color: #38d768;
+    border-color: #38d768
 }
 
 .btn-secondary:not([disabled]):not(.disabled).active {
@@ -1936,8 +1936,8 @@
     color: #fff;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    background-color: #ff1d08 !important;
-    border-color: #ff1d08 !important
+    background-color: #38d768 !important;
+    border-color: #38d768 !important
 }
 
 .btn-outline-secondary-2x:not([disabled]):not(.disabled).active {
@@ -2130,8 +2130,8 @@ table tbody .border-bottom-warning td {
 
 .table-styling .table-primary thead,
 .table-styling.table-primary thead {
-    background-color: #ff1d08;
-    border: 3px solid #ff1d08
+    background-color: #38d768;
+    border: 3px solid #38d768
 }
 
 .table-styling .table-secondary,
@@ -2561,8 +2561,8 @@ table tbody .border-bottom-warning td {
 .btn-air-primary:hover,
 .btn-air-primary:active,
 .btn-air-primary:not([disabled]):not(.disabled):active {
-    background-color: #ff1d08;
-    border-color: #ff1d08
+    background-color: #38d768;
+    border-color: #38d768
 }
 
 .btn-air-secondary {

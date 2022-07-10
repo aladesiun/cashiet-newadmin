@@ -1,75 +1,68 @@
-import { useEffect, useState, } from "react";
+import { useState, useContext, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import toast from 'react-hot-toast';
-import Pagination from "react-js-pagination";
 import httpServices from "../../hooks/http-services";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import axios from "axios";
 
-const Users = () => {
-    let endpoint = process.env.REACT_APP_ENDPOINT;
-    let token = localStorage.getItem('_ux');
-    const [data, setData]=useState();
-    const [NoUsers, setNoUsers] = useState(false);
-    const [Loading, setLoading] = useState(false)
-    const getUsers = async (pageNumber = 1) => {
-        setLoading(true)
-        let url = `https://cashiet-server.herokuapp.com/api/v1/users/?page=${pageNumber}`;
-        try { 
-            const response = await axios.get(url, {
-                headers: {
-                    Authorization: 'Bearer ' + token,
-                }})
-            if (response.status) {
-        setLoading(false)
-                setData(response.data.users)
-                toast.success('successfully added your profile');
-            }
-            else {
-
-            }
-        }
-        catch (error) {
-            var error_message = error.response.data.message;
-            toast.error(error_message);
-        }
-   
-    }
-    const Users  = data ? data.results : '';
-    console.log(Users);
+const Orders = () => {
+    let navigate = useNavigate()
+    const [Loading, setLoading] = useState(false);
+    const [orders, setorders] = useState([]);
+    const [query, setQuery] = useState('')
+    const url = query ? `/orders/filter/?name=${query}` : "/order";
     
-    const deleteUser = async (_id) => {
+    const handleInputChange = (e) => {
+        const newQuery = e.target.value;
+        setQuery(newQuery);
+    }
+    console.log(orders);
+    const getorders = async () => {
+        setLoading(true);
         try {
-            const response = await httpServices.delete('/Users/' + _id)
-            if (response.data.status) {
-                window.location.href = '/Users';
+            const response = await httpServices.get(url)
+            if (response.status == 200) {
+                setLoading(false)
+                let result = response.data.orders;
+                console.log(response.data.orders);
+                setorders(result)
+                toast.success(response.data.message)
+            }
+            else {
+                setorders(null)
+                toast.success(response.data.message)
+
+            }
+        }
+        catch (e) {
+            setLoading(false)
+            toast.error(e.message)
+        }
+    }
+    const deleteProduct = async (_id) => {
+        try {
+            const response = await httpServices.delete('/orders/' + _id)
+            if (response.status) {
+                setLoading(false)
+                window.location.href='/orders/filter';
+
+
             }
             else {
                 toast.success(response.data.message)
             }
         }
         catch (e) {
+            setLoading(false)
             toast.error(e.message)
+
         }
     }
-    const deleteAllUsers = async (_id) => {
-        try {
-            const response = await httpServices.delete('/Users/delete/all')
-            if (response.data.status) {
-                window.location.href = '/Users';
-            }
-            else {
-                toast.success(response.data.message)
-            }
-        }
-        catch (e) {
-            toast.error(e.message)
-        }
-    }
-    useEffect(()=>{
-        getUsers()
-    }, [])
+    useEffect(() => {
+        getorders()
+    }, []);
+
     return (
         <div className="page-body ">
             <div className="product-cont">
@@ -77,7 +70,7 @@ const Users = () => {
                     <div className="card height-equal">
 
                         <div className="card-header">
-                            <h5>Users</h5>
+                            <h5>orders</h5>
                             <div className="card-header-right">
                                 <ul className="list-unstyled card-option">
                                     <li><i className="icofont icofont-simple-left"></i></li>
@@ -90,19 +83,25 @@ const Users = () => {
                             </div>
                         </div>
                         <div className="d-flex justify-content-between align-items-center bg-white p-3">
+                            <form className="form-inline search-form search-box" onSubmit={(e) => { e.preventDefault(); getorders() }}>
+                                <div className="form-group flex">
+                                    <input className="form-control" type="text" placeholder="Search.." value={query} onChange={handleInputChange} />
 
-                            <a href="/users/new" className="btn btn-primary mt-md-0 mt-2">Add Users</a>
-                            <a href="#" className="btn btn-warning mt-md-0 mt-2" onClick={() => { deleteAllUsers() }}>Delete all</a>
+                                </div>
+                            </form>
+                            <a href="/orders/new" className="btn btn-primary mt-md-0 mt-2">Add orders</a>
                         </div>
                         <div className="card-body">
-                            <div className="user-status table-responsive Users-table">
+                            <div className="user-status table-responsive orders-table">
                                 <table className="table table-bordernone mb-0">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Username</th>
-                                            <th scope="col">email</th>
-                                            <th scope="col">role</th>
-                                            <th scope="col">Edit</th>
+                                            <th scope="col">Products name</th>
+                                            <th scope="col">payment</th>
+                                            <th scope="col">Rem..Amount</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Keywords</th>
+                                            <th scope="col"></th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
@@ -130,52 +129,37 @@ const Users = () => {
 
                                             </tr>
                                         }
-                                        {Users && Users.map((user) => (
-                                            <tr key={user._id} >
-                                                <td>{user.username}</td>
-                                                <td>{user.email}</td>
-                                                <td>{user.role}</td>
-                                                <td>
-                                                    <div className="form-button m-4 flex" >
-                                                        <Link to={"/user/edit/" + user._id} className="m-2" >
 
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-                                                        </Link>
-                                                        <Link to="#" className="m-2" onClick={() => { deleteUser(user._id) }}>
+                                        {orders && orders.map((product) => (<tr key={product._id} >
+                                            <td className="img-td" ><img src={product.image && product.image.url} alt={product._id + "product"} className="" style={{ width: '118px', height: "77px", borderRadius: '10px' }}></img></td>
+
+                                            <td>{product.paymentStatus}</td>
+                                            <td>{product.remainingAmount}</td>
+                                            <td>{product.price}</td>
+                                            <td>{product._id}</td>
+                                            <td>
+                                                <div className="form-button">
+                                                    <Link className="btn btn-primary" to={"/order/" + product._id}>View</Link>
+                                                    <div className="form-button m-4 flex" >
+                                                        <Link className="" to={"/order/edit/" + product._id}>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></Link>
+                                                        <Link to="#" className="m-2" onClick={() => { deleteProduct(product._id) }}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                                                         </Link>
                                                     </div>
-                                                </td>
-                                                <td>
-                                                    <Link to={"/user/" + user._id} className="m-2" >
-                                                        View
-                                                    </Link>
-                                                </td>
+                                                </div>
 
+                                            </td>
 
-                                            </tr>
+                                        </tr>
                                         ))}
+
                                     </tbody>
                                 </table>
                             </div>
-                            {Users && 
-                    <Pagination
-                        activePage={'1'}
-                        totalItemsCount={'4'}
-                        itemsCountPerPage={'10'}
-                        onChange={(pageNumber) => getUsers(pageNumber)}
-                        itemClassLast=""
-                        pageRangeDisplayed= ""
-                        linkClassPrev="icofont icofont-simple-left"
-                        linkClassNext="icofont icofont-simple-right"
-                        prevPageText=""
-                        nextPageText=""
-                        hideFirstLastPages="false"
-                    />
-                }
-                            {!Users && <>
+                            {orders.length < 1 && <>
 
-                                {!Loading && <div className="text-center w-full my-3 text-dangers"><h3>No Users At This Moment</h3></div>}
+                                {!Loading && <div className="text-center w-full my-3 text-dangers"><h3>Product not found</h3></div>}
 
                             </>}
                             <div className="code-box-copy">
@@ -192,4 +176,4 @@ const Users = () => {
     );
 }
 
-export default Users;
+export default Orders;
