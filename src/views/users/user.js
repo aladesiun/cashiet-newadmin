@@ -10,9 +10,9 @@ import httpServices from "../../hooks/http-services";
 
 const User = () => {
     let { _id } = useParams();
-    const { data, Loading, Error } = useGet('/users/' + _id);
-    const Products = data ? data.user : '';
-    console.log(Products);
+    const { data, Loading, Error } = useGet('/profile/' + _id);
+    const Profile = data ? data.userProfile : '';
+    console.log(Profile);
     const deleteUser = async (_id) => {
         try {
             const response = await httpServices.delete('/Users/' + _id)
@@ -40,7 +40,7 @@ const User = () => {
                             <div className="col-lg-6">
                                 <div className="page-header-left">
                                     <h3>
-                                        User Details
+                                        User Profile Details
                                         <small>Cashiet Admin panel</small>
                                     </h3>
                                 </div>
@@ -84,40 +84,71 @@ const User = () => {
                             </div>
 
                         }
-                        {Products &&
+                        {Profile &&
                             <div className="row product-page-main card-body">
                                 <div className="col-xl-10">
                                     <div className="product-page-details product-right mb-0">
-                                        <h2>{Products.username}</h2>
+                                    {Profile && <div className=" avater-rounded"><img src={Profile && Profile.profilePicture} alt={"Profile" + Profile._id} className=""></img></div>}
+
+                                        <h2>{Profile.user.username}</h2>
 
                                         <hr />
-                                        <h6 className="product-title ">Email</h6>
-                                        <p>
-                                            {Products.email}
+                                        <div className="d-flex align-items-center">
+                                       <h6 className="product-title m-r-2">FisrtName:</h6>
+                                        <p className="px-2">
+                                            {Profile.firstName ?? 'Not set'}
                                         </p>
+                                       </div>
+                                       <div className="d-flex align-items-center">
+                                       <h6 className="product-title m-r-2">LastName:</h6>
+                                        <p className="px-2">
+                                            {Profile.lastName ?? 'Not set'}
+                                        </p>
+                                       </div>
+                                       <div className="d-flex align-items-center">
+                                       <h6 className="product-title m-r-2">MiddleName:</h6>
+                                        <p className="px-2">
+                                            {Profile.midddlename ?? 'not set' ?? 'Not set'}
+                                        </p>
+                                       </div>
+                                       <div className="d-flex align-items-center">
+                                       <h6 className="product-title m-r-2">Email:</h6>
+                                        <p className="px-2">
+                                            {Profile.user.email ?? 'Not set'}
+                                        </p>
+                                       </div>
+                                       <div className="d-flex align-items-center">
+
                                         <h6 className="product-title size-text mt-2">
                                             Role:
                                         </h6>
-                                        <p>{Products.role}</p>
+                                        <p className="px-2">{Profile.user.role ?? 'Not set'}</p>
+                                        </div>
+                                       <div className="d-flex align-items-center">
+
                                         <h6 className="product-title size-text mt-2">
-                                            Mode of Registration:
+                                            Nationality:
                                         </h6>
-                                        <p>{Products.modeOfRegistration}</p>
+                                        <p className="px-2">{Profile.nationality ?? 'Not set'}</p>
+                                        </div>
+                                       <div className="d-flex align-items-center">
+
                                         <h6 className="product-title size-text mt-2">
                                             isVerified:
                                         </h6>
-                                        <p>{Products.isVerified ? 'true' : 'false'}</p>
+                                        <p className="px-2">{Profile.user.isVerified ? 'true' : 'false' ?? 'Not set'}</p>
+                                        </div>
 
                                     </div>
 
                                 </div>
                                 <div className="d-flex justify-content-between align-items-center bg-white p-3">
-                                    <a href={"/user/edit/" + Products._id} className="btn btn-primary mt-md-0 mt-2">Edit</a>
+                                    <a href={"/user/edit/" + Profile._id} className="btn btn-primary mt-md-0 mt-2">Edit</a>
                                     <a href="#" className="btn btn-warning mt-md-0 mt-2" onClick={() => { deleteUser() }}>Delete</a>
                                 </div>
                             </div>
                         }
-                        {Error && <div className="text-center"><h1 className="font-bold fs-3">Unable to fetch data at this monent</h1></div>}
+                        {Error && <div className="text-center"><h1 className="text-danger font-bold fs-3">Unable to fetch data at this monent</h1></div>}
 
                     </div>
                 </div>

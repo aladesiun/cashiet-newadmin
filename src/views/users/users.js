@@ -13,7 +13,7 @@ const Users = () => {
     const [data, setData] = useState();
     const [NoUsers, setNoUsers] = useState(false);
     const [Loading, setLoading] = useState(false)
-    const getUsers = async (pageNumber = 2) => {
+    const getUsers = async (pageNumber = 1) => {
         setLoading(true)
         let url = `https://cashiet-server.herokuapp.com/api/v1/users/?page=${pageNumber}`;
         try {

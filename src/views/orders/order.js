@@ -131,7 +131,7 @@ const Order = () => {
                                 </div>
                             </div>
                         }
-                        {Error && <div className="text-center"><h1 className="font-bold fs-3">Unable to fetch data at this monent</h1></div>}
+                        {Error && <div className="text-center"><h1 className="text-danger font-bold fs-3">Unable to fetch data at this monent</h1></div>}
 
                     </div>
                 </div>
