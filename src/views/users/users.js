@@ -10,19 +10,20 @@ import axios from "axios";
 const Users = () => {
     let endpoint = process.env.REACT_APP_ENDPOINT;
     let token = localStorage.getItem('_ux');
-    const [data, setData]=useState();
+    const [data, setData] = useState();
     const [NoUsers, setNoUsers] = useState(false);
     const [Loading, setLoading] = useState(false)
-    const getUsers = async (pageNumber = 1) => {
+    const getUsers = async (pageNumber = 2) => {
         setLoading(true)
         let url = `https://cashiet-server.herokuapp.com/api/v1/users/?page=${pageNumber}`;
-        try { 
+        try {
             const response = await axios.get(url, {
                 headers: {
                     Authorization: 'Bearer ' + token,
-                }})
+                }
+            })
             if (response.status) {
-        setLoading(false)
+                setLoading(false)
                 setData(response.data.users)
                 toast.success('successfully added your profile');
             }
@@ -34,11 +35,11 @@ const Users = () => {
             var error_message = error.response.data.message;
             toast.error(error_message);
         }
-   
+
     }
-    const Users  = data ? data.results : '';
+    const Users = data ? data.results : '';
     console.log(Users);
-    
+
     const deleteUser = async (_id) => {
         try {
             const response = await httpServices.delete('/Users/' + _id)
@@ -67,7 +68,7 @@ const Users = () => {
             toast.error(e.message)
         }
     }
-    useEffect(()=>{
+    useEffect(() => {
         getUsers()
     }, [])
     return (
@@ -91,7 +92,7 @@ const Users = () => {
                         </div>
                         <div className="d-flex justify-content-between align-items-center bg-white p-3">
 
-                            <a href="/users/new" className="btn btn-primary mt-md-0 mt-2">Add Users</a>
+                            <a href="/user/new" className="btn btn-primary mt-md-0 mt-2">Add Users</a>
                             <a href="#" className="btn btn-warning mt-md-0 mt-2" onClick={() => { deleteAllUsers() }}>Delete all</a>
                         </div>
                         <div className="card-body">
@@ -158,21 +159,21 @@ const Users = () => {
                                     </tbody>
                                 </table>
                             </div>
-                            {Users && 
-                    <Pagination
-                        activePage={'1'}
-                        totalItemsCount={'4'}
-                        itemsCountPerPage={'10'}
-                        onChange={(pageNumber) => getUsers(pageNumber)}
-                        itemClassLast=""
-                        pageRangeDisplayed= ""
-                        linkClassPrev="icofont icofont-simple-left"
-                        linkClassNext="icofont icofont-simple-right"
-                        prevPageText=""
-                        nextPageText=""
-                        hideFirstLastPages="false"
-                    />
-                }
+                            {Users &&
+                                <Pagination
+                                    activePage={2}
+                                    totalItemsCount={4}
+                                    itemsCountPerPage={10}
+                                    onChange={(pageNumber) => getUsers(pageNumber)}
+                                    itemClassLast=""
+                                    pageRangeDisplayed={2}
+                                    linkClassPrev="icofont icofont-simple-left"
+                                    linkClassNext="icofont icofont-simple-right"
+                                    prevPageText=""
+                                    nextPageText=""
+                                    hideFirstLastPages="false"
+                                />
+                            }
                             {!Users && <>
 
                                 {!Loading && <div className="text-center w-full my-3 text-dangers"><h3>No Users At This Moment</h3></div>}

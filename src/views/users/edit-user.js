@@ -7,10 +7,10 @@ const EditUser = () => {
     let endpoint = process.env.REACT_APP_ENDPOINT;
     let token = process.env.REACT_APP_ENDPOINT;
     let { _id } = useParams();
-    let url = "/users/" + _id;
+    let url = "/profile/" + _id;
     const { data, Loading } = useGet(url);
     const user = data ? data.user : 'dd';
-    const [userDetails, setuserDetails] = useState({  })
+    const [userDetails, setuserDetails] = useState({})
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setuserDetails((prevState) => ({
@@ -56,7 +56,7 @@ const EditUser = () => {
                                         <div className="form">
                                             <div className="form-group mb-3 row">
                                                 <div className="col-xl-8 col-sm-7">
-                                                    <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="username" placeholder="New"/>
+                                                    <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="username" placeholder="New" />
                                                 </div>
                                             </div>
                                         </div>
@@ -68,7 +68,7 @@ const EditUser = () => {
                                         <div className="form">
                                             <div className="form-group mb-3 row">
                                                 <div className="col-xl-8 col-sm-7">
-                                                    <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="email" placeholder="New"/>
+                                                    <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="email" placeholder="New" />
                                                 </div>
                                             </div>
                                         </div>
@@ -79,7 +79,7 @@ const EditUser = () => {
                                         <div className="form">
                                             <div className="form-group mb-3 row">
                                                 <div className="col-xl-8 col-sm-7">
-                                                    <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="role" placeholder="New"/>
+                                                    <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="role" placeholder="New" />
                                                 </div>
                                             </div>
                                         </div>

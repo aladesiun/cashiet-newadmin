@@ -7,22 +7,10 @@ import { Carousel } from 'react-carousel-minimal';
 
 const Order = () => {
     let { _id } = useParams();
-    const { data, Loading, Error } = useGet('/order/' + _id);
-    const Products = data ? data.product : '';
-    const ProductsGallery = data.gallery ? data.gallery.images : [];
-    const dataCarousel = ProductsGallery ? ProductsGallery.map((image) => image.url) : '';
-    const CarouselData = [{ image: dataCarousel, caption: "Scotland" }, { image: Products ? Products.image.url : '' }]
-    console.log(Products);
-    console.log(CarouselData);
-    console.log(dataCarousel);
-    const captionStyle = {
-        fontSize: '2em',
-        fontWeight: 'bold',
-    }
-    const slideNumberStyle = {
-        fontSize: '20px',
-        fontWeight: 'bold',
-    }
+    const { data, Loading, Error } = useGet('/order/admin/' + _id);
+    const Order = data ? data.order : '';
+
+    console.log(Order);
 
     useEffect(() => {
     }, [])
@@ -36,7 +24,7 @@ const Order = () => {
                             <div className="col-lg-6">
                                 <div className="page-header-left">
                                     <h3>
-                                        Product Detail
+                                        Order Details
                                         <small>Cashiet Admin panel</small>
                                     </h3>
                                 </div>
@@ -52,7 +40,7 @@ const Order = () => {
                                         </a>
                                     </li>
                                     <li className="breadcrumb-item">Physical</li>
-                                    <li className="breadcrumb-item active">Product Detail</li>
+                                    <li className="breadcrumb-item active">Order Detail</li>
                                 </ol>
                             </div>
                         </div>
@@ -80,61 +68,64 @@ const Order = () => {
                             </div>
 
                         }
-                        {Products &&
+                        {Order &&
                             <div className="row product-page-main card-body">
-                                <div className="col-xl-4">
-                                    {/* <div className="img-td" style={{ width: '200px', maxHeight: '200px' }}><img src={ : ''} alt={"Products" + Products._id} className="img-fluid"></img></div> */}
-                                    <Carousel
-                                        data={CarouselData}
-                                        time={3000}
-                                        width="850px"
-                                        height="500px"
-                                        radius="10px"
-                                        slideNumber={true}
-                                        slideNumberStyle={slideNumberStyle}
-                                        captionPosition="bottom"
-                                        dots={true}
-                                        automatic={true}
-                                        pauseIconColor="white"
-                                        pauseIconSize="40px"
-                                        slideBackgroundColor="black"
-                                        slideImageFit="cover"
-                                        thumbnails={true}
-                                        thumbnailWidth="100px"
-                                        style={{
-                                            textAlign: "center",
-                                            maxWidth: "850px",
-                                            maxHeight: "500px",
-                                            margin: "40px auto",
-                                        }}
-                                    />
-                                </div>
+
                                 <div className="col-xl-6">
                                     <div className="product-page-details product-right mb-0">
-                                        <h2>{Products.name}</h2>
-                                        <div className="d-flex"> keywords: <p className="mx-2">{Products.keywords.toString()}</p></div>
+                                        {Order.orderItems && Order.orderItems.map((product) => (
+                                            <div key={product._id}>
+
+
+                                            </div>
+                                        ))}
+                                        <h2 className="">product details</h2>
+
+                                        {Order.orderItems.map((product) => (
+                                            <div key={product._id}>
+                                               <div>
+                                                    <p className="d-flex">Product name :{product.product ? <p className="text-success">{product.product.name}</p> : <p className="text-danger text-9">Not available</p>}</p>
+                                                    <p className="d-flex">Product unitPrice:{product.product ? product.unitPrice : <p className="text-danger">Not available</p>}</p>
+                                                    <p>quantity:{product.quantity}</p>
+                                                    <hr/>
+                                               </div>
+
+                                            </div>
+                                        ))}
+                                        <div>
+                                            <h2>Delivery Address</h2>
+                                            <p>city :{Order.deliveryAddress.city}</p>
+                                            <p>country :{Order.deliveryAddress.country}</p>
+                                            <p>Email :{Order.deliveryAddress.email}</p>
+                                            <p>Line 1 :{Order.deliveryAddress.line1}</p>
+                                            <p>Line 2 :{Order.deliveryAddress.line2}</p>
+                                            <p>Phone :{Order.deliveryAddress.phoneNumber}</p>
+                                            <p>State  :{Order.deliveryAddress.state}</p>
+                                            <p>Zip code  :{Order.deliveryAddress.zip}</p>
+                                            <hr />
+                                        </div>
+                                        <h2>Delivery Details</h2>
+                                        <p>Delivery date  :{Order.deliveryDate}</p>
+                                        <p>Delivery status  :{Order.deliveryStatus}</p>
+                                        <p>Failed transactions :{Order.failedTransactions}</p>
+                                        <p>Order date :{Order.orderDate}</p>
                                         <hr />
-                                        <h6 className="product-title">product details</h6>
-                                        <p>
-                                            {Products.description}
-                                        </p>
-                                        <div className="product-price digits mt-2">
-                                            <h4> NGN{Products.price}<del className="mx-1">#0000</del></h4>
+
+                                        <div>
+                                            <h6 className="product-title ">User Details</h6>
+                                            {Order.user ? <div><p>User name  :{Order.user.username}</p>
+                                                <p>Email  :{Order.user.email}</p>
+                                                <p>Role  :{Order.user.role}</p>
+                                                <p>Verified  :{Order.user.isVerified ? 'true' : 'false'}</p></div> : "User not available"}
+
                                         </div>
 
                                         <hr />
-                                        <h6 className="product-title size-text">
-                                            Dimensions:
-                                        </h6>
-                                        <div>
-                                            width:{Products.dimension.width}
-                                        </div>
-                                        <hr />
                                         <h6 className="product-title">Description</h6>
-                                        <p>{Products.description}</p>
+                                        <p>{Order.description}</p>
                                         <div className="m-t-15">
                                             <button className="btn btn-primary m-r-10" type="button">Delete</button>
-                                            <a className="btn btn-secondary" href={"/product/edit/" + Products._id}>Edit</a>
+                                            <a className="btn btn-secondary" href={"/product/edit/" + Order._id}>Edit</a>
                                         </div>
                                     </div>
                                 </div>

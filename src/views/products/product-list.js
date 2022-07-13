@@ -43,10 +43,10 @@ const Products = () => {
     }
     const deleteProduct = async (_id) => {
         try {
-            const response = await httpServices.delete('/products/' + _id)
+            const response = await httpServices.delete('/order/' + _id)
             if (response.status) {
                 setLoading(false)
-                window.location.href='/products/filter';
+                window.location.href='/products';
 
 
             }

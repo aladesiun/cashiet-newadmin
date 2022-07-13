@@ -28,8 +28,8 @@ import EditUser from './views/users/edit-user';
 import User from './views/users/user';
 import CreateUser from './views/users/create-user';
 import Admins from './views/admin/admins';
-import Oders from './views/oders/oders';
-import Order from './views/oders/oder';
+import Orders from './views/orders/orders';
+import Order from './views/orders/order';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -71,7 +71,7 @@ root.render(
           <Route path="/admins" element={<Admins/>}></Route>
 
 
-          <Route path="/orders" element={<Oders/>}></Route>
+          <Route path="/orders" element={<Orders/>}></Route>
           <Route path="/order/:_id" element={<Order/>}></Route>
 
 

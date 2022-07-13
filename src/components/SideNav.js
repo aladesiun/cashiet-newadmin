@@ -21,7 +21,7 @@ const SideNavHeader = () => {
             <div className="sidebar custom-scrollbar">
                 <div className="sidebar-back d-lg-none d-block"><i className="fa fa-times" aria-hidden="true"></i></div>
                 <div className="sidebar-user block ml-0">
-                <img className="img-60" src={require('../assets/images/dashboard/user3.jpg')} alt=""></img>
+                    <img className="img-60" src={require('../assets/images/dashboard/user3.jpg')} alt=""></img>
 
                     <div>
                         <h6 className="f-14">{admins && admins.admin.username}</h6>
@@ -37,7 +37,7 @@ const SideNavHeader = () => {
                     </li>
                     <li className>
                         <a className="sidebar-header" href="javascript:void(0)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                             <span>Profiles</span>
                             <i className="fa fa-angle-right pull-right" />
                         </a>
@@ -54,7 +54,7 @@ const SideNavHeader = () => {
                                     <span>Users Profile</span>
                                 </a>
                             </li>
-                            
+
                         </ul>
                     </li>
 
@@ -156,7 +156,7 @@ const SideNavHeader = () => {
                         </a>
 
                         <ul className="sidebar-submenu">
-                           
+
                             <li>
                                 <a href="/admins">
                                     <i className="fa fa-circle"></i>
@@ -171,8 +171,8 @@ const SideNavHeader = () => {
                                 </a>
 
                             </li>
-                           
-                            
+
+
 
                         </ul>
                     </li>
@@ -184,7 +184,7 @@ const SideNavHeader = () => {
                         </a>
 
                         <ul className="sidebar-submenu">
-                           
+
                             <li>
                                 <a href="/orders">
                                     <i className="fa fa-circle"></i>
@@ -192,15 +192,6 @@ const SideNavHeader = () => {
                                 </a>
 
                             </li>
-                            <li>
-                                <a href="#">
-                                    <i className="fa fa-circle"></i>
-                                    <span>Cr</span>
-                                </a>
-
-                            </li>
-                           
-                            
 
                         </ul>
                     </li>

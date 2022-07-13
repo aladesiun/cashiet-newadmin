@@ -40,12 +40,12 @@ const Orders = () => {
             toast.error(e.message)
         }
     }
-    const deleteProduct = async (_id) => {
+    const deleteOrder = async (_id) => {
         try {
             const response = await httpServices.delete('/orders/' + _id)
             if (response.status) {
                 setLoading(false)
-                window.location.href='/orders/filter';
+                // window.location.href='/orders';
 
 
             }
@@ -99,8 +99,8 @@ const Orders = () => {
                                             <th scope="col">Products name</th>
                                             <th scope="col">payment</th>
                                             <th scope="col">Rem..Amount</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Keywords</th>
+                                            <th scope="col">user</th>
+                                            <th scope="col">DeliveryStatus</th>
                                             <th scope="col"></th>
                                             <th scope="col"></th>
                                         </tr>
@@ -130,20 +130,25 @@ const Orders = () => {
                                             </tr>
                                         }
 
-                                        {orders && orders.map((product) => (<tr key={product._id} >
-                                            <td className="img-td" ><img src={product.image && product.image.url} alt={product._id + "product"} className="" style={{ width: '118px', height: "77px", borderRadius: '10px' }}></img></td>
+                                        {orders && orders.map((order) => (<tr key={order._id} >
+                                            {order.orderItems.map((product)=>(
+                                                  <td key={product._id}>
+                                                    <p>{product.product ?  <p className="text-success">{product.product.name}</p>: <p className="text-danger">Not available</p>}</p>
+                                                  </td>
+                                            ))}
+                                          
 
-                                            <td>{product.paymentStatus}</td>
-                                            <td>{product.remainingAmount}</td>
-                                            <td>{product.price}</td>
-                                            <td>{product._id}</td>
+                                            <td>{order.paymentStatus}</td>
+                                            <td>{order.remainingAmount}</td>
+                                            <td>{order.user ? order.user.email : 'null'}</td>
+                                            <td>{order.deliveryStatus}</td>
                                             <td>
                                                 <div className="form-button">
-                                                    <Link className="btn btn-primary" to={"/order/" + product._id}>View</Link>
+                                                    <Link className="btn btn-primary" to={"/order/" + order._id}>View</Link>
                                                     <div className="form-button m-4 flex" >
-                                                        <Link className="" to={"/order/edit/" + product._id}>
+                                                        <Link className="" to={"/order/edit/" + order._id}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></Link>
-                                                        <Link to="#" className="m-2" onClick={() => { deleteProduct(product._id) }}>
+                                                        <Link to="#" className="m-2" onClick={() => { deleteOrder(order._id) }}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                                                         </Link>
                                                     </div>
