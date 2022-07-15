@@ -9,7 +9,7 @@ const EditUser = () => {
     let { _id } = useParams();
     let url = "/profile/" + _id;
     const { data, Loading } = useGet(url);
-    const user = data ? data.user : 'dd';
+    const user = data ? data.userProfile : 'dd';
     const [userDetails, setuserDetails] = useState({})
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -52,7 +52,7 @@ const EditUser = () => {
                             <tbody>
                                 <tr>
                                     <td>
-                                        Current UserName:  {user && user.username}
+                                        Current UserName:  {user && user.user.username}
                                         <div className="form">
                                             <div className="form-group mb-3 row">
                                                 <div className="col-xl-8 col-sm-7">
@@ -64,7 +64,7 @@ const EditUser = () => {
                                 </tr>
                                 <tr>
                                     <td>
-                                        Current Email:  {user && user.email}
+                                        Current Email:  {user && user.user.email}
                                         <div className="form">
                                             <div className="form-group mb-3 row">
                                                 <div className="col-xl-8 col-sm-7">
@@ -75,7 +75,7 @@ const EditUser = () => {
                                     </td>
                                 </tr><tr>
                                     <td>
-                                        Current Role:  {user && user.role}
+                                        Current Role:  {user && user.user.role}
                                         <div className="form">
                                             <div className="form-group mb-3 row">
                                                 <div className="col-xl-8 col-sm-7">
