@@ -6,149 +6,207 @@ import axios from "axios";
 
 const EditProduct = () => {
     let { _id } = useParams();
-    const [editProduct, setEditProduct] = useState({});
-    console.log(editProduct);
-    const { data, Loading, Error } = useGet('/products/' + _id);
-    const Products = data ? data.product : " ";
+    const [product, setProduct] = useState({ });
+    const { data:categories } = useGet("/categories");
+    const [editProduct, setEditProduct] = useState({name:'' , price: "", image: '', category: "", description: "",});
+    const [newProduct, setNewProduct] = useState({name:'' , price: "", image: '', category: "", description: "",});
+    const [Loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
     let url = '/products/' + _id;
-    console.log(Products);
     let endpoint = process.env.REACT_APP_ENDPOINT;
     let token = localStorage.getItem('_ux');
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setEditProduct((prevState) => ({
+        setNewProduct((prevState) => ({
             ...prevState,
             [name]: value
         }))
     }
-    const editProducts = async () => {
+    const [keywords, setKeywords] = useState('');
+    const [keywordsArr, setKeywordsArr] = useState([]);
+    const getData=async()=>{
+        setLoading(true)
+    
+        await axios.get(endpoint + url, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+            },
+        })
+        .then((data)=>{
+            if (data.status) {
+                setLoading(false);
+                setProduct(data.data.product)
+                console.log(product);
+                // toast.success('success')
+            }
+            
+        }) 
+        .catch((error)=> {
+            setLoading(false)
+            setError(true)
+            toast.error(error.response.data.message)
+        })
+       }
+
+    const handleKeyword = () => {
+        console.log('clicked');
+        setKeywordsArr(data => [...data, keywords]);
+        setKeywords('')
+        console.log(keywordsArr);
+
+    }
+    const ImageFile = (e) => {
+        let file = e.target.files[0];
+
+        if(file){
+            setProduct((prevState) => ({
+                ...prevState,
+                image: file
+            }))
+        }
+    }
+    setTimeout(() => {
+        setEditProduct(product);
+    }, 50);
+    
+    const edit = async (e) => {
+        
+        e.preventDefault();
+        setProduct((prevState) => ({
+            ...prevState,
+            keywords: keywordsArr
+        }))
+        let formData = new FormData();
+        
+        for(var field in product){
+            if (field != 'keywords') {
+                formData.append(field, product[field]);
+            }
+        }
+        for (var i = 0; i < keywordsArr.length; i++) {
+            formData.append('keywords', keywordsArr[i]);
+          }
+        console.log(formData);
+
+        setLoading(true)
+        
         try {
-            const response = await axios.put(endpoint + url, editProduct, {
-                headers: { Authorization: 'Bearer ' + token }
+            console.log(formData);
+            const response = await axios.put(endpoint + '/products', formData, {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                }
             })
             if (response.status) {
                 toast.success('successfully added your profile');
-                // window.location.href="/profile"
+                setLoading(false)
+                console.log(formData);
+                window.location.href="/products"
 
             }
             else {
+                setLoading(false)
 
             }
         }
         catch (error) {
+            setLoading(false)
             var error_message = error.response.data.message;
             toast.error(error_message);
         }
     }
     useEffect(() => {
+        getData()
     }, [])
     return (
         <>
-            <div className="page-body ">
-                {/* Container-fluid starts*/}
-                <div className="container-fluid bg-white p-3">
-                    <div className="page-header">
-                        <h3 className="text-dark">Edit Category</h3>
+             <div className="page-body">
+            {/* Container-fluid starts*/}
+            <div className="container-fluid">
+                <div className="page-header">
+                    <div className="row">
+                        <div className="col-lg-6">
+                            <div className="page-header-left">
+                                <h3>Edit Product
+                                    <small>Cashiet Admin panel</small>
+                                </h3>
+                            </div>
+                        </div>
+                        <div className="col-lg-6">
+                            <ol className="breadcrumb pull-right">
+                                <li className="breadcrumb-item">
+                                    <a href="index.html">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
+                                    </a>
+                                </li>
+                                <li className="breadcrumb-item">Digital</li>
+                                <li className="breadcrumb-item active">Add Product</li>
+                            </ol>
+                        </div>
                     </div>
-                    <form onSubmit={(e) => { e.preventDefault(); editProducts() }}>
-                        <table className="table table-borderless">
-                            <tbody>
-                                <tr>
-                                    {Products && <div className="img-td" style={{ width: '200px', maxHeight: '200px' }}><img src={Products && Products.image.url} alt={"Products" + Products._id} className="img-fluid"></img></div>}
-
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Current Name:  {Products && Products.name}
-                                        <div className="form">
-                                            <div className="form-group mb-3 row">
-                                                <div className="col-xl-8 col-sm-7">
-                                                    <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="name" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        Current price:  {Products && Products.price}
-                                        <div className="form">
-                                            <div className="form-group mb-3 row">
-                                                <div className="col-xl-8 col-sm-7">
-                                                    <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="price" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        Current width:  {Products && Products.dimension.width}
-                                        <div className="form">
-                                            <div className="form-group mb-3 row">
-                                                <div className="col-xl-8 col-sm-7">
-                                                    <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="price" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        Current height:  {Products && Products.dimension.height}
-                                        <div className="form">
-                                            <div className="form-group mb-3 row">
-                                                <div className="col-xl-8 col-sm-7">
-                                                    <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="height" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        
-                                        <div className="form">
-                                            <div className="form-group mb-3 row">
-                                                <div className="col-xl-8 col-sm-7">
-                                                    <div className="form-floating">
-                                                        <textarea onChange={handleInputChange}  className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ "height": "100px" }} defaultValue={""} />
-                                                        <label htmlFor="floatingTextarea2 my-1">Current Description:{Products && Products.description}
-                                                        </label>
-
-                                                        {/* {Products && Products.description.length > 2 ? Products.description.substring(0,20)+"...":  Products.description} */}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Current keywords:  {Products && Products.keywords.toString()}
-                                        <div className="form">
-                                            <div className="form-group mb-3 row">
-                                                <div className="col-xl-8 col-sm-7">
-                                                    <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="price" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        Current length:  {Products && Products.dimension.length}
-                                        <div className="form">
-                                            <div className="form-group mb-3 row">
-                                                <div className="col-xl-8 col-sm-7">
-                                                    <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="height" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <button type="submit" className="btn btn-primary">Edit</button>
-                        </table>
-                    </form>
                 </div>
             </div>
+            {/* Container-fluid Ends*/}
+            {/* Container-fluid starts*/}
+            <div className="container-fluid">
+                <form onSubmit={(e) => { edit(e) }} enctype='multipart/form-data'>
+                    <div className="row product-adding">
+                        <div className="col-xl-12">
+                            <div className="card">
+                                
+                                <div className="card-body">
+                                    <div className="digital-add needs-validation">
+                                        <div className="form-group">
+                                            <label htmlFor="validationCustom01" className="col-form-label pt-0"><span>*</span>Name</label>
+                                            <input name="name" onChange={handleInputChange} value={ editProduct.name ? editProduct.name : ''} className="form-control" id="validationCustom01" type="text" required />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="validationCustom01" className="col-form-label pt-0"><span>*</span>Price</label>
+                                            <input name="price" onChange={handleInputChange}   className="form-control" id="validationCustom01" type="number" required />
+                                        </div>
+                                        <div className="form-group">
+                                            <label className="col-form-label categories-basic"><span>*</span>
+                                                Categories</label>
+                                            <select className="custom-select form-control" required name="category" onChange={handleInputChange} >
+                                                {categories.categories && categories.categories.map((category) => (
+                                                    <option value={category._id}>{category.name}</option>
+
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="validationCustom01" className="col-form-label pt-0"><span className="mx-1">Added Keywords:</span>{keywordsArr.toString()}</label>
+
+                                            <input value={keywords} onChange={e => setKeywords(e.target.value)} className="form-control" id="validationCustom01" type="text" />
+                                            <button type="button" className="btn btn-primary my-2" onClick={() => handleKeyword()}>Add</button>
+                                        </div>
+                                        <div className="form-group">
+                                            <label className="col-form-label">Description</label>
+                                            <textarea rows={5} cols={12} defaultValue={""} name="description" onChange={handleInputChange} />
+                                        </div>
+
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="validationCustom01" className="col-form-label pt-0"><span>*</span>Image file</label>
+                                        <input onChange={e => ImageFile(e)} accept="avatar/*" multiple className="form-control" id="validationCustom01" type="file" required />
+                                    </div>
+                                    <div className="form-group mb-0">
+                                        <div className="product-buttons">
+                                            <button type="submit" className="btn btn-primary">Add</button>
+                                            <button type="button" className="btn btn-light">Discard</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            {/* Container-fluid Ends*/}
+        </div>
         </>
     )
 }

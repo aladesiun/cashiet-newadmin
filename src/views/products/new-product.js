@@ -2,13 +2,15 @@ import { useState, useContext, useEffect } from "react";
 import toast from 'react-hot-toast';
 import axios from "axios";
 import useGet from "../../hooks/get";
+import { useDropzone } from "react-dropzone";
 
 const AddProduct = () => {
-    const { data } = useGet("/categories");
 
+    const { data } = useGet("/categories");
+    const { data: subcategory } = useGet("/subcategory");
     const [keywords, setKeywords] = useState('');
     const [keywordsArr, setKeywordsArr] = useState([]);
-
+    const [imagesArr, setImagesArr] = useState([]);
 
     const handleKeyword = () => {
         console.log('clicked');
@@ -17,7 +19,7 @@ const AddProduct = () => {
         console.log(keywordsArr);
 
     }
-    const [product, setProduct] = useState({ name: "", price: "", image: '', category: "", description: "",});
+    const [product, setProduct] = useState({ name: "", price: "", image: '', category: "", subCategoryOne: '', subCategoryTwo: '', description: "", productHeight: "", productWidth: "", productLength: "", quantity: "" });
     console.log(product);
     const [Loading, setLoading] = useState(false);
     let endpoint = process.env.REACT_APP_ENDPOINT;
@@ -26,13 +28,14 @@ const AddProduct = () => {
     const ImageFile = (e) => {
         let file = e.target.files[0];
 
-        if(file){
+        if (file) {
             setProduct((prevState) => ({
                 ...prevState,
                 image: file
             }))
         }
     }
+    
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -42,26 +45,26 @@ const AddProduct = () => {
         }))
     }
     const addProduct = async (e) => {
-        
+
         e.preventDefault();
         setProduct((prevState) => ({
             ...prevState,
             keywords: keywordsArr
         }))
         let formData = new FormData();
-        
-        for(var field in product){
+
+        for (var field in product) {
             if (field != 'keywords') {
                 formData.append(field, product[field]);
             }
         }
         for (var i = 0; i < keywordsArr.length; i++) {
             formData.append('keywords', keywordsArr[i]);
-          }
+        }
         console.log(formData);
 
         setLoading(true)
-        
+
         try {
             console.log(formData);
             const response = await axios.post(endpoint + '/products', formData, {
@@ -73,7 +76,7 @@ const AddProduct = () => {
                 toast.success('successfully added your profile');
                 setLoading(false)
                 console.log(formData);
-                window.location.href="/products"
+                window.location.href = "/products"
 
             }
             else {
@@ -87,6 +90,62 @@ const AddProduct = () => {
             toast.error(error_message);
         }
     }
+    const uploadGallery= async(e)=>{
+        e.preventDefault();
+        
+        let formData = new FormData();
+
+       
+        for (var i = 0; i < imagesArr.length; i++) {
+            formData.append('images', imagesArr[i]);
+        }
+        console.log(formData);
+
+        setLoading(true)
+
+        try {
+            console.log(formData);
+            const response = await axios.post(endpoint + '/product-gallery', formData, {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                }
+            })
+            if (response.status) {
+                toast.success('successfully added your profile');
+                setLoading(false)
+                console.log(formData);
+                // window.location.href = "/products"
+
+            }
+            else {
+                setLoading(false)
+
+            }
+        }
+        catch (error) {
+            setLoading(false)
+            var error_message = error.response.data.message;
+            toast.error(error_message);
+        }
+    }
+    const [files, setFiles]= useState([]);
+    const { getRootProps, getInputProps} = useDropzone({
+        accept:"image/*",
+        onDrop:(acceptedFiles)=>{
+            setFiles(
+                acceptedFiles.map(file => Object.assign(file,{
+                    preview:URL.createObjectURL(file)
+                })),
+            setImagesArr(prevState =>[...prevState, ...files])
+
+            )
+        }
+    })
+        console.log(imagesArr);
+            
+    const images = files.map(file =>(
+        <img key={file.name} src={file.preview} alt="image" style={{width:'200px', height:'200px'}}></img>
+    ))
     useEffect(() => {
     }, [])
     return (
@@ -121,20 +180,18 @@ const AddProduct = () => {
             <div className="container-fluid">
                 <form onSubmit={(e) => { addProduct(e) }} enctype='multipart/form-data'>
                     <div className="row product-adding">
-                        <div className="col-xl-12">
+                        <div className="col-xl-6">
                             <div className="card">
-                                <div className="card-header">
-                                    <h5>General</h5>
-                                </div>
+
                                 <div className="card-body">
                                     <div className="digital-add needs-validation">
                                         <div className="form-group">
                                             <label htmlFor="validationCustom01" className="col-form-label pt-0"><span>*</span>Name</label>
-                                            <input name="name" onChange={handleInputChange} className="form-control" id="validationCustom01" type="text" required />
+                                            <input name="name" onChange={handleInputChange} className="form-control" type="text" required />
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="validationCustom01" className="col-form-label pt-0"><span>*</span>Price</label>
-                                            <input name="price" onChange={handleInputChange} className="form-control" id="validationCustom01" type="number" required />
+                                            <input name="price" onChange={handleInputChange} className="form-control" type="number" required />
                                         </div>
                                         <div className="form-group">
                                             <label className="col-form-label categories-basic"><span>*</span>
@@ -148,9 +205,31 @@ const AddProduct = () => {
                                             </select>
                                         </div>
                                         <div className="form-group">
-                                            <label htmlFor="validationCustom01" className="col-form-label pt-0"><span className="mx-1">Added Keywords:</span>{keywordsArr.toString()}</label>
+                                            <label className="col-form-label categories-basic"><span>*</span>
+                                                Sub Categories 1</label>
+                                            <select className="custom-select form-control" required name="subCategoryOne" onChange={handleInputChange}>
+                                                <option value>--Select--</option>
+                                                {subcategory.subcategories && subcategory.subcategories.map((category) => (
+                                                    <option value={category._id}>{category.name}</option>
 
-                                            <input value={keywords} onChange={e => setKeywords(e.target.value)} className="form-control" id="validationCustom01" type="text" />
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className="form-group">
+                                            <label className="col-form-label categories-basic"><span>*</span>
+                                                Sub Categories 2</label>
+                                            <select className="custom-select form-control" required name="subCategoryTwo" onChange={handleInputChange}>
+                                                <option value>--Select--</option>
+                                                {subcategory.subcategories && subcategory.subcategories.map((category) => (
+                                                    <option value={category._id}>{category.name}</option>
+
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="validationCustom01" className="col-form-label pt-0"><span className="mx-1">Added Keywords <i>Atleast two</i>:</span>{keywordsArr.toString()}</label>
+
+                                            <input value={keywords} onChange={e => setKeywords(e.target.value)} className="form-control" type="text" />
                                             <button type="button" className="btn btn-primary my-2" onClick={() => handleKeyword()}>Add</button>
                                         </div>
                                         <div className="form-group">
@@ -161,7 +240,7 @@ const AddProduct = () => {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="validationCustom01" className="col-form-label pt-0"><span>*</span>Image file</label>
-                                        <input onChange={e => ImageFile(e)} accept="avatar/*" multiple className="form-control" id="validationCustom01" type="file" required />
+                                        <input onChange={e => ImageFile(e)} accept="avatar/*" multiple className="form-control" type="file" required />
                                     </div>
                                     <div className="form-group mb-0">
                                         <div className="product-buttons">
@@ -173,6 +252,37 @@ const AddProduct = () => {
                                 </div>
                             </div>
 
+                        </div>
+                        <div className="col-xl-6">
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="form-group">
+                                        <label htmlFor="validationCustom01" className="col-form-label pt-0"><span>*</span>Height</label>
+                                        <input name="productHeight" onChange={handleInputChange} className="form-control" type="number" required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="validationCustom01" className="col-form-label pt-0"><span>*</span>Width</label>
+                                        <input name="productWidth" onChange={handleInputChange} className="form-control" type="number" required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="validationCustom01" className="col-form-label pt-0"><span>*</span>Length</label>
+                                        <input name="productLength" onChange={handleInputChange} className="form-control" type="number" required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="validationCustom01" className="col-form-label pt-0"><span>*</span>quantity</label>
+                                        <input name="quantity"  className="form-control" type="number" required />
+                                    </div>
+                                    <h4 className="my-3">Product Gallery</h4>
+                                    <div className="dropArea" {...getRootProps()}>
+                                        <input name="image" {...getInputProps()}></input>
+                                        <p>Drag and drop</p>
+                                    </div>
+                                    <div className="img-preview">
+                                        {images}
+                                    </div>
+                                    <button onClick={e=> uploadGallery(e)}>upload</button>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

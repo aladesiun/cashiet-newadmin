@@ -19,7 +19,6 @@ const Layout = () => {
                                 <div className="col-md-6 footer-copyright text-start">
                                     <p className="mb-0"> Copyright 2019 © Cashiet All rights reserved.</p>
                                 </div>
-                                
                             </div>
                         </div>
                     </footer>

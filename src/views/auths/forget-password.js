@@ -46,7 +46,7 @@ const ForgetPassword = () => {
                                 <h3 className="forgot-title">Forgot Password</h3>
                                 <div className="form-group reset-input">
                                     <label>Enter your email address and we will send you a link to reset your password.</label>
-                                    <input required name="email" onChange={handleInputChange} type="email" className="form-control" placeholder="Username / Phone Number" id="exampleInputEmail1" />
+                                    <input required name="email" onChange={handleInputChange} type="email" className="form-control" placeholder="Email" id="exampleInputEmail1" />
                                 </div>
                                 <div className="form-button mt-3">
                                     <button className="btn btn-primary" type="submit">Reset Password</button>

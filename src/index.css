@@ -88,3 +88,20 @@ button{
   margin-bottom: 20px;
   border-radius: 50%;
 }
+.dropArea{
+margin-right: auto;
+margin-left: auto;
+padding: 140px 50px;
+border: 2px dashed var(--theme-color);
+border-radius: 10px;
+-o-border-image: none;
+border-image: none;
+background: rgba(0,0,0,0);
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+min-height: 150px;
+text-align: center;
+}
+.img-preview{
+  border: 2px dashed #04A134;
+}

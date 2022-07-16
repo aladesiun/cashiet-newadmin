@@ -6,6 +6,8 @@ import useGet from "../../hooks/get";
 import { Carousel } from 'react-carousel-minimal';
 
 const Product = () => {
+    var CurrencyFormat = require('react-currency-format');
+
     let { _id } = useParams();
     const { data, Loading, Error } = useGet('/products/' + _id);
     const Products = data ? data.product : '';
@@ -119,7 +121,7 @@ const Product = () => {
                                             {Products.description}
                                         </p>
                                         <div className="product-price digits mt-2">
-                                            <h4> NGN{Products.price}<del className="mx-1">#0000</del></h4>
+                                            <h4><CurrencyFormat value={Products.price} displayType={'text'} thousandSeparator={true} prefix={'₦'} /></h4>
                                         </div>
 
                                         <hr />
