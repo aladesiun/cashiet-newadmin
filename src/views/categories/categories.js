@@ -69,7 +69,6 @@ const Categories = () => {
                                     <thead>
                                         <tr>
                                             <th scope="col">Name</th>
-                                            <th scope="col">Slug</th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
@@ -101,7 +100,6 @@ const Categories = () => {
                                             <tr key={category._id} >
 
                                                 <td>{category.name}</td>
-                                                <td>{category.slug}</td>
                                                 <td>
                                                     <div className="form-button m-4 flex" >
                                                         <a href={"/category/edit/"+category._id} className="m-2" >

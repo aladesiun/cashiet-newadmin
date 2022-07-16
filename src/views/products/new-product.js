@@ -42,8 +42,11 @@ const AddProduct = () => {
 
     const handleKeyword = () => {
         console.log('clicked');
+       if (keywords.length >= 2) {
         setKeywordsArr(data => [...data, keywords]);
         setKeywords('')
+
+       }
         console.log(keywordsArr);
 
     }

@@ -14,11 +14,11 @@ const SubCategories = () => {
     const deleteCategory = async (_id) => {
         try {
             const response = await httpServices.delete('/Subcategories/' + _id)
-            if (response.data.status) {
+            if (response.status) {
                 window.location.href = '/Subcategories';
             }
             else {
-                toast.success(response.data.message)
+                toast.error('failed')
             }
         }
         catch (e) {
@@ -28,11 +28,11 @@ const SubCategories = () => {
     const deleteAllSubCategories = async (_id) => {
         try {
             const response = await httpServices.delete('/Subcategories/delete/all')
-            if (response.data.status) {
+            if (response.status) {
                 window.location.href = '/Subcategories';
             }
             else {
-                toast.success(response.data.message)
+                toast.error('failed')
             }
         }
         catch (e) {
@@ -69,7 +69,7 @@ const SubCategories = () => {
                                     <thead>
                                         <tr>
                                             <th scope="col">Name</th>
-                                            <th scope="col">Slug</th>
+                                            <th scope="col">Category</th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
@@ -85,23 +85,13 @@ const SubCategories = () => {
                                                 <td className="w-[300px] mx-auto  my-9 flex justify-between items-center ">
                                                     <Skeleton count={1} width={50} height={10} box={true} />
                                                 </td>
-                                                <td className="w-[300px] mx-auto  my-9 flex justify-between items-center ">
-                                                    <Skeleton count={1} width={50} height={10} box={true} />
-                                                </td>
-                                                <td className="w-[300px] mx-auto  my-9 flex justify-between items-center ">
-                                                    <Skeleton count={1} width={50} height={10} box={true} />
-                                                </td>
-                                                <td className="w-[300px] mx-auto  my-9 flex justify-between items-center ">
-                                                    <Skeleton count={1} width={50} height={10} box={true} />
-                                                </td>
-
                                             </tr>
                                         }
                                         {SubCategories && SubCategories.map((category) => (
                                             <tr key={category._id} >
 
                                                 <td>{category.name}</td>
-                                                <td>{category.slug}</td>
+                                                <td>{category.category}</td>
                                                 <td>
                                                     <div className="form-button m-4 flex" >
                                                         <Link to={"/category/edit/"+category._id} className="m-2" >

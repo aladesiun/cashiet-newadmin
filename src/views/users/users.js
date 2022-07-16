@@ -43,11 +43,13 @@ const Users = () => {
     const deleteUser = async (_id) => {
         try {
             const response = await httpServices.delete('/Users/' + _id)
-            if (response.data.status) {
+            if (response.status) {
+                toast.success(response.data.message)
+
                 window.location.href = '/Users';
             }
             else {
-                toast.success(response.data.message)
+                toast.error('failed to delete')
             }
         }
         catch (e) {
@@ -103,7 +105,7 @@ const Users = () => {
                                             <th scope="col">Username</th>
                                             <th scope="col">email</th>
                                             <th scope="col">role</th>
-                                            <th scope="col">Edit</th>
+                                            <th scope="col">Actions</th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
@@ -145,13 +147,12 @@ const Users = () => {
                                                         <Link to="#" className="m-2" onClick={() => { deleteUser(user._id) }}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                                                         </Link>
+                                                        <Link to={"/user/" + user._id}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                                    </Link>
                                                     </div>
                                                 </td>
-                                                <td>
-                                                    <Link to={"/user/" + user._id} className="m-2" >
-                                                        View
-                                                    </Link>
-                                                </td>
+                                              
 
 
                                             </tr>
