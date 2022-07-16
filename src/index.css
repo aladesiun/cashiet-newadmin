@@ -91,15 +91,15 @@ button{
 .dropArea{
 margin-right: auto;
 margin-left: auto;
-padding: 140px 50px;
 border: 2px dashed var(--theme-color);
+padding: 20px;
 border-radius: 10px;
 -o-border-image: none;
 border-image: none;
 background: rgba(0,0,0,0);
 -webkit-box-sizing: border-box;
 box-sizing: border-box;
-min-height: 150px;
+min-height: 100px;
 text-align: center;
 }
 .sm-dropzone{

@@ -4,6 +4,8 @@ import axios from "axios";
 import useGet from "../../hooks/get";
 import { useDropzone } from "react-dropzone";
 import Dropzone from "react-dropzone";
+import React, { useRef } from 'react';
+import { Editor } from '@tinymce/tinymce-react';
 const AddProduct = () => {
 
     const { data } = useGet("/categories");
@@ -14,21 +16,23 @@ const AddProduct = () => {
     const [productId, setProuctId] = useState(null)
     const [heroFiles, setHeroFiles] = useState([]);
     const [files, setFiles] = useState([]);
+    const editorRef = useRef(null);
     const [product, setProduct] = useState({ name: "", price: "", image: '', category: "", subCategoryOne: '', subCategoryTwo: '', description: "", productHeight: "", productWidth: "", productLength: "", quantity: "" });
     const [Loading, setLoading] = useState(false);
     let endpoint = process.env.REACT_APP_ENDPOINT;
     let token = localStorage.getItem('_ux');
+    console.log(product);
     useEffect(() => {
         if (productId != null) {
-          uploadGallery()
-            
+            uploadGallery()
+
         }
     }, [productId])
 
     useEffect(() => {
         if (imagesArr.length < 5) {
             setImagesArr(prevState => [...imagesArr, ...files])
-        }else{
+        } else {
             toast.error('you can only upload up to 5 product images');
             return;
         }
@@ -40,13 +44,22 @@ const AddProduct = () => {
         }))
     }, [heroFiles])
 
+    const handleDescription = ()=>{
+        if (editorRef.current) {
+            let desc = editorRef.current.getContent();
+            setProduct((prevState) => ({
+                ...prevState,
+                description: desc
+            }))
+        }
+    }
     const handleKeyword = () => {
         console.log('clicked');
-       if (keywords.length >= 2) {
-        setKeywordsArr(data => [...data, keywords]);
-        setKeywords('')
+        if (keywords.length >= 2) {
+            setKeywordsArr(data => [...data, keywords]);
+            setKeywords('')
 
-       }
+        }
         console.log(keywordsArr);
 
     }
@@ -58,7 +71,7 @@ const AddProduct = () => {
         }))
     }
     const uploadGallery = async () => {
-      
+
 
         let formData = new FormData();
         formData.append('productId', productId)
@@ -97,7 +110,7 @@ const AddProduct = () => {
         }
     }
     const addProduct = async (e) => {
-        if (imagesArr.length <3) {
+        if (imagesArr.length < 3) {
             toast.error("Gallery pictures must be greater than 3");
             return;
         }
@@ -165,7 +178,7 @@ const AddProduct = () => {
     })
 
     const images = imagesArr.map(file => (
-        <img key={file.name} src={file.preview} alt="image" style={{ width: '200px', height: '200px' }}></img>
+        <img key={file.name} src={file.preview} alt="image" style={{ width: '140px', height: '14ß0px' }}></img>
         // <img style={{ width: "200px", height: "200px", margin: "0", display: "block" }} src={ file.preview ?? "https://via.placeholder.com/200x200"} alt="Hero Image" />
 
     ))
@@ -232,7 +245,7 @@ const AddProduct = () => {
                                             <select className="custom-select form-control" required name="subCategoryOne" onChange={handleInputChange}>
                                                 <option value>--Select--</option>
                                                 {subcategory.subcategories && subcategory.subcategories.map((category) => (
-                                                    <option key={category._id}  value={category._id}>{category.name}</option>
+                                                    <option key={category._id} value={category._id}>{category.name}</option>
 
                                                 ))}
                                             </select>
@@ -243,7 +256,7 @@ const AddProduct = () => {
                                             <select className="custom-select form-control" required name="subCategoryTwo" onChange={handleInputChange}>
                                                 <option value>--Select--</option>
                                                 {subcategory.subcategories && subcategory.subcategories.map((category) => (
-                                                    <option key={category._id}  value={category._id}>{category.name}</option>
+                                                    <option key={category._id} value={category._id}>{category.name}</option>
 
                                                 ))}
                                             </select>
@@ -255,8 +268,28 @@ const AddProduct = () => {
                                             <button type="button" className="btn btn-primary my-2" onClick={() => handleKeyword()}>Add</button>
                                         </div>
                                         <div className="form-group">
-                                            <label className="col-form-label">Description</label>
-                                            <textarea rows={5} cols={12} defaultValue={""} name="description" onChange={handleInputChange} />
+                                            <label>Description</label>
+                                            <Editor
+                                            apiKey='z04rnfohe8q4u1alj8mdf1o25k5xzjdyfk37qd9bwbt2g0oz' 
+                                            name="description" 
+                                            onKeyUp={e=>handleDescription()}
+                                                onInit={(evt, editor) => editorRef.current = editor}
+                                                initialValue=""
+                                                init={{
+                                                    height: 500,
+                                                    menubar: false,
+                                                    plugins: [
+                                                        'advlist autolink lists link image charmap print preview anchor',
+                                                        'searchreplace visualblocks code fullscreen',
+                                                        'insertdatetime media table paste code help wordcount'
+                                                    ],
+                                                    toolbar: 'undo redo | formatselect | ' +
+                                                        'bold italic backcolor | alignleft aligncenter ' +
+                                                        'alignright alignjustify | bullist numlist outdent indent | ' +
+                                                        'removeformat | help',
+                                                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                                                }}
+                                            />
                                         </div>
 
                                     </div>
@@ -269,7 +302,7 @@ const AddProduct = () => {
                                                     preview: URL.createObjectURL(file)
                                                 }))
                                             )
-                                        }} name="heroImage" multiple={false} maxSize={1000000} accept="images"> 
+                                        }} name="heroImage" multiple={false} maxSize={1000000} accept="images">
                                             {({ getRootProps, getInputProps }) => (
                                                 <div {...getRootProps({ className: 'dropzone' })}>
                                                     <input {...getInputProps()} />
@@ -284,7 +317,7 @@ const AddProduct = () => {
 
                                     <img style={{ width: "200px", height: "200px", margin: "0", display: "block" }} src={heroFiles.length > 0 ? heroFiles[0].preview : "https://via.placeholder.com/200x200"} alt="Hero Image" />
 
-                                   
+
 
                                 </div>
                             </div>
