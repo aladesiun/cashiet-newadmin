@@ -29,7 +29,8 @@ const AddProduct = () => {
         if (imagesArr.length < 5) {
             setImagesArr(prevState => [...imagesArr, ...files])
         }else{
-            alert('you can only upload up to 5 product images')
+            toast.error('you can only upload up to 5 product images');
+            return;
         }
     }, [files])
     useEffect(() => {
@@ -93,6 +94,10 @@ const AddProduct = () => {
         }
     }
     const addProduct = async (e) => {
+        if (imagesArr.length <3) {
+            toast.error("Gallery pictures must be greater than 3");
+            return;
+        }
         setLoading(true)
 
         e.preventDefault();

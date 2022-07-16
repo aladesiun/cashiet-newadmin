@@ -10,24 +10,25 @@ const Product = () => {
 
     let { _id } = useParams();
     const { data, Loading, Error } = useGet('/products/' + _id);
-    const { data:gallery, Error:galleryError } = useGet('/product-gallery/' + _id);
-    console.log(gallery);
     const Products = data ? data.product : '';
-    const ProductsGallery = data.gallery ? data.gallery.images : [];
-    const dataCarousel = ProductsGallery ? ProductsGallery.map((image) => image.url) : '';
-    const CarouselData = [{ image: dataCarousel, caption: "Scotland" }, { image: Products ? Products.image.url : '' }]
-    console.log(Products);
+    const ProductsGallery = Products ? Products.gallery.images.map((image) => image.url) : [];
+    // const dataCarousel = ;
+    const AddKeyToArr = (item, index) => {
+        var fullname = {image: item};
+        return fullname;
+      }
+      var output = ProductsGallery.map(AddKeyToArr);
+    const CarouselData = [...output, { image: Products ? Products.image.url : '' }]
     console.log(CarouselData);
-    console.log(dataCarousel);
+    console.log(ProductsGallery);
     const captionStyle = {
         fontSize: '2em',
         fontWeight: 'bold',
-    }
+    } 
     const slideNumberStyle = {
         fontSize: '20px',
         fontWeight: 'bold',
     }
-
     useEffect(() => {
     }, [])
     return (
@@ -94,15 +95,14 @@ const Product = () => {
                                         width="850px"
                                         height="500px"
                                         radius="10px"
-                                        slideNumber={true}
                                         slideNumberStyle={slideNumberStyle}
                                         captionPosition="bottom"
                                         dots={true}
                                         automatic={true}
                                         pauseIconColor="white"
                                         pauseIconSize="40px"
-                                        slideBackgroundColor="black"
-                                        slideImageFit="cover"
+                                        slideBackgroundColor=""
+                                        slideImageFit="fit"
                                         thumbnails={true}
                                         thumbnailWidth="100px"
                                         style={{
