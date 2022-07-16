@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import axios from "axios";
 import useGet from "../../hooks/get";
 import { useDropzone } from "react-dropzone";
-
+import Dropzone from "react-dropzone";
 const AddProduct = () => {
 
     const { data } = useGet("/categories");
@@ -11,6 +11,33 @@ const AddProduct = () => {
     const [keywords, setKeywords] = useState('');
     const [keywordsArr, setKeywordsArr] = useState([]);
     const [imagesArr, setImagesArr] = useState([]);
+    const [productId, setProuctId] = useState(null)
+    const [heroFiles, setHeroFiles] = useState([]);
+    const [files, setFiles] = useState([]);
+    const [product, setProduct] = useState({ name: "", price: "", image: '', category: "", subCategoryOne: '', subCategoryTwo: '', description: "", productHeight: "", productWidth: "", productLength: "", quantity: "" });
+    const [Loading, setLoading] = useState(false);
+    let endpoint = process.env.REACT_APP_ENDPOINT;
+    let token = localStorage.getItem('_ux');
+    useEffect(() => {
+        if (productId != null) {
+          uploadGallery()
+            
+        }
+    }, [productId])
+
+    useEffect(() => {
+        if (imagesArr.length < 5) {
+            setImagesArr(prevState => [...imagesArr, ...files])
+        }else{
+            alert('you can only upload up to 5 product images')
+        }
+    }, [files])
+    useEffect(() => {
+        setProduct((prevState) => ({
+            ...prevState,
+            image: heroFiles[0]
+        }))
+    }, [heroFiles])
 
     const handleKeyword = () => {
         console.log('clicked');
@@ -19,24 +46,6 @@ const AddProduct = () => {
         console.log(keywordsArr);
 
     }
-    const [product, setProduct] = useState({ name: "", price: "", image: '', category: "", subCategoryOne: '', subCategoryTwo: '', description: "", productHeight: "", productWidth: "", productLength: "", quantity: "" });
-    console.log(product);
-    const [Loading, setLoading] = useState(false);
-    let endpoint = process.env.REACT_APP_ENDPOINT;
-    let token = localStorage.getItem('_ux');
-
-    const ImageFile = (e) => {
-        let file = e.target.files[0];
-
-        if (file) {
-            setProduct((prevState) => ({
-                ...prevState,
-                image: file
-            }))
-        }
-    }
-    
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setProduct((prevState) => ({
@@ -44,58 +53,13 @@ const AddProduct = () => {
             [name]: value
         }))
     }
-    const addProduct = async (e) => {
+    const uploadGallery = async () => {
+      
 
-        e.preventDefault();
-        setProduct((prevState) => ({
-            ...prevState,
-            keywords: keywordsArr
-        }))
         let formData = new FormData();
+        formData.append('productId', productId)
 
-        for (var field in product) {
-            if (field != 'keywords') {
-                formData.append(field, product[field]);
-            }
-        }
-        for (var i = 0; i < keywordsArr.length; i++) {
-            formData.append('keywords', keywordsArr[i]);
-        }
-        console.log(formData);
 
-        setLoading(true)
-
-        try {
-            console.log(formData);
-            const response = await axios.post(endpoint + '/products', formData, {
-                headers: {
-                    Authorization: 'Bearer ' + token,
-                }
-            })
-            if (response.status) {
-                toast.success('successfully added your profile');
-                setLoading(false)
-                console.log(formData);
-                window.location.href = "/products"
-
-            }
-            else {
-                setLoading(false)
-
-            }
-        }
-        catch (error) {
-            setLoading(false)
-            var error_message = error.response.data.message;
-            toast.error(error_message);
-        }
-    }
-    const uploadGallery= async(e)=>{
-        e.preventDefault();
-        
-        let formData = new FormData();
-
-       
         for (var i = 0; i < imagesArr.length; i++) {
             formData.append('images', imagesArr[i]);
         }
@@ -111,7 +75,55 @@ const AddProduct = () => {
                 }
             })
             if (response.status) {
-                toast.success('successfully added your profile');
+                toast.success('successfully added gallery');
+                setLoading(false)
+
+                // window.location.href = "/products"
+
+            }
+            else {
+                setLoading(false)
+
+            }
+        }
+        catch (error) {
+            setLoading(false)
+            var error_message = error.response.data.message;
+            toast.error(error_message);
+        }
+    }
+    const addProduct = async (e) => {
+        setLoading(true)
+
+        e.preventDefault();
+
+        setProduct((prevState) => ({
+            ...prevState,
+            keywords: keywordsArr
+        }))
+        let formData = new FormData();
+
+        for (var field in product) {
+            if (field != 'keywords') {
+                formData.append(field, product[field]);
+            }
+        }
+        for (var i = 0; i < keywordsArr.length; i++) {
+            formData.append('keywords', keywordsArr[i]);
+        }
+
+
+        try {
+            console.log(formData);
+            const response = await axios.post(endpoint + '/products', formData, {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                }
+            })
+            if (response.status) {
+                setProuctId(response.data.productId)
+                alert(response.data.productId)
+                toast.success('successfully added a new product');
                 setLoading(false)
                 console.log(formData);
                 // window.location.href = "/products"
@@ -128,26 +140,28 @@ const AddProduct = () => {
             toast.error(error_message);
         }
     }
-    const [files, setFiles]= useState([]);
-    const { getRootProps, getInputProps} = useDropzone({
-        accept:"image/*",
-        onDrop:(acceptedFiles)=>{
-            setFiles(
-                acceptedFiles.map(file => Object.assign(file,{
-                    preview:URL.createObjectURL(file)
-                })),
-            setImagesArr(prevState =>[...prevState, ...files])
 
-            )
-        }
+
+    const { getRootProps, getInputProps } = useDropzone({
+        accept: "image/*",
+        onDrop: (acceptedFiles) => {
+            setFiles(acceptedFiles.map(file => Object.assign(file, {
+                preview: URL.createObjectURL(file)
+            })))
+        },
+        maxSize: 1000000,
+        maxFiles: 5,
+        onError: ((error) => {
+            alert(error)
+        })
     })
-        console.log(imagesArr);
-            
-    const images = files.map(file =>(
-        <img key={file.name} src={file.preview} alt="image" style={{width:'200px', height:'200px'}}></img>
+
+    const images = imagesArr.map(file => (
+        <img key={file.name} src={file.preview} alt="image" style={{ width: '200px', height: '200px' }}></img>
+        // <img style={{ width: "200px", height: "200px", margin: "0", display: "block" }} src={ file.preview ?? "https://via.placeholder.com/200x200"} alt="Hero Image" />
+
     ))
-    useEffect(() => {
-    }, [])
+
     return (
         <div className="page-body">
             {/* Container-fluid starts*/}
@@ -178,7 +192,7 @@ const AddProduct = () => {
             {/* Container-fluid Ends*/}
             {/* Container-fluid starts*/}
             <div className="container-fluid">
-                <form onSubmit={(e) => { addProduct(e) }} enctype='multipart/form-data'>
+                <form onSubmit={e => { e.preventDefault(); addProduct(e) }} enctype='multipart/form-data'>
                     <div className="row product-adding">
                         <div className="col-xl-6">
                             <div className="card">
@@ -199,7 +213,7 @@ const AddProduct = () => {
                                             <select className="custom-select form-control" required name="category" onChange={handleInputChange}>
                                                 <option value>--Select--</option>
                                                 {data.categories && data.categories.map((category) => (
-                                                    <option value={category._id}>{category.name}</option>
+                                                    <option key={category._id} value={category._id}>{category.name}</option>
 
                                                 ))}
                                             </select>
@@ -210,7 +224,7 @@ const AddProduct = () => {
                                             <select className="custom-select form-control" required name="subCategoryOne" onChange={handleInputChange}>
                                                 <option value>--Select--</option>
                                                 {subcategory.subcategories && subcategory.subcategories.map((category) => (
-                                                    <option value={category._id}>{category.name}</option>
+                                                    <option key={category._id}  value={category._id}>{category.name}</option>
 
                                                 ))}
                                             </select>
@@ -221,7 +235,7 @@ const AddProduct = () => {
                                             <select className="custom-select form-control" required name="subCategoryTwo" onChange={handleInputChange}>
                                                 <option value>--Select--</option>
                                                 {subcategory.subcategories && subcategory.subcategories.map((category) => (
-                                                    <option value={category._id}>{category.name}</option>
+                                                    <option key={category._id}  value={category._id}>{category.name}</option>
 
                                                 ))}
                                             </select>
@@ -239,15 +253,30 @@ const AddProduct = () => {
 
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="validationCustom01" className="col-form-label pt-0"><span>*</span>Image file</label>
-                                        <input onChange={e => ImageFile(e)} accept="avatar/*" multiple className="form-control" type="file" required />
+                                        <label htmlFor="validationCustom01" className="col-form-label pt-0"><span>*</span>Image file <i className="text-danger">Not more than 1mb</i></label>
+                                        <Dropzone onDrop={(acceptedFiles) => {
+                                            console.log(acceptedFiles);
+                                            setHeroFiles(
+                                                acceptedFiles.map(file => Object.assign(file, {
+                                                    preview: URL.createObjectURL(file)
+                                                }))
+                                            )
+                                        }} name="heroImage" multiple={false} maxSize={1000000} accept="images"> 
+                                            {({ getRootProps, getInputProps }) => (
+                                                <div {...getRootProps({ className: 'dropzone' })}>
+                                                    <input {...getInputProps()} />
+                                                    <span style={{ fontSize: ".8rem" }} className="d-flex sm-dropzone">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-plus"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+                                                    </span>
+
+                                                </div>
+                                            )}
+                                        </Dropzone>
                                     </div>
-                                    <div className="form-group mb-0">
-                                        <div className="product-buttons">
-                                            <button type="submit" className="btn btn-primary">Add</button>
-                                            <button type="button" className="btn btn-light">Discard</button>
-                                        </div>
-                                    </div>
+
+                                    <img style={{ width: "200px", height: "200px", margin: "0", display: "block" }} src={heroFiles.length > 0 ? heroFiles[0].preview : "https://via.placeholder.com/200x200"} alt="Hero Image" />
+
+                                   
 
                                 </div>
                             </div>
@@ -270,17 +299,24 @@ const AddProduct = () => {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="validationCustom01" className="col-form-label pt-0"><span>*</span>quantity</label>
-                                        <input name="quantity"  className="form-control" type="number" required />
+                                        <input name="quantity" onChange={handleInputChange} className="form-control" type="number" required />
                                     </div>
-                                    <h4 className="my-3">Product Gallery</h4>
+                                    <h4 className="my-3">Product Gallery <i className="text-danger">*Not more than 1mb</i></h4>
+                                    <p className="my-3"> <i className="text-danger">*Upload maximum of 5 minimum of 3</i></p>
                                     <div className="dropArea" {...getRootProps()}>
                                         <input name="image" {...getInputProps()}></input>
                                         <p>Drag and drop</p>
+                                        <div className="img-preview p-3 rounded">
+                                            {images}
+                                        </div>
                                     </div>
-                                    <div className="img-preview">
-                                        {images}
+
+                                    {/* <button onClick={e => uploadGallery(e)}>upload</button> */}
+                                    <div className="form-group mb-0 my-2">
+                                        <div className="product-buttons">
+                                            <button type="submit" className="btn btn-primary ">{!Loading ? 'Add Product' : 'Adding..'}</button>
+                                        </div>
                                     </div>
-                                    <button onClick={e=> uploadGallery(e)}>upload</button>
                                 </div>
                             </div>
                         </div>

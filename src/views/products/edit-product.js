@@ -17,7 +17,7 @@ const EditProduct = () => {
     let token = localStorage.getItem('_ux');
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setNewProduct((prevState) => ({
+        setEditProduct((prevState) => ({
             ...prevState,
             [name]: value
         }))
@@ -34,8 +34,10 @@ const EditProduct = () => {
         })
         .then((data)=>{
             if (data.status) {
+                let result = data.data.product
                 setLoading(false);
                 setProduct(data.data.product)
+                setEditProduct({name:result.name, price:result.price, category:result.category})
                 console.log(product);
                 // toast.success('success')
             }
@@ -65,9 +67,9 @@ const EditProduct = () => {
             }))
         }
     }
-    setTimeout(() => {
-        setEditProduct(product);
-    }, 50);
+    // setTimeout(() => {
+    //     setEditProduct(product);
+    // }, 50);
     
     const edit = async (e) => {
         
@@ -162,12 +164,13 @@ const EditProduct = () => {
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="validationCustom01" className="col-form-label pt-0"><span>*</span>Price</label>
-                                            <input name="price" onChange={handleInputChange}   className="form-control" id="validationCustom01" type="number" required />
+                                            <input name="price" onChange={handleInputChange}   value={ editProduct.price ? editProduct.price : ''} className="form-control" id="validationCustom01" type="number" required />
                                         </div>
                                         <div className="form-group">
                                             <label className="col-form-label categories-basic"><span>*</span>
                                                 Categories</label>
                                             <select className="custom-select form-control" required name="category" onChange={handleInputChange} >
+                                                <option value={ editProduct.category ? editProduct.category : ''}></option>
                                                 {categories.categories && categories.categories.map((category) => (
                                                     <option value={category._id}>{category.name}</option>
 

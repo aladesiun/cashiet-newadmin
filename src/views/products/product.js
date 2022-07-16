@@ -10,6 +10,8 @@ const Product = () => {
 
     let { _id } = useParams();
     const { data, Loading, Error } = useGet('/products/' + _id);
+    const { data:gallery, Error:galleryError } = useGet('/product-gallery/' + _id);
+    console.log(gallery);
     const Products = data ? data.product : '';
     const ProductsGallery = data.gallery ? data.gallery.images : [];
     const dataCarousel = ProductsGallery ? ProductsGallery.map((image) => image.url) : '';
@@ -128,6 +130,15 @@ const Product = () => {
                                         <h6 className="product-title size-text">
                                             Dimensions:
                                         </h6>
+                                        <div>
+                                            width:{Products.dimension.width}
+                                        </div>
+                                        <div>
+                                            length:{Products.dimension.length}
+                                        </div>
+                                        <div>
+                                            width:{Products.dimension.width}
+                                        </div>
                                         <div>
                                             width:{Products.dimension.width}
                                         </div>

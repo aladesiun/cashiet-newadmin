@@ -9,6 +9,7 @@ import dateFormat, { masks } from "dateformat";
 
 
 const Products = () => {
+   
     var CurrencyFormat = require('react-currency-format');
     const now = new Date();
     let navigate = useNavigate()
@@ -45,23 +46,27 @@ const Products = () => {
         }
     }
     const deleteProduct = async (_id) => {
-        try {
-            const response = await httpServices.delete('/order/' + _id)
-            if (response.status) {
+        
+            try {
+                const response = await httpServices.delete('/products/' + _id)
+                if (response.status) {
+                    setLoading(false)
+                    // window.location.href = '/products';
+                    toast.success()
+    
+    
+                }
+                else {
+                    toast.error('failed to delete')
+                }
+            }
+            catch (e) {
                 setLoading(false)
-                window.location.href = '/products';
-
-
+                toast.error(e.message)
+    
             }
-            else {
-                toast.success(response.data.message)
-            }
-        }
-        catch (e) {
-            setLoading(false)
-            toast.error(e.message)
-
-        }
+        
+       
     }
     useEffect(() => {
         getProducts()
@@ -137,18 +142,18 @@ const Products = () => {
                                             <td className="img-td" ><img src={product.image && product.image.url} alt={product._id + "product"} className="" style={{ width: '118px', height: "77px", borderRadius: '10px' }}></img></td>
 
                                             <td>{product.name}</td>
-                                            <td>{product.categories ?? 'not set'}</td>
+                                            <td>{product.category? product.category.name : 'not set'}</td>
                                             <td><CurrencyFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'₦'} /></td>
-                                            <td>{product._id}</td>
+                                            <td>{product.sku ?? 'not set'}</td>
                                             <td>
-                                                <div className="form-button d-flex">
+                                                <div className="form-button d-flex flex-nowrap  align-items-center">
                                                     <Link to={"/product/" + product._id}>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></Link>
-                                                    <div className="mx-3 flex" >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></Link>
+                                                    <div className="mx-3 d-flex flex-nowrap align-items-center" >
                                                         <Link className="" to={"/product/edit/" + product._id}>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></Link>
-                                                        <Link to="#" className="m-2" onClick={() => { deleteProduct(product._id) }}>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></Link>
+                                                        <Link to="#" className="m-2" onClick={() => {deleteProduct(product._id) }}>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                                                         </Link>
                                                     </div>
                                                 </div>

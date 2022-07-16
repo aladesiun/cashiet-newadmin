@@ -43,6 +43,8 @@ export default {
         });
     },
     delete(url){
+        // confirm("Are you sure?. this action can")
+        if (window.confirm("are you sure")) {
         return new Promise((resolve, reject) => {
             axios.delete(this.state.endpoint + url, {
                 headers: {
@@ -56,6 +58,8 @@ export default {
                 reject(error);
             })
         });
+    }
+    return 'failed to delete';
     },
 
     handleError(){
