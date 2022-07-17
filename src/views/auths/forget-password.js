@@ -37,10 +37,14 @@ const ForgetPassword = () => {
     }
     return (
         <div className="flex justify-content-center forgot-cont">
-
+ <div className="logo-wrapper">
+                                    <img className="d-none d-lg-block blur-up lazyloaded" src={require('../../assets/images/index.png')} alt=""></img>
+                                </div>
             <div className="card tab2-card card-login mb-0">
+                
                 <div className="card-body">
                     <div className="tab-content" id="top-tabContent">
+                        
                         <div className="tab-pane fade show active" id="top-profile" role="tabpanel">
                             <form className="form-horizontal reset-pass auth-form" onSubmit={(e)=>{e.preventDefault(); resetPassword()}}>
                                 <h3 className="forgot-title">Forgot Password</h3>

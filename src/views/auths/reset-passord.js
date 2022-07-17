@@ -3,12 +3,13 @@ import axios from 'axios'
 import toast from "react-hot-toast";
 import { useSearchParams } from "react-router-dom";
 const ResetPassword = () => {
-    const [searchParams, setSearchParams]= useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const resetToken = searchParams.get('token');
-    const userId= searchParams.get('user');
+    const userId = searchParams.get('user');
     let endpoint = process.env.REACT_APP_ENDPOINT;
     let token = process.env.REACT_APP_ADMIN_TOKEN;
-    const [password, setPassword] = useState({password:"", token:resetToken, userId:userId});
+    const [password, setPassword] = useState({ password: "", token: resetToken, userId: userId });
+    const [confirmPassword, setConfirmPassword] = useState()
     console.log(password);
     const [Loading, setLoading] = useState(false);
     const handleInputChange = (e) => {
@@ -18,8 +19,9 @@ const ResetPassword = () => {
             [name]: value.replace(/\s/g, '')
         }))
     }
-    const resetPassword= async ()=>{
-        setLoading(true)
+    const resetPassword = async () => {
+        if (password.password == confirmPassword) {
+            setLoading(true)
         try {
             const response = await axios.post(endpoint + '/password/reset', password, {
                 headers: { Authorization: 'Bearer ' + token }
@@ -27,11 +29,11 @@ const ResetPassword = () => {
             if (response.status) {
                 toast.success(response.message);
                 setLoading(false)
-                window.location.href="/signin"
+                window.location.href = "/signin"
 
             }
             else {
-               
+
             }
         }
         catch (error) {
@@ -39,19 +41,29 @@ const ResetPassword = () => {
             var error_message = error.response.data.message;
             toast.error(error_message);
         }
+        } else{
+            toast.error('passwords do not match')
+        }
+        
     }
     return (
         <div className="flex justify-content-center forgot-cont">
-
+            <div className="logo-wrapper">
+                <img className="d-none d-lg-block blur-up lazyloaded" src={require('../../assets/images/index.png')} alt=""></img>
+            </div>
             <div className="card tab2-card card-login mb-0">
                 <div className="card-body">
                     <div className="tab-content" id="top-tabContent">
                         <div className="tab-pane fade show active" id="top-profile" role="tabpanel">
-                            <form className="form-horizontal reset-pass auth-form" onSubmit={(e)=>{e.preventDefault(); resetPassword()}}>
+                            <form className="form-horizontal reset-pass auth-form" onSubmit={(e) => { e.preventDefault(); resetPassword() }}>
                                 <h3 className="forgot-title">Set New Password</h3>
                                 <div className="form-group reset-input">
                                     <label>New Password</label>
-                                    <input required name="password" onChange={handleInputChange} type="text" className="form-control" placeholder="Username / Phone Number" id="exampleInputEmail1" />
+                                    <input required name="password" onChange={handleInputChange} type="text" className="form-control" placeholder="******" id="exampleInputEmail1" />
+                                </div>
+                                <div className="form-group reset-input">
+                                    <label>Confirm Password</label>
+                                    <input required  onChange={e=> setConfirmPassword(e.target.value)} type="text" className="form-control" placeholder="******" id="exampleInputEmail1" />
                                 </div>
                                 <div className="form-button mt-3">
                                     <button className="btn btn-primary" type="submit">{Loading ? 'Reseting' : 'Reset Password'}</button>

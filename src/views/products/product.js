@@ -11,7 +11,7 @@ const Product = () => {
     let { _id } = useParams();
     const { data, Loading, Error } = useGet('/products/' + _id);
     const Products = data ? data.product : '';
-    const ProductsGallery = Products ? Products.gallery.images.map((image) => image.url) : [];
+    const ProductsGallery = Products.gallery ? Products.gallery.images.map((image) => image.url) : [];
     // const dataCarousel = ;
     const AddKeyToArr = (item, index) => {
         var fullname = {image: item};
@@ -101,7 +101,7 @@ const Product = () => {
                                         automatic={true}
                                         pauseIconColor="white"
                                         pauseIconSize="40px"
-                                        slideBackgroundColor=""
+                                        slideBackgroundColor="black"
                                         slideImageFit="fit"
                                         thumbnails={true}
                                         thumbnailWidth="100px"
