@@ -46,7 +46,7 @@ const Admins = () => {
                     <div className="card height-equal">
 
                         <div className="card-header">
-                            <h5>Users</h5>
+                            <h5>Admins</h5>
                             <div className="card-header-right">
                                 <ul className="list-unstyled card-option">
                                     <li><i className="icofont icofont-simple-left"></i></li>
@@ -129,7 +129,7 @@ const Admins = () => {
                             </div>
                             {!Users && <>
 
-                                {!Loading && <div className="text-center w-full my-3 text-dangers"><h3>No Users At This Moment</h3></div>}
+                                {!Loading && <div className="text-center w-full my-3 text-dangers"><h3>No Admins At This Moment</h3></div>}
 
                             </>}
                             <div className="code-box-copy">

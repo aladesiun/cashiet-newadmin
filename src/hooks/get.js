@@ -5,6 +5,7 @@ import axios from "axios";
 const useGet = (url) =>{
     let endpoint = process.env.REACT_APP_ENDPOINT;
     let token = localStorage.getItem('_ux');
+    let superToken = process.env.REACT_APP_TOKEN;
     const [data, setData] = useState({});
     const [Loading, setLoading] = useState(false);
     const [Error, setError] = useState(false);

@@ -52,7 +52,7 @@ const Products = () => {
                 if (response.status) {
                     setLoading(false)
                     // window.location.href = '/products';
-                    toast.success()
+                    toast.success(response.message)
     
     
                 }

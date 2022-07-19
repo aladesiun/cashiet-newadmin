@@ -70,7 +70,7 @@ const CreateProfile = () => {
                                 <div className="col-xl-8 col-sm-7">
 
                                 <select className="form-control" id="validationCustom01" required onChange={handleInputChange} name="gender" >
-                                    <option value="">--select--</option>
+                                    <option value="" disabled>--select--</option>
                                     <option value="male">male</option>
                                     <option value="female">female</option>
                                 </select>

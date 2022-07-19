@@ -10,7 +10,8 @@ import CreateProfile from "./create-profile";
 const Profile = () => {
     const { data, Loading, Error } = useGet('/profile/user');
     const profile = data ? data.userProfile : null;
-    const [editprofile, setEditProfile] =  useState({})
+    const [editprofile, setEditProfile] =  useState(profile)
+    console.log(editprofile);
     let endpoint = process.env.REACT_APP_ENDPOINT;
     console.log(editprofile);
     let token = localStorage.getItem("_ux");
@@ -267,12 +268,6 @@ const Profile = () => {
                                                         </tbody>
                                                         <button type="submit" className="btn btn-primary">Edit</button>
                                                     </table>
-
-                                                    <div className="account-setting deactivate-account">
-                                                        <h5 className="f-w-600">Delete Account</h5>
-
-                                                        <button type="button" className="btn btn-primary">Delete Account</button>
-                                                    </div>
                                                 </form>
                                             </div>
                                         </div>

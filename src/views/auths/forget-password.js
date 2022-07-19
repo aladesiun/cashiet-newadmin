@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 const ForgetPassword = () => {
     let endpoint = process.env.REACT_APP_ENDPOINT;
     let token = process.env.REACT_APP_ADMIN_TOKEN;
-    const [email, setEmail] = useState({email:""});
+    const [email, setEmail] = useState({ email: "" });
     const [Loading, setLoading] = useState(false);
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -13,7 +13,7 @@ const ForgetPassword = () => {
             [name]: value.replace(/\s/g, '')
         }))
     }
-    const resetPassword= async ()=>{
+    const resetPassword = async () => {
         setLoading(true)
         try {
             const response = await axios.post(endpoint + '/password', email, {
@@ -26,7 +26,7 @@ const ForgetPassword = () => {
 
             }
             else {
-               
+
             }
         }
         catch (error) {
@@ -37,16 +37,16 @@ const ForgetPassword = () => {
     }
     return (
         <div className="flex justify-content-center forgot-cont">
- <div className="logo-wrapper">
-                                    <img className="d-none d-lg-block blur-up lazyloaded" src={require('../../assets/images/index.png')} alt=""></img>
-                                </div>
+            <div className="logo-wrapper">
+                <img className="d-none d-lg-block blur-up lazyloaded" src={require('../../assets/images/index.png')} alt=""></img>
+            </div>
             <div className="card tab2-card card-login mb-0">
-                
+
                 <div className="card-body">
                     <div className="tab-content" id="top-tabContent">
-                        
+
                         <div className="tab-pane fade show active" id="top-profile" role="tabpanel">
-                            <form className="form-horizontal reset-pass auth-form" onSubmit={(e)=>{e.preventDefault(); resetPassword()}}>
+                            <form className="form-horizontal reset-pass auth-form" onSubmit={(e) => { e.preventDefault(); resetPassword() }}>
                                 <h3 className="forgot-title">Forgot Password</h3>
                                 <div className="form-group reset-input">
                                     <label>Enter your email address and we will send you a link to reset your password.</label>

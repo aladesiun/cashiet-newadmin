@@ -4,27 +4,20 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import useGet from "../../hooks/get";
 import { Carousel } from 'react-carousel-minimal';
-
+import ReactHtmlParser from "react-html-parser";
 const Product = () => {
     var CurrencyFormat = require('react-currency-format');
 
     let { _id } = useParams();
     const { data, Loading, Error } = useGet('/products/' + _id);
     const Products = data ? data.product : '';
-    const ProductsGallery = Products.gallery ? Products.gallery.images.map((image) => image.url) : [];
-    // const dataCarousel = ;
+    const ProductsGallery = Products? Products.gallery.images.map((image) => image.url) : [];
     const AddKeyToArr = (item, index) => {
         var fullname = {image: item};
         return fullname;
       }
       var output = ProductsGallery.map(AddKeyToArr);
-    const CarouselData = [...output, { image: Products ? Products.image.url : '' }]
-    console.log(CarouselData);
-    console.log(ProductsGallery);
-    const captionStyle = {
-        fontSize: '2em',
-        fontWeight: 'bold',
-    } 
+    const CarouselData = [{ image: Products ? Products.image.url : '' }, ...output, ]
     const slideNumberStyle = {
         fontSize: '20px',
         fontWeight: 'bold',
@@ -86,12 +79,12 @@ const Product = () => {
 
                         }
                         {Products &&
-                            <div className="row product-page-main card-body">
-                                <div className="col-xl-4">
+                            <div className="row product-page-main card-body" style={{minHight:'1000px'}}>
+                                <div className="col-xl-5">
                                     {/* <div className="img-td" style={{ width: '200px', maxHeight: '200px' }}><img src={ : ''} alt={"Products" + Products._id} className="img-fluid"></img></div> */}
                                     <Carousel
                                         data={CarouselData}
-                                        time={3000}
+                                        time={9000}
                                         width="850px"
                                         height="500px"
                                         radius="10px"
@@ -101,7 +94,6 @@ const Product = () => {
                                         automatic={true}
                                         pauseIconColor="white"
                                         pauseIconSize="40px"
-                                        slideBackgroundColor="black"
                                         slideImageFit="fit"
                                         thumbnails={true}
                                         thumbnailWidth="100px"
@@ -109,19 +101,15 @@ const Product = () => {
                                             textAlign: "center",
                                             maxWidth: "850px",
                                             maxHeight: "500px",
-                                            margin: "40px auto",
                                         }}
                                     />
                                 </div>
-                                <div className="col-xl-6">
+                                <div className="col-xl-7">
                                     <div className="product-page-details product-right mb-0">
                                         <h2>{Products.name}</h2>
                                         <div className="d-flex"> keywords: <p className="mx-2">{Products.keywords.toString()}</p></div>
                                         <hr />
-                                        <h6 className="product-title">product details</h6>
-                                        <p>
-                                            {Products.description}
-                                        </p>
+                                        <h6 className="product-title">product price</h6>
                                         <div className="product-price digits mt-2">
                                             <h4><CurrencyFormat value={Products.price} displayType={'text'} thousandSeparator={true} prefix={'₦'} /></h4>
                                         </div>
@@ -137,14 +125,13 @@ const Product = () => {
                                             length:{Products.dimension.length}
                                         </div>
                                         <div>
-                                            width:{Products.dimension.width}
+                                            Height:{Products.dimension.height}
                                         </div>
-                                        <div>
-                                            width:{Products.dimension.width}
-                                        </div>
+                                       
                                         <hr />
                                         <h6 className="product-title">Description</h6>
-                                        <p>{Products.description}</p>
+                                        <p>{ReactHtmlParser(Products.description)}
+</p>
                                         <div className="m-t-15">
                                             <button className="btn btn-primary m-r-10" type="button">Delete</button>
                                             <a className="btn btn-secondary" href={"/product/edit/" + Products._id}>Edit</a>

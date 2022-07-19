@@ -113,3 +113,12 @@ text-align: center;
 .img-preview{
   border: 2px dashed #04A134;
 }
+.avater-pro{
+  height: 90px;
+}
+.text-sm{
+  font-size: 15px!important;
+}
+.capitalize{
+  text-transform: capitalize;
+}
