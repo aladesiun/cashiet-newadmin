@@ -12,6 +12,7 @@ const AddProduct = () => {
     const { data } = useGet("/categories");
     const { data: subcategory } = useGet("/subcategory");
 
+
     const [editProduct, setEditProduct] = useState({name:'' , price: "", image: '', category: "", description: "",});
     const [error, setError] = useState(false)
     const [keywords, setKeywords] = useState('');
@@ -22,17 +23,17 @@ const AddProduct = () => {
     const [files, setFiles] = useState([]);
     const editorRef = useRef(null);
     const [Loading, setLoading] = useState(false);
-
+    console.log('console render');
     let endpoint = process.env.REACT_APP_ENDPOINT;
     let token = localStorage.getItem('_ux');
     let url = '/products/' + _id;
+
     useEffect(() => {
         if (productId != null) {
             uploadGallery()
 
         }
     }, [productId])
-
     useEffect(() => {
         if (imagesArr.length < 5) {
             setImagesArr(prevState => [...imagesArr, ...files])
@@ -186,8 +187,6 @@ const AddProduct = () => {
             toast.error(error_message);
         }
     }
-
-
     const { getRootProps, getInputProps } = useDropzone({
         accept: "image/*",
         onDrop: (acceptedFiles) => {
@@ -209,7 +208,7 @@ const AddProduct = () => {
     const imagesDef = editProduct.gallery ? editProduct.gallery.images.map(file => (
         <img key={file.name} src={file.url} alt="image" style={{ width: '140px', height: '14ß0px' }}></img>
 
-    )):'no';
+    )):[];
     return (
         <div className="page-body">
             {/* Container-fluid starts*/}
@@ -218,7 +217,7 @@ const AddProduct = () => {
                     <div className="row">
                         <div className="col-lg-6">
                             <div className="page-header-left">
-                                <h3>Add Products
+                                <h3>Edit Product
                                     <small>Cashiet Admin panel</small>
                                 </h3>
                             </div>
@@ -231,7 +230,7 @@ const AddProduct = () => {
                                     </a>
                                 </li>
                                 <li className="breadcrumb-item">Digital</li>
-                                <li className="breadcrumb-item active">Add Product</li>
+                                <li className="breadcrumb-item active">Edit Product</li>
                             </ol>
                         </div>
                     </div>
@@ -398,8 +397,6 @@ const AddProduct = () => {
             </div>
             {/* Container-fluid Ends*/}
         </div>
-
-
     );
 }
 
