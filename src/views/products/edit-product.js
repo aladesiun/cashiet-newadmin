@@ -13,9 +13,10 @@ const AddProduct = () => {
     const { data: subcategory } = useGet("/subcategory");
 
 
-    const [editProduct, setEditProduct] = useState({name:'' , price: "", image: '', category: "", description: "",});
+    const [editProduct, setEditProduct] = useState({name:'' , price: "", image: '', category: "", description: "", subCategoryOne:"", subCategoryTwo:"", gallery:"", keywords:"", length:"", width:"", height:""});
     const [error, setError] = useState(false)
     const [keywords, setKeywords] = useState('');
+    const [description, setDescription] = useState('');
     const [keywordsArr, setKeywordsArr] = useState([]);
     const [imagesArr, setImagesArr] = useState([]);
     const [productId, setProuctId] = useState(null)
@@ -23,10 +24,11 @@ const AddProduct = () => {
     const [files, setFiles] = useState([]);
     const editorRef = useRef(null);
     const [Loading, setLoading] = useState(false);
-    console.log('console render');
+    console.log(editProduct);
     let endpoint = process.env.REACT_APP_ENDPOINT;
     let token = localStorage.getItem('_ux');
     let url = '/products/' + _id;
+
 
     useEffect(() => {
         if (productId != null) {
@@ -53,7 +55,6 @@ const AddProduct = () => {
     }, [])
     const getData=async()=>{
         setLoading(true)
-    
         await axios.get(endpoint + url, {
             headers: {
                 Authorization: 'Bearer ' + token,
@@ -66,7 +67,6 @@ const AddProduct = () => {
                 setEditProduct(result)
                 console.log(result);
             }
-            
         }) 
         .catch((error)=> {
             setLoading(false)
@@ -77,10 +77,8 @@ const AddProduct = () => {
     const handleDescription = ()=>{
         if (editorRef.current) {
             let desc = editorRef.current.getContent();
-            setEditProduct((prevState) => ({
-                ...prevState,
-                description: desc
-            }))
+            setDescription(desc)
+            console.log(editProduct);
         }
     }
     const handleKeyword = () => {
@@ -140,6 +138,7 @@ const AddProduct = () => {
         }
     }
     const addProduct = async (e) => {
+        console.log(editProduct.image);
         if (imagesArr.length < 3 && editProduct.gallery.images.length < 3) {
             toast.error("Gallery pictures must be greater than 3");
             return;
@@ -155,17 +154,29 @@ const AddProduct = () => {
         let formData = new FormData();
 
         for (var field in editProduct) {
-            if (field != 'keywords') {
+            if (field != 'description'  && field != 'image' && field != 'keywords' && field != 'dimension' && field != 'gallery' && field != 'category' && field != 'subCategoryOne' && field != 'subCategoryTwo') {
                 formData.append(field, editProduct[field]);
+            }
+        }
+        if (keywordsArr.length < 1) {
+            for (var i = 0; i < editProduct.keywords.length; i++) {
+                formData.append('keywords',editProduct.keywords[i]);
             }
         }
         for (var i = 0; i < keywordsArr.length; i++) {
             formData.append('keywords', keywordsArr[i]);
         }
+        for(var field in editProduct.dimension){
+            formData.append(field, editProduct.dimension[field])
 
-
+        }
+        if (editProduct.image instanceof File ) {
+        formData.append('image', editProduct.image)
+        }
+        formData.append('description', description)
+        formData.append('category', editProduct.category._id)
+        console.log(formData);
         try {
-            console.log(formData);
             const response = await axios.put(endpoint + url, formData, {
                 headers: {
                     Authorization: 'Bearer ' + token,
@@ -188,7 +199,10 @@ const AddProduct = () => {
         }
     }
     const { getRootProps, getInputProps } = useDropzone({
-        accept: "image/*",
+        accept: { 
+        'image/*': ['.png','.jpg'],
+        'text/html': ['.html', '.htm']
+    },
         onDrop: (acceptedFiles) => {
             setFiles(acceptedFiles.map(file => Object.assign(file, {
                 preview: URL.createObjectURL(file)
@@ -205,7 +219,7 @@ const AddProduct = () => {
         <img key={file.name} src={file.preview} alt="image" style={{ width: '140px', height: '14ß0px' }}></img>
 
     ))
-    const imagesDef = editProduct.gallery ? editProduct.gallery.images.map(file => (
+    const defaultImgs= editProduct.gallery ? editProduct.gallery.images.map(file => (
         <img key={file.name} src={file.url} alt="image" style={{ width: '140px', height: '14ß0px' }}></img>
 
     )):[];
@@ -257,7 +271,7 @@ const AddProduct = () => {
                                         <div className="form-group">
                                             <label className="col-form-label categories-basic"><span>*</span>
                                                 Categories</label>
-                                            <select className="custom-select form-control" required name="category" value={editProduct.name} onChange={handleInputChange}>
+                                            <select className="custom-select form-control" required name="category" value={editProduct.category.name} onChange={handleInputChange}>
                                                 <option value={editProduct.category._id}>{editProduct.category.name}</option>
                                                 {data.categories && data.categories.map((category) => (
                                                     <option key={category._id} value={category._id}>{category.name}</option>
@@ -268,8 +282,8 @@ const AddProduct = () => {
                                         <div className="form-group">
                                             <label className="col-form-label categories-basic"><span>*</span>
                                                 Sub Categories 1</label>
-                                            <select className="custom-select form-control" required name="subCategoryOne" value={editProduct.name} onChange={handleInputChange}>
-                                                <option value={editProduct.subCategoryOne}>{editProduct.category.name}</option>
+                                            <select className="custom-select form-control" required name="subCategoryOne" value={editProduct.subCategoryOne} onChange={handleInputChange}>
+                                                <option value={editProduct.subCategoryOne?._id}>{editProduct.subCategoryOne?.name}</option>
 
                                                 {subcategory.subcategories && subcategory.subcategories.map((category) => (
                                                     <option key={category._id} value={category._id}>{category.name}</option>
@@ -280,8 +294,8 @@ const AddProduct = () => {
                                         <div className="form-group">
                                             <label className="col-form-label categories-basic"><span>*</span>
                                                 Sub Categories 2</label>
-                                            <select className="custom-select form-control" required name="subCategoryTwo" value={editProduct.name} onChange={handleInputChange}>
-                                                <option value={editProduct.subCategoryTwo}>{editProduct.category.name}</option>
+                                            <select className="custom-select form-control" required name="subCategoryTwo" value={editProduct.subCategoryTwo} onChange={handleInputChange}>
+                                                <option value={editProduct.subCategoryTwo?._id}>{editProduct.subCategoryTwo?.name}</option>
 
                                                 {subcategory.subcategories && subcategory.subcategories.map((category) => (
                                                     <option key={category._id} value={category._id}>{category.name}</option>
@@ -362,7 +376,7 @@ const AddProduct = () => {
                                                 <div {...getRootProps({ className: 'dropzone' })}>
                                                     <input {...getInputProps()} />
                                                     <span style={{ fontSize: ".8rem" }} className="d-flex sm-dropzone">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-plus"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="feather feather-file-plus"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
                                                     </span>
 
                                                 </div>
@@ -378,7 +392,7 @@ const AddProduct = () => {
                                         <p>Drag and drop</p>
                                         <div className="img-preview p-3 rounded">
                                             {images}
-                                            {imagesDef}
+                                            {defaultImgs}
                                         </div>
                                     </div>
 

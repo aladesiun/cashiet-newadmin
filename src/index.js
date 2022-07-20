@@ -24,13 +24,11 @@ import SubCategories from './views/categories/sub-categories/sub-categories';
 import AddSubCategories from './views/categories/sub-categories/add-categories';
 import Users from './views/users/users';
 import CreateAdmin from './views/admin/create-admin';
-import EditUser from './views/users/edit-user';
-import User from './views/users/user';
-import CreateUser from './views/users/create-user';
 import Admins from './views/admin/admins';
 import Orders from './views/orders/orders';
 import Order from './views/orders/order';
-
+import CreateUser from './views/users/create-user';
+import UserProfile from './views/users/user-profile';
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AdminProvider> 
@@ -63,8 +61,7 @@ root.render(
 
           <Route path="/users" element={<Users/>}></Route>
           <Route path="/user/new" element={<CreateUser/>}></Route>
-          <Route path="/user/:_id" element={<User/>}></Route>
-          <Route path="/user/edit/:_id" element={<EditUser/>}></Route>
+          <Route path="/user/:_id" element={<UserProfile/>}></Route>
 
 
           <Route path="/admin/new" element={<CreateAdmin/>}></Route>

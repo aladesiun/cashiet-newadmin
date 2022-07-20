@@ -1,22 +1,47 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import useGet from "../../hooks/get";
-import EditProduct from "../products/edit-product";
-import { useState, useContext, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import toast from 'react-hot-toast';
 
 import axios from 'axios'
-import CreateProfile from "../profile/create-profile";
 import CreateUserProfile from "./create-user-profile";
-const Profile = () => {
+import useGet from "../../hooks/get";
+const UserProfile = () => {
     let { _id } = useParams();
-    const { data, Loading, Error } = useGet('/profile/' + _id);
-    const profile = data ? data.userProfile: null;
-    const [editprofile, setEditProfile] =  useState(profile)
+    const [Loading, setLoading] = useState(false);
+    const [editprofile, setEditProfile] =  useState({})
+    const [error, setError] = useState(false)
+
+    console.log(editprofile);
     let endpoint = process.env.REACT_APP_ENDPOINT;
     let token = localStorage.getItem("_ux");
+    let url = '/profile/' + _id;
+
+    const getData=async()=>{
+        setLoading(true)
+        await axios.get(endpoint + url, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+            },
+        })
+        .then((data)=>{
+            if (data.status) {
+                let result = data.data.userProfile
+
+                console.log(result);
+
+                setLoading(false);
+                setEditProfile(result)
+            }
+        }) 
+        .catch((error)=> {
+            setLoading(false)
+            setError(true)
+            toast.error(error.response.data.message)
+        })
+       }
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setEditProfile((prevState) => ({
@@ -43,6 +68,9 @@ const Profile = () => {
             toast.error(error_message);
         }
     }
+    useEffect(()=>{
+        getData();
+    }, [])
     return (
         <>
             <div className="page-body">
@@ -96,16 +124,16 @@ const Profile = () => {
 
                 }
                
-               {profile &&
+               {editprofile &&
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-xl-4">
                                 <div className="card">
                                     <div className="card-body">
                                         <div className="profile-details text-center">
-                                            <img src={profile.profilePicture !== '' ? profile.profilePicture  :require('../../assets/images/dashboard/designer.jpg') } alt={profile._id } className="avater-pro img-fluid img-90 rounded-circle blur-up lazyloaded" />
-                                            <h5 className="f-w-600 mb-0">{profile.username ?? "Not set"}</h5>
-                                            <span>{profile.user.email ?? "Not set"}</span>
+                                            <img src={editprofile.profilePicture !== '' ? editprofile.profilePicture  :require('../../assets/images/dashboard/designer.jpg') } alt={editprofile._id } className="avater-pro img-fluid img-90 rounded-circle blur-up lazyloaded" />
+                                            <h5 className="f-w-600 mb-0">{editprofile.user?.username ?? "Not set"}</h5>
+                                            <span>{editprofile.user?.email ?? "Not set"}</span>
                                             <div className="social">
                                                 <div className="form-group btn-showcase">
                                                     <button className="btn social-btn btn-fb d-inline-block"><i className="fa fa-facebook" /></button>
@@ -149,37 +177,37 @@ const Profile = () => {
                                                     <table className="table table-borderless">
                                                         <tbody>
                                                             <tr>
-                                                                <td>First Name:</td>
-                                                                <td>{profile.firstName ?? "Not set"}</td>
+                                                                <td className="capitalize">First Name:</td>
+                                                                <td className="capitalize">{editprofile.firstName ?? "Not set"}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Last Name:</td>
-                                                                <td>{profile.lastName ?? "Not set"}</td>
+                                                                <td className="capitalize">Last Name:</td>
+                                                                <td className="capitalize">{editprofile.lastName ?? "Not set"}</td>
 
                                                             </tr>
                                                             <tr>
-                                                                <td>Email:</td>
-                                                                <td>{profile.user.email ?? "Not set"}</td>
+                                                                <td className="capitalize">Email:</td>
+                                                                <td className="capitalize">{editprofile.user? editprofile.user.email :  "Not set"}</td>
 
                                                             </tr>
                                                             <tr>
-                                                                <td>Gender:</td>
-                                                                <td>{profile.gender ?? "Not set"}</td>
+                                                                <td className="capitalize">Gender:</td>
+                                                                <td className="capitalize">{editprofile.gender ?? "Not set"}</td>
 
                                                             </tr>
                                                             <tr>
-                                                                <td>Mobile Number:</td>
-                                                                <td>{profile.phoneNumber ?? "Not set"}</td>
+                                                                <td className="capitalize">Mobile Number:</td>
+                                                                <td className="capitalize">{editprofile.phoneNumber ?? "Not set"}</td>
 
                                                             </tr>
                                                             <tr>
-                                                                <td>DOB:</td>
-                                                                <td>{profile.dob ?? "Not set"}</td>
+                                                                <td className="capitalize">DOB:</td>
+                                                                <td className="capitalize">{editprofile.dob ?? "Not set"}</td>
 
                                                             </tr>
                                                             <tr>
-                                                                <td>Nationality :</td>
-                                                                <td>{profile.nationality ?? "Not set"}</td>
+                                                                <td className="capitalize">Nationality :</td>
+                                                                <td className="capitalize">{editprofile.nationality ?? "Not set"}</td>
 
                                                             </tr>
                                                         </tbody>
@@ -191,41 +219,40 @@ const Profile = () => {
                                                     <table className="table table-borderless">
                                                         <tbody>
                                                             <tr>
-                                                                <td>First Name:</td>
-                                                                <td>
-                                                                    Current: {profile.firstName}
+                                                                <td className="capitalize">First Name:</td>
+                                                                <td className="capitalize">
                                                                     <div className="form">
                                                                         <div className="form-group mb-3 row">
                                                                             <div className="col-xl-8 col-sm-7">
-                                                                                <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="firstName" />
+                                                                                <input value={editprofile.firstName} className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="firstName" />
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Last Name:</td>
-                                                                <td>Current: {profile.lastName}
+                                                                <td className="capitalize">Last Name:</td>
+                                                                <td className="capitalize">
                                                                     <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
-                                                                            <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="lastName" />
+                                                                            <input value={editprofile.lastName} className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="lastName" />
                                                                         </div>
                                                                     </div></td>
 
                                                             </tr>
                                                             <tr>
-                                                                <td>Email:</td>
-                                                                <td>Current: {profile.user.email}
+                                                                <td className="capitalize">Email:</td>
+                                                                <td className="capitalize">Current:
                                                                     <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
-                                                                            <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="email" />
+                                                                            <input value= {editprofile?.user?.email} className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="email" />
                                                                         </div>
                                                                     </div></td>
 
                                                             </tr>
                                                             <tr>
-                                                                <td>Gender:</td>
-                                                                <td>Current: {profile.gender}
+                                                                <td className="capitalize">Gender:</td>
+                                                                <td className="capitalize">Current: {editprofile.gender}
                                                                     <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
 
@@ -238,31 +265,31 @@ const Profile = () => {
 
                                                             </tr>
                                                             <tr>
-                                                                <td>Mobile Number:</td>
-                                                                <td>Current: {profile.phoneNumber}
+                                                                <td className="capitalize">Mobile Number:</td>
+                                                                <td className="capitalize">Current: {editprofile.phoneNumber}
                                                                     <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
-                                                                            <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="phoneNumber" />
+                                                                            <input value= {editprofile.phoneNumber} className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="phoneNumber" />
                                                                         </div>
                                                                     </div></td>
 
                                                             </tr>
                                                             <tr>
-                                                                <td>DOB:</td>
-                                                                <td>Current: {profile.dob}
+                                                                <td className="capitalize">DOB:</td>
+                                                                <td className="capitalize">Current: {editprofile.dob}
                                                                     <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
-                                                                            <input className="form-control" id="validationCustom01" type="date" onChange={handleInputChange} name="dob" />
+                                                                            <input value= {editprofile.dob} className="form-control" id="validationCustom01" type="date" onChange={handleInputChange} name="dob" />
                                                                         </div>
                                                                     </div></td>
 
                                                             </tr>
                                                             <tr>
-                                                                <td>Nationality :</td>
-                                                                <td>Current: {profile.nationality}
+                                                                <td className="capitalize">Nationality :</td>
+                                                                <td className="capitalize">Current: {editprofile.nationality}
                                                                     <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
-                                                                            <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="nationality" />
+                                                                            <input value= {editprofile.nationality} className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="nationality" />
                                                                         </div>
                                                                     </div></td>
 
@@ -281,7 +308,7 @@ const Profile = () => {
                         </div>
                     </div>
                 }
-                {profile == null && <>
+                {editprofile == null && <>
 
 {!Loading && <CreateUserProfile/>}
 
@@ -292,4 +319,4 @@ const Profile = () => {
     );
 }
 
-export default Profile;
+export default UserProfile;

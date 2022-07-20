@@ -147,37 +147,37 @@ const Profile = () => {
                                                     <table className="table table-borderless">
                                                         <tbody>
                                                             <tr>
-                                                                <td>First Name:</td>
-                                                                <td>{profile.firstName ?? "Not set"}</td>
+                                                                <td className="capitalize">First Name:</td>
+                                                                <td className="capitalize">{profile.firstName ?? "Not set"}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Last Name:</td>
-                                                                <td>{profile.lastName ?? "Not set"}</td>
+                                                                <td className="capitalize">Last Name:</td>
+                                                                <td className="capitalize">{profile.lastName ?? "Not set"}</td>
 
                                                             </tr>
                                                             <tr>
-                                                                <td>Email:</td>
-                                                                <td>{profile.user.email ?? "Not set"}</td>
+                                                                <td className="capitalize">Email:</td>
+                                                                <td className="capitalize">{profile.user.email ?? "Not set"}</td>
 
                                                             </tr>
                                                             <tr>
-                                                                <td>Gender:</td>
-                                                                <td>{profile.gender ?? "Not set"}</td>
+                                                                <td className="capitalize">Gender:</td>
+                                                                <td className="capitalize">{profile.gender ?? "Not set"}</td>
 
                                                             </tr>
                                                             <tr>
-                                                                <td>Mobile Number:</td>
-                                                                <td>{profile.phoneNumber ?? "Not set"}</td>
+                                                                <td className="capitalize">Mobile Number:</td>
+                                                                <td className="capitalize">{profile.phoneNumber ?? "Not set"}</td>
 
                                                             </tr>
                                                             <tr>
-                                                                <td>DOB:</td>
-                                                                <td>{profile.dob ?? "Not set"}</td>
+                                                                <td className="capitalize">DOB:</td>
+                                                                <td className="capitalize">{profile.dob ?? "Not set"}</td>
 
                                                             </tr>
                                                             <tr>
-                                                                <td>Nationality :</td>
-                                                                <td>{profile.nationality ?? "Not set"}</td>
+                                                                <td className="capitalize">Nationality :</td>
+                                                                <td className="capitalize">{profile.nationality ?? "Not set"}</td>
 
                                                             </tr>
                                                         </tbody>
@@ -189,8 +189,8 @@ const Profile = () => {
                                                     <table className="table table-borderless">
                                                         <tbody>
                                                             <tr>
-                                                                <td>First Name:</td>
-                                                                <td>
+                                                                <td className="capitalize">First Name:</td>
+                                                                <td className="capitalize">
                                                                     Current: {profile.firstName}
                                                                     <div className="form">
                                                                         <div className="form-group mb-3 row">
@@ -202,8 +202,8 @@ const Profile = () => {
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Last Name:</td>
-                                                                <td>Current: {profile.lastName}
+                                                                <td className="capitalize">Last Name:</td>
+                                                                <td className="capitalize">Current: {profile.lastName}
                                                                     <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
                                                                             <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="lastName" />
@@ -212,8 +212,8 @@ const Profile = () => {
 
                                                             </tr>
                                                             <tr>
-                                                                <td>Email:</td>
-                                                                <td>Current: {profile.user.email}
+                                                                <td className="capitalize">Email:</td>
+                                                                <td className="capitalize">Current: {profile.user.email}
                                                                     <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
                                                                             <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="email" />
@@ -222,8 +222,8 @@ const Profile = () => {
 
                                                             </tr>
                                                             <tr>
-                                                                <td>Gender:</td>
-                                                                <td>Current: {profile.gender}
+                                                                <td className="capitalize">Gender:</td>
+                                                                <td className="capitalize">Current: {profile.gender}
                                                                     <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
 
@@ -236,8 +236,8 @@ const Profile = () => {
 
                                                             </tr>
                                                             <tr>
-                                                                <td>Mobile Number:</td>
-                                                                <td>Current: {profile.phoneNumber}
+                                                                <td className="capitalize">Mobile Number:</td>
+                                                                <td className="capitalize">Current: {profile.phoneNumber}
                                                                     <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
                                                                             <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="phoneNumber" />
@@ -246,8 +246,8 @@ const Profile = () => {
 
                                                             </tr>
                                                             <tr>
-                                                                <td>DOB:</td>
-                                                                <td>Current: {profile.dob}
+                                                                <td className="capitalize">DOB:</td>
+                                                                <td className="capitalize">Current: {profile.dob}
                                                                     <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
                                                                             <input className="form-control" id="validationCustom01" type="date" onChange={handleInputChange} name="dob" />
@@ -256,8 +256,8 @@ const Profile = () => {
 
                                                             </tr>
                                                             <tr>
-                                                                <td>Nationality :</td>
-                                                                <td>Current: {profile.nationality}
+                                                                <td className="capitalize">Nationality :</td>
+                                                                <td className="capitalize">Current: {profile.nationality}
                                                                     <div className="form-group mb-3 row">
                                                                         <div className="col-xl-8 col-sm-7">
                                                                             <input className="form-control" id="validationCustom01" type="text" onChange={handleInputChange} name="nationality" />

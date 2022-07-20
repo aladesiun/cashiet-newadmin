@@ -13,7 +13,7 @@ const NavHeader = () => {
     <div className="mobile-sidebar w-auto">
       <div className="media-body text-end switch-sm">
         <label className="switch">
-          <a href="javascript:void(0)">
+          <a href="#">
             <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="feather feather-align-left" id="sidebar-toggle">
               <line x1={17} y1={10} x2={3} y2={10} />
               <line x1={21} y1={6} x2={3} y2={6} />
@@ -40,7 +40,7 @@ const NavHeader = () => {
           </form>
         </li>
         <li>
-          <a className="text-dark" href="javascript:void(0)" onclick="javascript:toggleFullScreen()">
+          <a className="text-dark" href="#" >
             <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="feather feather-maximize-2">
               <polyline points="15 3 21 3 21 9" />
               <polyline points="9 21 3 21 3 15" />
@@ -50,21 +50,21 @@ const NavHeader = () => {
           </a>
         </li>
         <li className="onhover-dropdown">
-          <a className="txt-dark" href="javascript:void(0)">
+          <a className="txt-dark" href="#">
             <h6>EN</h6>
           </a>
           <ul className="language-dropdown onhover-show-div p-20">
             <li>
-              <a href="javascript:void(0)" data-lng="en"><i className="flag-icon flag-icon-is" /> English</a>
+              <a href="#" data-lng="en"><i className="flag-icon flag-icon-is" /> English</a>
             </li>
             <li>
-              <a href="javascript:void(0)" data-lng="es"><i className="flag-icon flag-icon-um" /> Spanish</a>
+              <a href="#" data-lng="es"><i className="flag-icon flag-icon-um" /> Spanish</a>
             </li>
             <li>
-              <a href="javascript:void(0)" data-lng="pt"><i className="flag-icon flag-icon-uy" /> Portuguese</a>
+              <a href="#" data-lng="pt"><i className="flag-icon flag-icon-uy" /> Portuguese</a>
             </li>
             <li>
-              <a href="javascript:void(0)" data-lng="fr"><i className="flag-icon flag-icon-nz" /> French</a>
+              <a href="#" data-lng="fr"><i className="flag-icon flag-icon-nz" /> French</a>
             </li>
           </ul>
         </li>
@@ -127,11 +127,11 @@ const NavHeader = () => {
                 </div>
               </div>
             </li>
-            <li className="bg-light txt-dark"><a href="javascript:void(0)">All</a> notification</li>
+            <li className="bg-light txt-dark"><a href="#">All</a> notification</li>
           </ul>
         </li>
         <li>
-          <a href="javascript:void(0)">
+          <a href="#">
             <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="feather feather-message-square right_side_toggle">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
             </svg>

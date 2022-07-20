@@ -7,7 +7,8 @@ const CreateUserProfile = () => {
     console.log(profile);
     const [Loading, setLoading] = useState(false);
     let endpoint = process.env.REACT_APP_ENDPOINT;
-    let token = process.env.REACT_APP_TOKKEN;
+    // let token = process.env.REACT_APP_TOKKEN;
+    let token = localStorage.getItem('_ux');
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setProfile((prevState) => ({

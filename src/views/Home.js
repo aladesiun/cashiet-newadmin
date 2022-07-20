@@ -153,39 +153,39 @@ const Home = () => {
                                         <table className="table table-bordernone">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Order ID</th>
-                                                    <th scope="col">Order Total</th>
-                                                    <th scope="col">Payment Method</th>
-                                                    <th scope="col">Status</th>
+                                                    <th scope="col capitalize">Order ID</th>
+                                                    <th scope="col capitalize">Order Total</th>
+                                                    <th scope="col capitalize">Payment Method</th>
+                                                    <th scope="col capitalize">Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>1</td>
+                                                    <td className="capitalize">1</td>
                                                     <td className="digits">$120.00</td>
                                                     <td className="font-danger">Bank Transfers</td>
                                                     <td className="digits">On Way</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>2</td>
+                                                    <td className="capitalize">2</td>
                                                     <td className="digits">$90.00</td>
                                                     <td className="font-secondary">Ewallets</td>
                                                     <td className="digits">Delivered</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>3</td>
+                                                    <td className="capitalize">3</td>
                                                     <td className="digits">$240.00</td>
                                                     <td className="font-warning">Cash</td>
                                                     <td className="digits">Delivered</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>4</td>
+                                                    <td className="capitalize">4</td>
                                                     <td className="digits">$120.00</td>
                                                     <td className="font-primary">Direct Deposit</td>
                                                     <td className="digits">$6523</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>5</td>
+                                                    <td className="capitalize">5</td>
                                                     <td className="digits">$50.00</td>
                                                     <td className="font-primary">Bank Transfers</td>
                                                     <td className="digits">Delivered</td>

@@ -53,7 +53,7 @@ const EditCategory = () => {
                         <table className="table table-borderless">
                             <tbody>
                                 <tr>
-                                    <td>
+                                    <td className="capitalize">
                                         Current Name:  {Category && Category.name}
                                         <div className="form">
                                             <div className="form-group mb-3 row">
